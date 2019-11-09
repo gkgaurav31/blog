@@ -18,6 +18,8 @@ https://docs.microsoft.com/en-us/azure/app-service/overview-managed-identity?tab
 curl $MSI_ENDPOINT'?api-version=2017-09-01&resource=https%3A%2F%2Fdatabase.windows.net%2F' -H Metadata:true -H secret:$MSI_SECRET -s
 ```
 
+### Sample PHP Code:
+
 ```php
 <?php
 
