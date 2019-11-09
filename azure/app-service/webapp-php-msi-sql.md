@@ -10,6 +10,9 @@
 3. secret : Header
 4. clientid : query paramter (Optional for System Managed Identity)
 
+### Documentation: 
+https://docs.microsoft.com/en-us/azure/app-service/overview-managed-identity?tabs=dotnet#using-the-rest-protocol
+
 ### Example of a cURL request:
 ```curl
 curl $MSI_ENDPOINT'?api-version=2017-09-01&resource=https%3A%2F%2Fdatabase.windows.net%2F' -H Metadata:true -H secret:$MSI_SECRET -s
