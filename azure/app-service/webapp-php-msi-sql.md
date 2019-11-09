@@ -1,6 +1,6 @@
 # Sample code to access SQL Database from Azure WebApp using Managed Identity
 
-## How to get the access token:
+### How to get the access token:
 - Azure WebApp has two environment variables which are used for Managed Identity:
 1. MSI_ENDPOINT
 2. MSI_SECRET
