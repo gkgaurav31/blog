@@ -5,8 +5,8 @@
 
 $accToken='';
 
-$azureServer = 'gauksql.database.windows.net';
-$azureDatabase = 'gauksql';
+$azureServer = 'mydb.database.windows.net';
+$azureDatabase = 'mydb';
 $connectionInfo = array('Database'=>$azureDatabase,
                         'AccessToken'=>$accToken);
 $conn = sqlsrv_connect($azureServer, $connectionInfo);
