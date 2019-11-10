@@ -4,6 +4,10 @@ title: About
 permalink: /about/
 ---
 
+This blog contains about things which I find interesting and useful in some way, and is not necessarily technical. I hope it is helpful to someone.  
+
+
+### About the theme:
 This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 
 You can find the source code for Minima at GitHub:
