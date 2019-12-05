@@ -32,6 +32,10 @@ __Steps:__
 
 __Example (using cURL):__
 
+```curl
+curl -X POST -u <deployment_user> --data-binary @"<zip_file_path>" https://<app_name>.scm.azurewebsites.net/api/zipdeploy
+```
+
 ![screenshot](/assets/zipdeploy.jpg)
 
 __Documentation:__: [https://docs.microsoft.com/en-us/azure/app-service/deploy-zip#rest](https://docs.microsoft.com/en-us/azure/app-service/deploy-zip#rest)
