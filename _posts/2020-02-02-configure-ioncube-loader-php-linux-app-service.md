@@ -44,6 +44,6 @@ Cannot load Zend OPcache - it was already loaded
 PHP 7.2.24 (cli) (built: Nov  5 2019 13:45:32) ( NTS )
 Copyright (c) 1997-2018 The PHP Group
 Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-    with the __ionCube PHP Loader__ + ionCube24 v10.3.9, Copyright (c) 2002-2019, by ionCube Ltd.
+    with the ionCube PHP Loader + ionCube24 v10.3.9, Copyright (c) 2002-2019, by ionCube Ltd.
     with Zend OPcache v7.2.24, Copyright (c) 1999-2018, by Zend Technologies
 ```
