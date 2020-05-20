@@ -36,6 +36,7 @@ __Example (using cURL):__
 curl -X POST -u <deployment_user> --data-binary @"<zip_file_path>" https://<app_name>.scm.azurewebsites.net/api/zipdeploy
 ```
 
-![snapshot](/assets/zipdeploy.jpg)
+![snapshot]({{ site.baseurl }}/assets/zipdeploy.jpg)
+
 
 __Documentation:__: [https://docs.microsoft.com/en-us/azure/app-service/deploy-zip#rest](https://docs.microsoft.com/en-us/azure/app-service/deploy-zip#rest)

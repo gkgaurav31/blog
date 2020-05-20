@@ -47,3 +47,5 @@ __Analyze Thread Dump:__
 The Thread Dump contains details about each of the thread running in the JVM. For each thread, we have a NID which is in hexadecimal. In order to co-related this NID with the PID we got earlier, we would need to convert the PID obtained in previous step to hexadecimal value. This can be done easily using Calculator App in Windows. Now, just search for that hexadecimal value in the Thread Dump. [ Note that the hexadecimal values start with __0x__ ]
 
 The corresponding NID will provide the details about the thread consuming high CPU, and also provide the stack trace, which can be useful for finding out the cause of high CPU.
+
+![snapshot]({{ site.baseurl }}/assets/thread-cpu.png)
