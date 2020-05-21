@@ -36,6 +36,10 @@ This can be done by using the JVM argument: -XX:ErrorFile=/home/hs_err_pid%p.log
 JAVA_OPTS=-XX:ErrorFile=/home/hs_err_pid%p.log
 ```
 
-The easiest way to access the log file generated is by going to the Kudu site from Advanced Tools blade of the WebApp -> Files -> Open the link which would look like: ```https://<webappname>.scm.azurewebsites.net/api/vfs/hs_err_pid123.log```.    
+![snapshot]({{ site.baseurl }}/assets/app-setting-java-opts.png)
+
+The easiest way to access the log file generated is by going to the Kudu site from Advanced Tools blade of the WebApp -> Files -> Open the link which would look like:  
+
+```https://<webappname>.scm.azurewebsites.net/api/vfs/hs_err_pid123.log```.  
 
 The crash dump will indicate the reason why JVM is failing to come up. If the problem is due to memory, you could try configure the heap memory using the following JVM argument: ```-Xms1024m -Xmx1024m```. This will set the minimum and maximum heap memory for the JVM to 1 GB.
