@@ -4,7 +4,7 @@ title: Custom JRE/JDK on Azure App Service - Windows
 date: 2020-05-26 23:12 +0530
 ---
 
-Here's how you can use Custom JRE/JDK for your Java Application deployed on Azure WebApp:
+Here's how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:
 
 #### STEPS
 
@@ -16,7 +16,7 @@ Example:
 
 You can then extract the zip using the command: ```unzip file.zip```
 
-- Create a web.config under D:\home\site\wwwroot with the following content:  
+- Create a __web.config__ under D:\home\site\wwwroot with the following content:  
 
 :exclamation: Modify the __JRE_HOME__ environment variable in web.config as per your configuration.
 
