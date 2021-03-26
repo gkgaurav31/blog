@@ -45,7 +45,7 @@ You can add the following Application Setting for your WebApp to configure GC lo
 __Collect Heap Dump automatically on OutOfMemoryException:__  
 ```-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/heapdump/```
 
-__Integration your application with Application Insights:__  
+__Integrate your application with Application Insights:__  
 You can use the Application Insights codeless agent to integrate your application with AI. This does not need any code changes:
 [Codeless Agent](https://docs.microsoft.com/en-us/azure/azure-monitor/app/java-in-process-agent)
 
