@@ -2,6 +2,7 @@
 layout: post
 title: Enable Tomcat Manager app on Linux WebApp on Azure
 date: 2020-07-16 15:20 +0530
+categories: tomcat azure_webapp
 ---
 
 Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use [wardeploy API](https://github.com/projectkudu/kudu/wiki/Deploying-WAR-files-using-wardeploy#why-wardeploy).

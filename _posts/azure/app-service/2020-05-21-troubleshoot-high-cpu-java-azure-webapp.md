@@ -2,6 +2,7 @@
 layout: post
 title: Troubleshoot High CPU - Java - Azure WebApp - Linux
 date: 2020-05-21 02:06 +0530
+categories: java azure_webapp
 ---
 
 There are various ways to find what is leading to high CPU usage on any system. Here is something you could do while the issue is going on and you are seeing high CPU usage by a certain Java application hosted on Azure Linux WebApp:

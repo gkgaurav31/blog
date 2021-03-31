@@ -2,6 +2,7 @@
 layout: post
 title: Custom JRE/JDK on Azure App Service - Windows
 date: 2020-05-26 23:12 +0530
+categories: azure_webapp java
 ---
 
 Here's how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:

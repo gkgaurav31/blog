@@ -2,6 +2,7 @@
 layout: post
 title: Troubleshoot - JVM Crash - Azure WebApp - Linux
 date: 2020-05-22 00:09 +0530
+categories: java crash azure_webapp
 ---
 
 On Azure WebApp Linux, if your JVM is crashing and is unable to come up, you would see a generic "Application Error" message when trying to browse your site. In order to find what might be causing this issue, we could need to determine if the JVM is crashing. If yes, then we can collect the crash dump to find out the root cause of the issue.

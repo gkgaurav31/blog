@@ -3,6 +3,7 @@ layout: post
 title: Deploy Spring Boot Application On Azure WebApp via ZipDeploy
 date: 2019-12-06 02:29 +0530
 permalink: '/webappspringboot'
+categories: java spring_boot azure_webapp deployment
 ---
 
 # Here is one of the simplest ways to deploy a Spring Boot application (JAR with embedded Tomcat) to Azure WebApp (Windows)

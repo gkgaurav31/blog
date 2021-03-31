@@ -3,6 +3,7 @@ layout: post
 title: Detect Tomcat Version change on Azure App Service when using Auto-Update...
   and more
 date: 2021-03-26 22:08 +0530
+categories: tomcat azure_webapp 
 ---
 
 When using __Auto-Update__ for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official [announcement page](https://github.com/Azure/app-service-announcements/issues) for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.

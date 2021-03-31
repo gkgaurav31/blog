@@ -2,6 +2,7 @@
 layout: post
 title: Access SQL Database via Azure Function App - Python
 date: 2019-11-17 00:01 +0530
+categories: sql python azure_functions
 ---
 
 # Sample Code - Access Azure SQL Database via Python Function App 

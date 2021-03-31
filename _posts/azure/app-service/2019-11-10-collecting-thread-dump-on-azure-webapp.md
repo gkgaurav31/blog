@@ -2,6 +2,7 @@
 layout: post
 title: Collecting Thread Dump on Azure WebApp
 date: 2019-11-10 21:26 +0530
+categories: java dump azure_webapp
 ---
 
 # Below are some of the ways using which you can collect Thread Dump on Azure WebApps (Windows)

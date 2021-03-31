@@ -2,6 +2,7 @@
 layout: post
 title: Configure IonCube Loader - PHP Linux App Service
 date: 2020-02-02 21:32 +0530
+categories: ioncube php azure_webapp
 ---
 
 ### Steps:

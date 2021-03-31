@@ -2,6 +2,7 @@
 layout: post
 title: Download files from Azure Linux WebApp using pscp
 date: 2020-06-01 20:06 +0530
+categories: azure_webapp pscp
 ---
 
 There are multiple ways of downloading files from Azure WebApps, some of which include:

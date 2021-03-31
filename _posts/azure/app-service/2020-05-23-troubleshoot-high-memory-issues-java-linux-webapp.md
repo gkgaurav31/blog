@@ -2,6 +2,7 @@
 layout: post
 title: Troubleshoot High Memory Issues - Java Linux WebApp
 date: 2020-05-23 01:40 +0530
+categories: java azure_webapp memory
 ---
 
 There are different ways of dealing with Memory Issues. In this blog, I would like to share some steps you can take in order to find what could be causing memory leak.

@@ -2,6 +2,7 @@
 layout: post
 title: Deploy NodeJS WebApp via GitHub Actions
 date: 2019-11-17 00:41 +0530
+categories: github_actions nodejs deployment
 ---
 
 # Steps to deploy a NodeJS application on Azure App Service

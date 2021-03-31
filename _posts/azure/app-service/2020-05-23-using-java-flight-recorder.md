@@ -2,6 +2,7 @@
 layout: post
 title: Using Java Flight Recorder
 date: 2020-05-23 02:46 +0530
+categories: java jfr performance
 ---
 
 #### You can now use Java Flight Recorder on Azure App Services - Linux!  

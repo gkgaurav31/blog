@@ -2,6 +2,7 @@
 layout: post
 title: Deploy Azure Java Function App (Windows) via GitHub Actions
 date: 2019-11-17 02:32 +0530
+categories: java azure_functions github_actions
 ---
 
 # Deploy a Java Function App on Azure using GitHub Actions:  
