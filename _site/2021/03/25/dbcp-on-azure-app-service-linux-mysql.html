@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>DBCP on Azure App Service Linux (MySQL) | Gaurav’s GitHub Pages!</title>
-<meta name="generator" content="Jekyll v3.8.7">
-<meta property="og:title" content="DBCP on Azure App Service Linux (MySQL)">
-<meta property="og:locale" content="en_US">
-<meta name="description" content="Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally.">
-<meta property="og:description" content="Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally.">
-<link rel="canonical" href="http://localhost:4000/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html">
-<meta property="og:url" content="http://localhost:4000/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html">
-<meta property="og:site_name" content="Gaurav’s GitHub Pages!">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2021-03-25T18:15:00+05:30">
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="DBCP on Azure App Service Linux (MySQL)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally." />
+<meta property="og:description" content="Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally." />
+<link rel="canonical" href="http://localhost:4000/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" />
+<meta property="og:url" content="http://localhost:4000/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" />
+<meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-25T18:15:00+05:30" />
 <script type="application/ld+json">
 {"url":"http://localhost:4000/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html","headline":"DBCP on Azure App Service Linux (MySQL)","dateModified":"2021-03-25T18:15:00+05:30","datePublished":"2021-03-25T18:15:00+05:30","description":"Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
@@ -26,11 +23,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -413,6 +411,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
     </time>
 
     
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -489,7 +499,7 @@ cp -a /usr/local/tomcat/ /home/</p>
     <span class="nt">&lt;Manager</span> <span class="na">pathname=</span><span class="s">""</span> <span class="nt">/&gt;</span>
 
     <span class="nt">&lt;Resource</span> <span class="na">name=</span><span class="s">"mydatasource"</span> <span class="na">type=</span><span class="s">"javax.sql.DataSource"</span>
-                <span class="na">url=</span><span class="s">"jdbc\:mysql\://gaukmysql.mysql.database.azure.com:3306/testdb?serverTimezone=UTC"</span>
+                <span class="na">url=</span><span class="s">"jdbc:mysql://gaukmysql.mysql.database.azure.com:3306/testdb?serverTimezone=UTC"</span>
                 <span class="na">driverClassName=</span><span class="s">"com.mysql.cj.jdbc.Driver"</span> <span class="na">username=</span><span class="s">"gauk@gaukmysql"</span>
                 <span class="na">password=</span><span class="s">"xxxxx"</span> <span class="nt">/&gt;</span>
 
@@ -526,10 +536,10 @@ mysql-connector-java-8.0.21.jar
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Troubleshoot - JVM Crash - Azure WebApp - Linux</a></li>
-<li><a class="post-link" href="/jekyll/update/2019/11/10/webapp-php-msi-sql.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li>
-<li><a class="post-link" href="/2021/03/26/curl-3.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">curl &lt;3</a></li>
-<li><a class="post-link" href="/2020/05/23/using-java-flight-recorder.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Using Java Flight Recorder</a></li>
+        <li><a class="post-link" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Stop and remove all Docker containers at once</a></li>
+<li><a class="post-link" href="/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Deploy Azure Java Function App (Windows) via GitHub Actions</a></li>
+<li><a class="post-link" href="/2021/03/31/using-opencv-python-on-linux-app-service.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Using opencv-python on Linux App Service</a></li>
+<li><a class="post-link" href="/2019/11/10/create-a-post-in-jekyll-from-command-line.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Create a post in Jekyll via command line</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

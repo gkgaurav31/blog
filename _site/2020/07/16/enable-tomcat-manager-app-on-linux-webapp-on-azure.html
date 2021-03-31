@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Enable Tomcat Manager app on Linux WebApp on Azure | Gaurav’s GitHub Pages!</title>
-<meta name="generator" content="Jekyll v3.8.7">
-<meta property="og:title" content="Enable Tomcat Manager app on Linux WebApp on Azure">
-<meta property="og:locale" content="en_US">
-<meta name="description" content="Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use wardeploy API.">
-<meta property="og:description" content="Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use wardeploy API.">
-<link rel="canonical" href="http://localhost:4000/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html">
-<meta property="og:url" content="http://localhost:4000/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html">
-<meta property="og:site_name" content="Gaurav’s GitHub Pages!">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2020-07-16T15:20:00+05:30">
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Enable Tomcat Manager app on Linux WebApp on Azure" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use wardeploy API." />
+<meta property="og:description" content="Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use wardeploy API." />
+<link rel="canonical" href="http://localhost:4000/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" />
+<meta property="og:url" content="http://localhost:4000/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" />
+<meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-16T15:20:00+05:30" />
 <script type="application/ld+json">
 {"url":"http://localhost:4000/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html","headline":"Enable Tomcat Manager app on Linux WebApp on Azure","dateModified":"2020-07-16T15:20:00+05:30","datePublished":"2020-07-16T15:20:00+05:30","description":"Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use wardeploy API.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
@@ -26,11 +23,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -413,6 +411,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
     </time>
 
     
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -456,7 +466,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p><strong>Remove:</strong></p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;Valve</span> <span class="na">className=</span><span class="s">"org.apache.catalina.valves.RemoteAddrValve"</span>
-         <span class="na">allow=</span><span class="s">"127\.\d+\.\d+\.\d+|::1|0\:0\:0\:0\:0\:0\:0:1"</span> <span class="nt">/&gt;</span>
+         <span class="na">allow=</span><span class="s">"127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <ul>
@@ -493,10 +503,10 @@ cp -a /usr/local/tomcat/conf /home/tomcat/conf
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/first/" title="DBCP on Azure App Service Linux (MySQL)">First Blog Post!</a></li>
-<li><a class="post-link" href="/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" title="DBCP on Azure App Service Linux (MySQL)">Download files from Azure Linux WebApp using pscp</a></li>
-<li><a class="post-link" href="/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="DBCP on Azure App Service Linux (MySQL)">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li>
-<li><a class="post-link" href="/2021/03/31/using-opencv-python-on-linux-app-service.html" title="DBCP on Azure App Service Linux (MySQL)">Using opencv-python on Linux App Service</a></li>
+        <li><a class="post-link" href="/2019/11/10/collecting-thread-dump-on-azure-webapp.html" title="DBCP on Azure App Service Linux (MySQL)">Collecting Thread Dump on Azure WebApp</a></li>
+<li><a class="post-link" href="/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="DBCP on Azure App Service Linux (MySQL)">Enable Tomcat Manager app on Linux WebApp on Azure</a></li>
+<li><a class="post-link" href="/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="DBCP on Azure App Service Linux (MySQL)">Configure IonCube Loader - PHP Linux App Service</a></li>
+<li><a class="post-link" href="/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="DBCP on Azure App Service Linux (MySQL)">Deploy Azure Java Function App (Windows) via GitHub Actions</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Access Azure SQL Database using Managed Identity - PHP WebApp | Gaurav’s GitHub Pages!</title>
-<meta name="generator" content="Jekyll v3.8.7">
-<meta property="og:title" content="Access Azure SQL Database using Managed Identity - PHP WebApp">
-<meta property="og:locale" content="en_US">
-<meta name="description" content="Sample code to access Azure SQL Database from Azure WebApp using Managed Identity">
-<meta property="og:description" content="Sample code to access Azure SQL Database from Azure WebApp using Managed Identity">
-<link rel="canonical" href="http://localhost:4000/jekyll/update/2019/11/10/webapp-php-msi-sql.html">
-<meta property="og:url" content="http://localhost:4000/jekyll/update/2019/11/10/webapp-php-msi-sql.html">
-<meta property="og:site_name" content="Gaurav’s GitHub Pages!">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2019-11-10T02:27:00+05:30">
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Access Azure SQL Database using Managed Identity - PHP WebApp" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Sample code to access Azure SQL Database from Azure WebApp using Managed Identity" />
+<meta property="og:description" content="Sample code to access Azure SQL Database from Azure WebApp using Managed Identity" />
+<link rel="canonical" href="http://localhost:4000/jekyll/update/2019/11/10/webapp-php-msi-sql.html" />
+<meta property="og:url" content="http://localhost:4000/jekyll/update/2019/11/10/webapp-php-msi-sql.html" />
+<meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-10T02:27:00+05:30" />
 <script type="application/ld+json">
 {"url":"http://localhost:4000/jekyll/update/2019/11/10/webapp-php-msi-sql.html","headline":"Access Azure SQL Database using Managed Identity - PHP WebApp","dateModified":"2019-11-10T02:27:00+05:30","datePublished":"2019-11-10T02:27:00+05:30","description":"Sample code to access Azure SQL Database from Azure WebApp using Managed Identity","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/jekyll/update/2019/11/10/webapp-php-msi-sql.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
@@ -26,11 +23,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -118,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
-<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
   <body>
 
@@ -143,17 +140,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <header class="site-header " role="banner">
 
   <div class="wrapper">
-    <div class="site-header-inner">
-<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
-  <img class="site-favicon" title="Gaurav's GitHub Pages!" src="" onerror="this.style.display='none'">
-  Gaurav's GitHub Pages!
+    <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="Gaurav&#39;s GitHub Pages!" src="" onerror="this.style.display='none'">
+  Gaurav&#39;s GitHub Pages!
 </a>
 </span><nav class="site-nav">
-          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
           <label for="nav-trigger">
             <span class="menu-icon">
-              <svg viewbox="0 0 18 15" width="18px" height="15px">
-                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
               </svg>
             </span>
           </label>
@@ -164,8 +160,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 </div>
-        </nav>
-</div>
+        </nav></div>
   </div>
 </header>
 
@@ -414,6 +409,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
     </time>
 
     
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -512,19 +519,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
     </div>
 
 </article>
-<div class="post-nav">
-<a class="previous" href="/first/" title="First Blog Post!">First Blog Post!</a><a class="next" href="/2019/11/10/collecting-thread-dump-on-azure-webapp.html" title="Collecting Thread Dump on Azure WebApp">Collecting Thread Dump on Azure WebApp...</a>
-</div>
-<div class="post-related">
+<div class="post-nav"><a class="previous" href="/first/" title="First Blog Post!">First Blog Post!</a><a class="next" href="/2019/11/10/collecting-thread-dump-on-azure-webapp.html" title="Collecting Thread Dump on Azure WebApp">Collecting Thread Dump on Azure WebApp...</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2021/03/31/using-opencv-python-on-linux-app-service.html" title="Collecting Thread Dump on Azure WebApp">Using opencv-python on Linux App Service</a></li>
-<li><a class="post-link" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="Collecting Thread Dump on Azure WebApp">Stop and remove all Docker containers at once</a></li>
-<li><a class="post-link" href="/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="Collecting Thread Dump on Azure WebApp">Custom JRE/JDK on Azure App Service - Windows</a></li>
-<li><a class="post-link" href="/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="Collecting Thread Dump on Azure WebApp">Deploy Azure Java Function App (Windows) via GitHub Actions</a></li>
-</ul>
-    </div>
-<div class="post-comments"></div></section>
+        <li><a class="post-link" href="/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" title="Collecting Thread Dump on Azure WebApp">DBCP on Azure App Service Linux (MySQL)</a></li><li><a class="post-link" href="/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Collecting Thread Dump on Azure WebApp">Troubleshoot High Memory Issues - Java Linux WebApp</a></li><li><a class="post-link" href="/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="Collecting Thread Dump on Azure WebApp">Access SQL Database via Azure Function App - Python</a></li><li><a class="post-link" href="/2021/03/26/curl-3.html" title="Collecting Thread Dump on Azure WebApp">curl &lt;3</a></li></ul>
+    </div><div class="post-comments"></div></section>
 </div>
 
 
@@ -665,8 +664,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
-      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
-</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a></div>
     </div>
   </div>
 </footer>

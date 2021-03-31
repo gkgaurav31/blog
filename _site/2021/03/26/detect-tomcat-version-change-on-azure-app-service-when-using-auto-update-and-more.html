@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
-<!-- Begin Jekyll SEO tag v2.6.1 -->
+    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Detect Tomcat Version change on Azure App Service when using Auto-Update… and more | Gaurav’s GitHub Pages!</title>
-<meta name="generator" content="Jekyll v3.8.7">
-<meta property="og:title" content="Detect Tomcat Version change on Azure App Service when using Auto-Update… and more">
-<meta property="og:locale" content="en_US">
-<meta name="description" content="When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.">
-<meta property="og:description" content="When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.">
-<link rel="canonical" href="http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html">
-<meta property="og:url" content="http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html">
-<meta property="og:site_name" content="Gaurav’s GitHub Pages!">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2021-03-26T22:08:00+05:30">
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="Detect Tomcat Version change on Azure App Service when using Auto-Update… and more" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done." />
+<meta property="og:description" content="When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done." />
+<link rel="canonical" href="http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" />
+<meta property="og:url" content="http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" />
+<meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-26T22:08:00+05:30" />
 <script type="application/ld+json">
 {"url":"http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html","headline":"Detect Tomcat Version change on Azure App Service when using Auto-Update… and more","dateModified":"2021-03-26T22:08:00+05:30","datePublished":"2021-03-26T22:08:00+05:30","description":"When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
@@ -26,11 +23,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
-<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+<script charset="UTF-8"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
 
 
@@ -413,6 +411,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     </time>
 
     
+    
 
 
 
@@ -434,7 +433,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
   </p></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
@@ -453,55 +463,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 --header 'Content-Type: application/json' \
 --header 'Cookie: ARRAffinity=b5a9cc36272cdc0ce98dd1d4591de2a3387e634d23af23b5cfacc2627fff9108; ARRAffinitySameSite=b5a9cc36272cdc0ce98dd1d4591de2a3387e634d23af23b5cfacc2627fff9108' \
 --data-raw '{
-    "command": '
-
-This will return the value of __AZURE_TOMCAT90_HOME__, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.
-
-General steps which you would need to follow:  
-
-- Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
-You could send e-mails using another Azure Automation if needed.
-Refer to this documentation: [Send an email from a runbook
-](https://docs.microsoft.com/en-us/azure/automation/automation-send-email
-).
-
-- Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its __action__.
-
-Here is a simple Python 3 runbook script which you could use:
-
-```python
-#!/usr/bin/env python3
-import requests
-import os
-import json
-import sys
-import automationassets
-
-url = 'https://gauktomcatwin.scm.azurewebsites.net/api/command';
-myobj = {'command': 'echo %AZURE_TOMCAT90_HOME%', 'dir':'site'};
-
-username = automationassets.get_automation_variable("username");
-password = automationassets.get_automation_variable("password");
-previous_tomcat_version = automationassets.get_automation_variable("tomcat_version");
-
-response = requests.post(url, json = myobj, auth=(username, password));
-
-current_tomcat_version = response.json()["Output"].split("\")[2]
-
-automationassets.set_automation_variable("tomcat_version",current_tomcat_version);
-
-if(previous_tomcat_version == current_tomcat_version):
-    print ("No Tomcat update. Version: ", current_tomcat_version);
-else:
-    print("Tomcat version has changed from ", previous_tomcat_version, " to ", current_tomcat_version);
-    #more code to send email to notify users
+    "command": '\''echo %AZURE_TOMCAT90_HOME%'\'',
+    "dir": '\''site'\''
+}'
 </code></pre>
 
-<p>With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.</p>
-
-<p>I hope this helps. <img class="emoji" title=":v:" alt=":v:" src="https://github.githubassets.com/images/icons/emoji/unicode/270c.png" height="20" width="20">
-‘echo %AZURE_TOMCAT90_HOME%’</p>
-
 <p>This will return the value of <strong>AZURE_TOMCAT90_HOME</strong>, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.</p>
 
 <p>General steps which you would need to follow:</p>
@@ -536,165 +502,16 @@ Refer to this documentation: <a href="https://docs.microsoft.com/en-us/azure/aut
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span> <span class="o">=</span> <span class="n">myobj</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">));</span>
 
-<span class="n">current_tomcat_version</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()[</span><span class="s">"Output"</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="s">"</span><span class="se">\"</span><span class="s">)[2]
+<span class="n">current_tomcat_version</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()[</span><span class="s">"Output"</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="s">"</span><span class="se">\\</span><span class="s">"</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
 
-automationassets.set_automation_variable("</span><span class="n">tomcat_version</span><span class="s">",current_tomcat_version);
+<span class="n">automationassets</span><span class="p">.</span><span class="n">set_automation_variable</span><span class="p">(</span><span class="s">"tomcat_version"</span><span class="p">,</span><span class="n">current_tomcat_version</span><span class="p">);</span>
 
-if(previous_tomcat_version == current_tomcat_version):
-    print ("</span><span class="n">No</span> <span class="n">Tomcat</span> <span class="n">update</span><span class="p">.</span> <span class="n">Version</span><span class="p">:</span> <span class="s">", current_tomcat_version);
-else:
-    print("</span><span class="n">Tomcat</span> <span class="n">version</span> <span class="n">has</span> <span class="n">changed</span> <span class="k">from</span> <span class="s">", previous_tomcat_version, "</span> <span class="n">to</span> <span class="s">", current_tomcat_version);
-    #more code to send email to notify users
+<span class="k">if</span><span class="p">(</span><span class="n">previous_tomcat_version</span> <span class="o">==</span> <span class="n">current_tomcat_version</span><span class="p">):</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s">"No Tomcat update. Version: "</span><span class="p">,</span> <span class="n">current_tomcat_version</span><span class="p">);</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Tomcat version has changed from "</span><span class="p">,</span> <span class="n">previous_tomcat_version</span><span class="p">,</span> <span class="s">" to "</span><span class="p">,</span> <span class="n">current_tomcat_version</span><span class="p">);</span>
+    <span class="c1">#more code to send email to notify users
 </span></code></pre></div></div>
-
-<p>With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.</p>
-
-<p>I hope this helps. <img class="emoji" title=":v:" alt=":v:" src="https://github.githubassets.com/images/icons/emoji/unicode/270c.png" height="20" width="20">
-‘,
-    “dir”: ‘</p>
-
-<p>This will return the value of <strong>AZURE_TOMCAT90_HOME</strong>, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.</p>
-
-<p>General steps which you would need to follow:</p>
-
-<ul>
-  <li>
-    <p>Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
-You could send e-mails using another Azure Automation if needed.
-Refer to this documentation: <a href="https://docs.microsoft.com/en-us/azure/automation/automation-send-email">Send an email from a runbook
-</a>.</p>
-  </li>
-  <li>
-    <p>Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its <strong>action</strong>.</p>
-  </li>
-</ul>
-
-<p>Here is a simple Python 3 runbook script which you could use:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
-</span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">automationassets</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">'https://gauktomcatwin.scm.azurewebsites.net/api/command'</span><span class="p">;</span>
-<span class="n">myobj</span> <span class="o">=</span> <span class="p">{</span><span class="s">'command'</span><span class="p">:</span> <span class="s">'echo %AZURE_TOMCAT90_HOME%'</span><span class="p">,</span> <span class="s">'dir'</span><span class="p">:</span><span class="s">'site'</span><span class="p">};</span>
-
-<span class="n">username</span> <span class="o">=</span> <span class="n">automationassets</span><span class="p">.</span><span class="n">get_automation_variable</span><span class="p">(</span><span class="s">"username"</span><span class="p">);</span>
-<span class="n">password</span> <span class="o">=</span> <span class="n">automationassets</span><span class="p">.</span><span class="n">get_automation_variable</span><span class="p">(</span><span class="s">"password"</span><span class="p">);</span>
-<span class="n">previous_tomcat_version</span> <span class="o">=</span> <span class="n">automationassets</span><span class="p">.</span><span class="n">get_automation_variable</span><span class="p">(</span><span class="s">"tomcat_version"</span><span class="p">);</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span> <span class="o">=</span> <span class="n">myobj</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">));</span>
-
-<span class="n">current_tomcat_version</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()[</span><span class="s">"Output"</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="s">"</span><span class="se">\"</span><span class="s">)[2]
-
-automationassets.set_automation_variable("</span><span class="n">tomcat_version</span><span class="s">",current_tomcat_version);
-
-if(previous_tomcat_version == current_tomcat_version):
-    print ("</span><span class="n">No</span> <span class="n">Tomcat</span> <span class="n">update</span><span class="p">.</span> <span class="n">Version</span><span class="p">:</span> <span class="s">", current_tomcat_version);
-else:
-    print("</span><span class="n">Tomcat</span> <span class="n">version</span> <span class="n">has</span> <span class="n">changed</span> <span class="k">from</span> <span class="s">", previous_tomcat_version, "</span> <span class="n">to</span> <span class="s">", current_tomcat_version);
-    #more code to send email to notify users
-</span></code></pre></div></div>
-
-<p>With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.</p>
-
-<p>I hope this helps. <img class="emoji" title=":v:" alt=":v:" src="https://github.githubassets.com/images/icons/emoji/unicode/270c.png" height="20" width="20">
-‘site’</p>
-
-<p>This will return the value of <strong>AZURE_TOMCAT90_HOME</strong>, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.</p>
-
-<p>General steps which you would need to follow:</p>
-
-<ul>
-  <li>
-    <p>Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
-You could send e-mails using another Azure Automation if needed.
-Refer to this documentation: <a href="https://docs.microsoft.com/en-us/azure/automation/automation-send-email">Send an email from a runbook
-</a>.</p>
-  </li>
-  <li>
-    <p>Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its <strong>action</strong>.</p>
-  </li>
-</ul>
-
-<p>Here is a simple Python 3 runbook script which you could use:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
-</span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">automationassets</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">'https://gauktomcatwin.scm.azurewebsites.net/api/command'</span><span class="p">;</span>
-<span class="n">myobj</span> <span class="o">=</span> <span class="p">{</span><span class="s">'command'</span><span class="p">:</span> <span class="s">'echo %AZURE_TOMCAT90_HOME%'</span><span class="p">,</span> <span class="s">'dir'</span><span class="p">:</span><span class="s">'site'</span><span class="p">};</span>
-
-<span class="n">username</span> <span class="o">=</span> <span class="n">automationassets</span><span class="p">.</span><span class="n">get_automation_variable</span><span class="p">(</span><span class="s">"username"</span><span class="p">);</span>
-<span class="n">password</span> <span class="o">=</span> <span class="n">automationassets</span><span class="p">.</span><span class="n">get_automation_variable</span><span class="p">(</span><span class="s">"password"</span><span class="p">);</span>
-<span class="n">previous_tomcat_version</span> <span class="o">=</span> <span class="n">automationassets</span><span class="p">.</span><span class="n">get_automation_variable</span><span class="p">(</span><span class="s">"tomcat_version"</span><span class="p">);</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span> <span class="o">=</span> <span class="n">myobj</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">));</span>
-
-<span class="n">current_tomcat_version</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">json</span><span class="p">()[</span><span class="s">"Output"</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="s">"</span><span class="se">\"</span><span class="s">)[2]
-
-automationassets.set_automation_variable("</span><span class="n">tomcat_version</span><span class="s">",current_tomcat_version);
-
-if(previous_tomcat_version == current_tomcat_version):
-    print ("</span><span class="n">No</span> <span class="n">Tomcat</span> <span class="n">update</span><span class="p">.</span> <span class="n">Version</span><span class="p">:</span> <span class="s">", current_tomcat_version);
-else:
-    print("</span><span class="n">Tomcat</span> <span class="n">version</span> <span class="n">has</span> <span class="n">changed</span> <span class="k">from</span> <span class="s">", previous_tomcat_version, "</span> <span class="n">to</span> <span class="s">", current_tomcat_version);
-    #more code to send email to notify users
-</span></code></pre></div></div>
-
-<p>With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.</p>
-
-<p>I hope this helps. <img class="emoji" title=":v:" alt=":v:" src="https://github.githubassets.com/images/icons/emoji/unicode/270c.png" height="20" width="20">
-‘
-}’</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-This will return the value of __AZURE_TOMCAT90_HOME__, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.
-
-General steps which you would need to follow:  
-
-- Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
-You could send e-mails using another Azure Automation if needed.
-Refer to this documentation: [Send an email from a runbook
-](https://docs.microsoft.com/en-us/azure/automation/automation-send-email
-).
-
-- Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its __action__.
-
-Here is a simple Python 3 runbook script which you could use:
-
-```python
-#!/usr/bin/env python3
-import requests
-import os
-import json
-import sys
-import automationassets
-
-url = 'https://gauktomcatwin.scm.azurewebsites.net/api/command';
-myobj = {'command': 'echo %AZURE_TOMCAT90_HOME%', 'dir':'site'};
-
-username = automationassets.get_automation_variable("username");
-password = automationassets.get_automation_variable("password");
-previous_tomcat_version = automationassets.get_automation_variable("tomcat_version");
-
-response = requests.post(url, json = myobj, auth=(username, password));
-
-current_tomcat_version = response.json()["Output"].split("\")[2]
-
-automationassets.set_automation_variable("tomcat_version",current_tomcat_version);
-
-if(previous_tomcat_version == current_tomcat_version):
-    print ("No Tomcat update. Version: ", current_tomcat_version);
-else:
-    print("Tomcat version has changed from ", previous_tomcat_version, " to ", current_tomcat_version);
-    #more code to send email to notify users
-</code></pre></div></div>
 
 <p>With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.</p>
 
@@ -710,10 +527,10 @@ else:
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="curl &lt;3">Access SQL Database via Azure Function App - Python</a></li>
-<li><a class="post-link" href="/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="curl &lt;3">Configure IonCube Loader - PHP Linux App Service</a></li>
-<li><a class="post-link" href="/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="curl &lt;3">Enable Tomcat Manager app on Linux WebApp on Azure</a></li>
-<li><a class="post-link" href="/2021/03/26/curl-3.html" title="curl &lt;3">curl &lt;3</a></li>
+        <li><a class="post-link" href="/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="curl &lt;3">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li>
+<li><a class="post-link" href="/2021/03/31/using-opencv-python-on-linux-app-service.html" title="curl &lt;3">Using opencv-python on Linux App Service</a></li>
+<li><a class="post-link" href="/webappspringboot" title="curl &lt;3">Deploy Spring Boot Application On Azure WebApp via ZipDeploy</a></li>
+<li><a class="post-link" href="/first/" title="curl &lt;3">First Blog Post!</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

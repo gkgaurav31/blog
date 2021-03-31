@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-04-01T01:42:04+05:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Using opencv-python on Linux App Service</title><link href="http://localhost:4000/2021/03/31/using-opencv-python-on-linux-app-service.html" rel="alternate" type="text/html" title="Using opencv-python on Linux App Service" /><published>2021-03-31T22:54:00+05:30</published><updated>2021-03-31T22:54:00+05:30</updated><id>http://localhost:4000/2021/03/31/using-opencv-python-on-linux-app-service</id><content type="html" xml:base="http://localhost:4000/2021/03/31/using-opencv-python-on-linux-app-service.html">&lt;p&gt;The &lt;a href=&quot;https://pypi.org/project/opencv-python/&quot;&gt;opencv-python&lt;/a&gt; module in Python has certain OS level dependencies, which could be missing in certain environment or Docker images. You could obviously create your own Custom Docker Image and use that to run Python application on Azure WebApp for Containers. But that comes up with an overhead of maintaining the Docker Image. In order to use opencv-python (or any other module which have certain missing dependencies in the environment you are running in), you could make use of a Startup Script to install the required libraries. Using apt install command via webSSH directly would not work, since the files are non-persistent outside of /home. Read more about persistence &lt;a href=&quot;https://docs.microsoft.com/en-us/archive/blogs/waws/things-you-should-know-web-apps-and-linux#if-youre-persisting-files-only-the-home-directory-is-persistedapplies-to-web-app-for-containers&quot;&gt;HERE&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-04-01T01:46:09+05:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Using opencv-python on Linux App Service</title><link href="http://localhost:4000/2021/03/31/using-opencv-python-on-linux-app-service.html" rel="alternate" type="text/html" title="Using opencv-python on Linux App Service" /><published>2021-03-31T22:54:00+05:30</published><updated>2021-03-31T22:54:00+05:30</updated><id>http://localhost:4000/2021/03/31/using-opencv-python-on-linux-app-service</id><content type="html" xml:base="http://localhost:4000/2021/03/31/using-opencv-python-on-linux-app-service.html">&lt;p&gt;The &lt;a href=&quot;https://pypi.org/project/opencv-python/&quot;&gt;opencv-python&lt;/a&gt; module in Python has certain OS level dependencies, which could be missing in certain environment or Docker images. You could obviously create your own Custom Docker Image and use that to run Python application on Azure WebApp for Containers. But that comes up with an overhead of maintaining the Docker Image. In order to use opencv-python (or any other module which have certain missing dependencies in the environment you are running in), you could make use of a Startup Script to install the required libraries. Using apt install command via webSSH directly would not work, since the files are non-persistent outside of /home. Read more about persistence &lt;a href=&quot;https://docs.microsoft.com/en-us/archive/blogs/waws/things-you-should-know-web-apps-and-linux#if-youre-persisting-files-only-the-home-directory-is-persistedapplies-to-web-app-for-containers&quot;&gt;HERE&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;So, the idea is to run a startup command/script while the container is coming up as part of the init script. You would need to follow the below steps to achieve this:&lt;/p&gt;
 
@@ -69,55 +69,11 @@ Connection: keep-alive
 --header 'Content-Type: application/json' \
 --header 'Cookie: ARRAffinity=b5a9cc36272cdc0ce98dd1d4591de2a3387e634d23af23b5cfacc2627fff9108; ARRAffinitySameSite=b5a9cc36272cdc0ce98dd1d4591de2a3387e634d23af23b5cfacc2627fff9108' \
 --data-raw '{
-    &quot;command&quot;: '
-
-This will return the value of __AZURE_TOMCAT90_HOME__, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.
-
-General steps which you would need to follow:  
-
-- Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
-You could send e-mails using another Azure Automation if needed.
-Refer to this documentation: [Send an email from a runbook
-](https://docs.microsoft.com/en-us/azure/automation/automation-send-email
-).
-
-- Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its __action__.
-
-Here is a simple Python 3 runbook script which you could use:
-
-```python
-#!/usr/bin/env python3
-import requests
-import os
-import json
-import sys
-import automationassets
-
-url = 'https://gauktomcatwin.scm.azurewebsites.net/api/command';
-myobj = {'command': 'echo %AZURE_TOMCAT90_HOME%', 'dir':'site'};
-
-username = automationassets.get_automation_variable(&quot;username&quot;);
-password = automationassets.get_automation_variable(&quot;password&quot;);
-previous_tomcat_version = automationassets.get_automation_variable(&quot;tomcat_version&quot;);
-
-response = requests.post(url, json = myobj, auth=(username, password));
-
-current_tomcat_version = response.json()[&quot;Output&quot;].split(&quot;\&quot;)[2]
-
-automationassets.set_automation_variable(&quot;tomcat_version&quot;,current_tomcat_version);
-
-if(previous_tomcat_version == current_tomcat_version):
-    print (&quot;No Tomcat update. Version: &quot;, current_tomcat_version);
-else:
-    print(&quot;Tomcat version has changed from &quot;, previous_tomcat_version, &quot; to &quot;, current_tomcat_version);
-    #more code to send email to notify users
+    &quot;command&quot;: '\''echo %AZURE_TOMCAT90_HOME%'\'',
+    &quot;dir&quot;: '\''site'\''
+}'
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.&lt;/p&gt;
-
-&lt;p&gt;I hope this helps. :v:
-‘echo %AZURE_TOMCAT90_HOME%’&lt;/p&gt;
-
 &lt;p&gt;This will return the value of &lt;strong&gt;AZURE_TOMCAT90_HOME&lt;/strong&gt;, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.&lt;/p&gt;
 
 &lt;p&gt;General steps which you would need to follow:&lt;/p&gt;
@@ -152,165 +108,16 @@ Refer to this documentation: &lt;a href=&quot;https://docs.microsoft.com/en-us/a
 
 &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
 
-&lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Output&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)[2]
+&lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Output&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 
-automationassets.set_automation_variable(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tomcat_version&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;,current_tomcat_version);
+&lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tomcat_version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-if(previous_tomcat_version == current_tomcat_version):
-    print (&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
-else:
-    print(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changed&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, previous_tomcat_version, &quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
-    #more code to send email to notify users
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;previous_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;No Tomcat update. Version: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Tomcat version has changed from &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;previous_tomcat_version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; to &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#more code to send email to notify users
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.&lt;/p&gt;
-
-&lt;p&gt;I hope this helps. :v:
-‘,
-    “dir”: ‘&lt;/p&gt;
-
-&lt;p&gt;This will return the value of &lt;strong&gt;AZURE_TOMCAT90_HOME&lt;/strong&gt;, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.&lt;/p&gt;
-
-&lt;p&gt;General steps which you would need to follow:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
-You could send e-mails using another Azure Automation if needed.
-Refer to this documentation: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/automation/automation-send-email&quot;&gt;Send an email from a runbook
-&lt;/a&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its &lt;strong&gt;action&lt;/strong&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Here is a simple Python 3 runbook script which you could use:&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python3
-&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;json&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;automationassets&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://gauktomcatwin.scm.azurewebsites.net/api/command'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'command'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'echo %AZURE_TOMCAT90_HOME%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'dir'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'site'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;previous_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tomcat_version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Output&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)[2]
-
-automationassets.set_automation_variable(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tomcat_version&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;,current_tomcat_version);
-
-if(previous_tomcat_version == current_tomcat_version):
-    print (&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
-else:
-    print(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changed&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, previous_tomcat_version, &quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
-    #more code to send email to notify users
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.&lt;/p&gt;
-
-&lt;p&gt;I hope this helps. :v:
-‘site’&lt;/p&gt;
-
-&lt;p&gt;This will return the value of &lt;strong&gt;AZURE_TOMCAT90_HOME&lt;/strong&gt;, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.&lt;/p&gt;
-
-&lt;p&gt;General steps which you would need to follow:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
-You could send e-mails using another Azure Automation if needed.
-Refer to this documentation: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/automation/automation-send-email&quot;&gt;Send an email from a runbook
-&lt;/a&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its &lt;strong&gt;action&lt;/strong&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Here is a simple Python 3 runbook script which you could use:&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python3
-&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;json&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;automationassets&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://gauktomcatwin.scm.azurewebsites.net/api/command'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'command'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'echo %AZURE_TOMCAT90_HOME%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'dir'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'site'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;previous_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tomcat_version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Output&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)[2]
-
-automationassets.set_automation_variable(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tomcat_version&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;,current_tomcat_version);
-
-if(previous_tomcat_version == current_tomcat_version):
-    print (&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
-else:
-    print(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changed&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, previous_tomcat_version, &quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
-    #more code to send email to notify users
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.&lt;/p&gt;
-
-&lt;p&gt;I hope this helps. :v:
-‘
-}’&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-This will return the value of __AZURE_TOMCAT90_HOME__, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.
-
-General steps which you would need to follow:  
-
-- Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
-You could send e-mails using another Azure Automation if needed.
-Refer to this documentation: [Send an email from a runbook
-](https://docs.microsoft.com/en-us/azure/automation/automation-send-email
-).
-
-- Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its __action__.
-
-Here is a simple Python 3 runbook script which you could use:
-
-```python
-#!/usr/bin/env python3
-import requests
-import os
-import json
-import sys
-import automationassets
-
-url = 'https://gauktomcatwin.scm.azurewebsites.net/api/command';
-myobj = {'command': 'echo %AZURE_TOMCAT90_HOME%', 'dir':'site'};
-
-username = automationassets.get_automation_variable(&quot;username&quot;);
-password = automationassets.get_automation_variable(&quot;password&quot;);
-previous_tomcat_version = automationassets.get_automation_variable(&quot;tomcat_version&quot;);
-
-response = requests.post(url, json = myobj, auth=(username, password));
-
-current_tomcat_version = response.json()[&quot;Output&quot;].split(&quot;\&quot;)[2]
-
-automationassets.set_automation_variable(&quot;tomcat_version&quot;,current_tomcat_version);
-
-if(previous_tomcat_version == current_tomcat_version):
-    print (&quot;No Tomcat update. Version: &quot;, current_tomcat_version);
-else:
-    print(&quot;Tomcat version has changed from &quot;, previous_tomcat_version, &quot; to &quot;, current_tomcat_version);
-    #more code to send email to notify users
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.&lt;/p&gt;
 

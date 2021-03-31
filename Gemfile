@@ -10,6 +10,8 @@ source "https://rubygems.org"
 #gem "jekyll", "~> 4.0.0"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
+gem "jekyll-remote-theme"
+
 gem "minima", "~> 2.5.1"
 gem 'jekyll-compose', group: [:jekyll_plugins] #required to automate post-creation using bundle exec jekyll post "New Post"
 gem 'jemoji'
