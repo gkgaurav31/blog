@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Using opencv-python on Linux App Service" />
 <script type="application/ld+json">
-{"headline":"Using opencv-python on Linux App Service","dateModified":"2021-03-31T22:54:00+05:30","datePublished":"2021-03-31T22:54:00+05:30","url":"/2021/03/31/using-opencv-python-on-linux-app-service.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/03/31/using-opencv-python-on-linux-app-service.html"},"description":"The opencv-python module in Python has certain OS level dependencies, which could be missing in certain environment or Docker images. You could obviously create your own Custom Docker Image and use that to run Python application on Azure WebApp for Containers. But that comes up with an overhead of maintaining the Docker Image. In order to use opencv-python (or any other module which have certain missing dependencies in the environment you are running in), you could make use of a Startup Script to install the required libraries. Using apt install command via webSSH directly would not work, since the files are non-persistent outside of /home. Read more about persistence HERE","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/2021/03/31/using-opencv-python-on-linux-app-service.html","description":"The opencv-python module in Python has certain OS level dependencies, which could be missing in certain environment or Docker images. You could obviously create your own Custom Docker Image and use that to run Python application on Azure WebApp for Containers. But that comes up with an overhead of maintaining the Docker Image. In order to use opencv-python (or any other module which have certain missing dependencies in the environment you are running in), you could make use of a Startup Script to install the required libraries. Using apt install command via webSSH directly would not work, since the files are non-persistent outside of /home. Read more about persistence HERE","headline":"Using opencv-python on Linux App Service","dateModified":"2021-03-31T22:54:00+05:30","datePublished":"2021-03-31T22:54:00+05:30","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/03/31/using-opencv-python-on-linux-app-service.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -494,10 +494,10 @@ gunicorn <span class="nt">--bind</span><span class="o">=</span>0.0.0.0 <span cla
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="">Deploy Azure Java Function App (Windows) via GitHub Actions</a></li>
-<li><a class="post-link" href="/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="">Custom JRE/JDK on Azure App Service - Windows</a></li>
+        <li><a class="post-link" href="/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html" title="">Troubleshoot - JVM Crash - Azure WebApp - Linux</a></li>
 <li><a class="post-link" href="/2020/05/23/using-java-flight-recorder.html" title="">Using Java Flight Recorder</a></li>
 <li><a class="post-link" href="/2019/11/17/deploy-nodejs-webapp-via-github-actions.html" title="">Deploy NodeJS WebApp via GitHub Actions</a></li>
+<li><a class="post-link" href="/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="">Configure IonCube Loader - PHP Linux App Service</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
