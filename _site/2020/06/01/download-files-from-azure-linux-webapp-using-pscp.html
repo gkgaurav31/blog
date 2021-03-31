@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<header class="site-header " role="banner">
+<header class="site-header site-header-transparent" role="banner">
 
   <div class="wrapper">
     <div class="site-header-inner">
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     var documentElement = document.documentElement;
 
     function storeScrollData() {
-      var y = getScrollPos().y;var scrollStatus = "";
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
 
       if (y <= 0) {
         scrollStatus = "top";
@@ -236,7 +236,60 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<script>
+
+  <section class="page-banner">
+    <div class="page-banner-img">
+      <div style="background-image: url(/assets/banner.jpg)"></div>
+    </div>
+    <div class="wrapper">
+      <div class="page-banner-inner">
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">A blog for anyone...</h1>
+  <h3 class="post-subtitle">and everyone.</h3>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2020-06-01T20:06:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Jun 1, 2020
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </p></header>
+</div>
+    </div>
+  </section><script>
   function hashLocate(hashValue) {
     hashValue = hashValue.replace(/^.*#h-/, '');
     var element = document.getElementById(hashValue);
@@ -402,50 +455,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Download files from Azure Linux WebApp using pscp</h1>
-  <h3 class="post-subtitle"></h3>
-
-  <p class="post-meta">
-    <time class="dt-published" datetime="2020-06-01T20:06:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Jun 1, 2020
-    </time>
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-  </p></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
@@ -495,10 +504,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Download files from Azure Linux WebApp using pscp</a></li>
-<li><a class="post-link" href="/jekyll/update/2019/11/10/webapp-php-msi-sql.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li>
-<li><a class="post-link" href="/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Access SQL Database via Azure Function App - Python</a></li>
-<li><a class="post-link" href="/2020/05/23/using-java-flight-recorder.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Using Java Flight Recorder</a></li>
+        <li><a class="post-link" href="/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li>
+<li><a class="post-link" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Stop and remove all Docker containers at once</a></li>
+<li><a class="post-link" href="/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Configure IonCube Loader - PHP Linux App Service</a></li>
+<li><a class="post-link" href="/2019/11/10/create-a-post-in-jekyll-from-command-line.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Create a post in Jekyll via command line</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

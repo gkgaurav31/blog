@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<header class="site-header " role="banner">
+<header class="site-header site-header-transparent" role="banner">
 
   <div class="wrapper">
     <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     var documentElement = document.documentElement;
 
     function storeScrollData() {
-      var y = getScrollPos().y;var scrollStatus = "";
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
 
       if (y <= 0) {
         scrollStatus = "top";
@@ -234,7 +234,59 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<script>
+
+  <section class="page-banner">
+    <div class="page-banner-img">
+      <div style="background-image: url(/assets/banner.jpg)"></div>
+    </div>
+    <div class="wrapper">
+      <div class="page-banner-inner"><header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">A blog for anyone...</h1>
+  <h3 class="post-subtitle">and everyone.</h3>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2020-02-02T21:32:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Feb 2, 2020
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </p></header>
+</div>
+    </div>
+  </section><script>
   function hashLocate(hashValue) {
     hashValue = hashValue.replace(/^.*#h-/, '');
     var element = document.getElementById(hashValue);
@@ -400,50 +452,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Configure IonCube Loader - PHP Linux App Service</h1>
-  <h3 class="post-subtitle"></h3>
-
-  <p class="post-meta">
-    <time class="dt-published" datetime="2020-02-02T21:32:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Feb 2, 2020
-    </time>
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-  </p></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
@@ -506,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-nav"><a class="previous" href="/webappspringboot" title="Deploy Spring Boot Application On Azure WebApp via ZipDeploy">Deploy Spring Boot Application On Azure...</a><a class="next" href="/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Troubleshoot High CPU - Java - Azure WebApp - Linux">Troubleshoot High CPU - Java -...</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" title="Troubleshoot High CPU - Java - Azure WebApp - Linux">DBCP on Azure App Service Linux (MySQL)</a></li><li><a class="post-link" href="/2021/03/31/using-opencv-python-on-linux-app-service.html" title="Troubleshoot High CPU - Java - Azure WebApp - Linux">Using opencv-python on Linux App Service</a></li><li><a class="post-link" href="/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="Troubleshoot High CPU - Java - Azure WebApp - Linux">Custom JRE/JDK on Azure App Service - Windows</a></li><li><a class="post-link" href="/2021/03/26/curl-3.html" title="Troubleshoot High CPU - Java - Azure WebApp - Linux">curl &lt;3</a></li></ul>
+        <li><a class="post-link" href="/2019/11/10/create-a-post-in-jekyll-from-command-line.html" title="Troubleshoot High CPU - Java - Azure WebApp - Linux">Create a post in Jekyll via command line</a></li><li><a class="post-link" href="/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Troubleshoot High CPU - Java - Azure WebApp - Linux">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li><li><a class="post-link" href="/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="Troubleshoot High CPU - Java - Azure WebApp - Linux">Enable Tomcat Manager app on Linux WebApp on Azure</a></li><li><a class="post-link" href="/2019/11/10/collecting-thread-dump-on-azure-webapp.html" title="Troubleshoot High CPU - Java - Azure WebApp - Linux">Collecting Thread Dump on Azure WebApp</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 

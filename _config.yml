@@ -50,6 +50,7 @@ defaults:
     values:
       heading: "A blog for anyone..."
       subheading: "and everyone."
+      banner: "assets/banner.jpg"
 
 # Exclude from processing.
 # The following items will not be processed, by default.

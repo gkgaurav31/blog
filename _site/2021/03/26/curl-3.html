@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<header class="site-header " role="banner">
+<header class="site-header site-header-transparent" role="banner">
 
   <div class="wrapper">
     <div class="site-header-inner">
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     var documentElement = document.documentElement;
 
     function storeScrollData() {
-      var y = getScrollPos().y;var scrollStatus = "";
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
 
       if (y <= 0) {
         scrollStatus = "top";
@@ -236,7 +236,60 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<script>
+
+  <section class="page-banner">
+    <div class="page-banner-img">
+      <div style="background-image: url(/assets/banner.jpg)"></div>
+    </div>
+    <div class="wrapper">
+      <div class="page-banner-inner">
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">A blog for anyone...</h1>
+  <h3 class="post-subtitle">and everyone.</h3>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2021-03-26T22:35:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Mar 26, 2021
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+  </p></header>
+</div>
+    </div>
+  </section><script>
   function hashLocate(hashValue) {
     hashValue = hashValue.replace(/^.*#h-/, '');
     var element = document.getElementById(hashValue);
@@ -402,50 +455,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">curl &lt;3</h1>
-  <h3 class="post-subtitle"></h3>
-
-  <p class="post-meta">
-    <time class="dt-published" datetime="2021-03-26T22:35:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Mar 26, 2021
-    </time>
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-  </p></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
@@ -500,10 +509,10 @@ Connection: keep-alive
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Using opencv-python on Linux App Service">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li>
-<li><a class="post-link" href="/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Using opencv-python on Linux App Service">Troubleshoot High Memory Issues - Java Linux WebApp</a></li>
-<li><a class="post-link" href="/2019/11/17/deploy-nodejs-webapp-via-github-actions.html" title="Using opencv-python on Linux App Service">Deploy NodeJS WebApp via GitHub Actions</a></li>
-<li><a class="post-link" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="Using opencv-python on Linux App Service">Stop and remove all Docker containers at once</a></li>
+        <li><a class="post-link" href="/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" title="Using opencv-python on Linux App Service">DBCP on Azure App Service Linux (MySQL)</a></li>
+<li><a class="post-link" href="/webappspringboot" title="Using opencv-python on Linux App Service">Deploy Spring Boot Application On Azure WebApp via ZipDeploy</a></li>
+<li><a class="post-link" href="/2021/03/26/curl-3.html" title="Using opencv-python on Linux App Service">curl &lt;3</a></li>
+<li><a class="post-link" href="/2019/11/10/create-a-post-in-jekyll-from-command-line.html" title="Using opencv-python on Linux App Service">Create a post in Jekyll via command line</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

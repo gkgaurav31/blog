@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<header class="site-header " role="banner">
+<header class="site-header site-header-transparent" role="banner">
 
   <div class="wrapper">
     <div class="site-header-inner"><span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     var documentElement = document.documentElement;
 
     function storeScrollData() {
-      var y = getScrollPos().y;var scrollStatus = "";
+      var y = getScrollPos().y;documentElement.setAttribute("data-header-transparent", "");var scrollStatus = "";
 
       if (y <= 0) {
         scrollStatus = "top";
@@ -232,7 +232,22 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-<script>
+
+  <section class="page-banner">
+    <div class="page-banner-img">
+      <div style="background-image: url(/assets/banner.jpg)"></div>
+    </div>
+    <div class="wrapper">
+      <div class="page-banner-inner"><div class="page-banner-default">
+            <h1 class="page-banner-heading">
+              A blog for anyone...
+            </h1>
+            <h2 class="page-banner-subheading">
+              and everyone.
+            </h2>
+          </div></div>
+    </div>
+  </section><script>
   function hashLocate(hashValue) {
     hashValue = hashValue.replace(/^.*#h-/, '');
     var element = document.getElementById(hashValue);
