@@ -3,27 +3,29 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.6.1 -->
+    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Detect Tomcat Version change on Azure App Service when using Auto-Update… and more | Gaurav’s GitHub Pages!</title>
-<meta name="generator" content="Jekyll v3.8.7" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Detect Tomcat Version change on Azure App Service when using Auto-Update… and more" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done." />
 <meta property="og:description" content="When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done." />
-<link rel="canonical" href="http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" />
-<meta property="og:url" content="http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" />
+<link rel="canonical" href="/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" />
+<meta property="og:url" content="/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" />
 <meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-03-26T22:08:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Detect Tomcat Version change on Azure App Service when using Auto-Update… and more" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html","headline":"Detect Tomcat Version change on Azure App Service when using Auto-Update… and more","dateModified":"2021-03-26T22:08:00+05:30","datePublished":"2021-03-26T22:08:00+05:30","description":"When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"headline":"Detect Tomcat Version change on Azure App Service when using Auto-Update… and more","dateModified":"2021-03-26T22:08:00+05:30","datePublished":"2021-03-26T22:08:00+05:30","url":"/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html"},"description":"When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
@@ -536,10 +538,10 @@ Refer to this documentation: <a href="https://docs.microsoft.com/en-us/azure/aut
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2019/11/10/create-a-post-in-jekyll-from-command-line.html" title="curl &lt;3">Create a post in Jekyll via command line</a></li>
-<li><a class="post-link" href="/first/" title="curl &lt;3">First Blog Post!</a></li>
-<li><a class="post-link" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="curl &lt;3">Stop and remove all Docker containers at once</a></li>
-<li><a class="post-link" href="/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="curl &lt;3">Configure IonCube Loader - PHP Linux App Service</a></li>
+        <li><a class="post-link" href="/2021/03/26/curl-3.html" title="curl &lt;3">curl &lt;3</a></li>
+<li><a class="post-link" href="/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="curl &lt;3">Custom JRE/JDK on Azure App Service - Windows</a></li>
+<li><a class="post-link" href="/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html" title="curl &lt;3">Troubleshoot - JVM Crash - Azure WebApp - Linux</a></li>
+<li><a class="post-link" href="/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="curl &lt;3">Access SQL Database via Azure Function App - Python</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

@@ -3,27 +3,29 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.6.1 -->
+    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Download files from Azure Linux WebApp using pscp | Gaurav’s GitHub Pages!</title>
-<meta name="generator" content="Jekyll v3.8.7" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Download files from Azure Linux WebApp using pscp" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="There are multiple ways of downloading files from Azure WebApps, some of which include:" />
 <meta property="og:description" content="There are multiple ways of downloading files from Azure WebApps, some of which include:" />
-<link rel="canonical" href="http://localhost:4000/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" />
-<meta property="og:url" content="http://localhost:4000/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" />
+<link rel="canonical" href="/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" />
+<meta property="og:url" content="/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" />
 <meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-06-01T20:06:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Download files from Azure Linux WebApp using pscp" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html","headline":"Download files from Azure Linux WebApp using pscp","dateModified":"2020-06-01T20:06:00+05:30","datePublished":"2020-06-01T20:06:00+05:30","description":"There are multiple ways of downloading files from Azure WebApps, some of which include:","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"headline":"Download files from Azure Linux WebApp using pscp","dateModified":"2020-06-01T20:06:00+05:30","datePublished":"2020-06-01T20:06:00+05:30","url":"/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html"},"description":"There are multiple ways of downloading files from Azure WebApps, some of which include:","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
@@ -479,18 +481,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <ul>
   <li>
     <p>Create a remote connection using a tcp tunnel to your web app:<br>
-<code class="highlighter-rouge">az webapp create-remote-connection -g RESOURCE_GROUP -n APP_NAME -p 2222</code></p>
+<code class="language-plaintext highlighter-rouge">az webapp create-remote-connection -g RESOURCE_GROUP -n APP_NAME -p 2222</code></p>
   </li>
   <li>
     <p>Then copy the required files using pscp:
 [ <a href="https://www.ssh.com/ssh/putty/putty-manuals/0.68/Chapter5.html">PSCP</a> is part of the PuTTY tool suite for Windows ]<br>
-<code class="highlighter-rouge">pscp -P 2222 root@localhost:/home/test.log .</code></p>
+<code class="language-plaintext highlighter-rouge">pscp -P 2222 root@localhost:/home/test.log .</code></p>
   </li>
 </ul>
 
 <p><img class="emoji" title=":exclamation:" alt=":exclamation:" src="https://github.githubassets.com/images/icons/emoji/unicode/2757.png" height="20" width="20"> <strong>NOTE:</strong> You would need to provide the root password here. This is usually set using the following directive:</p>
 
-<p><code class="highlighter-rouge">RUN echo "root:Docker!" | chpasswd</code></p>
+<p><code class="language-plaintext highlighter-rouge">RUN echo "root:Docker!" | chpasswd</code></p>
 
 <p>That’s it! <img class="emoji" title=":v:" alt=":v:" src="https://github.githubassets.com/images/icons/emoji/unicode/270c.png" height="20" width="20"></p>
 
@@ -504,10 +506,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li>
+        <li><a class="post-link" href="/2021/03/31/using-opencv-python-on-linux-app-service.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Using opencv-python on Linux App Service</a></li>
 <li><a class="post-link" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Stop and remove all Docker containers at once</a></li>
-<li><a class="post-link" href="/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Configure IonCube Loader - PHP Linux App Service</a></li>
 <li><a class="post-link" href="/2019/11/10/create-a-post-in-jekyll-from-command-line.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Create a post in Jekyll via command line</a></li>
+<li><a class="post-link" href="/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Enable Tomcat Manager app on Linux WebApp on Azure">Troubleshoot High Memory Issues - Java Linux WebApp</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

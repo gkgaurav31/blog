@@ -3,27 +3,29 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.6.1 -->
+    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Using Java Flight Recorder | Gaurav’s GitHub Pages!</title>
-<meta name="generator" content="Jekyll v3.8.7" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Using Java Flight Recorder" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="You can now use Java Flight Recorder on Azure App Services - Linux!" />
 <meta property="og:description" content="You can now use Java Flight Recorder on Azure App Services - Linux!" />
-<link rel="canonical" href="http://localhost:4000/2020/05/23/using-java-flight-recorder.html" />
-<meta property="og:url" content="http://localhost:4000/2020/05/23/using-java-flight-recorder.html" />
+<link rel="canonical" href="/2020/05/23/using-java-flight-recorder.html" />
+<meta property="og:url" content="/2020/05/23/using-java-flight-recorder.html" />
 <meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-23T02:46:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Using Java Flight Recorder" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/2020/05/23/using-java-flight-recorder.html","headline":"Using Java Flight Recorder","dateModified":"2020-05-23T02:46:00+05:30","datePublished":"2020-05-23T02:46:00+05:30","description":"You can now use Java Flight Recorder on Azure App Services - Linux!","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/05/23/using-java-flight-recorder.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"headline":"Using Java Flight Recorder","dateModified":"2020-05-23T02:46:00+05:30","datePublished":"2020-05-23T02:46:00+05:30","url":"/2020/05/23/using-java-flight-recorder.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2020/05/23/using-java-flight-recorder.html"},"description":"You can now use Java Flight Recorder on Azure App Services - Linux!","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
@@ -485,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <h4 id="how-to-enable-jfr">How to Enable JFR</h4>
 
 <p>JFR can be enabled using the following JVM arguments:<br />
-<code class="highlighter-rouge">java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder</code></p>
+<code class="language-plaintext highlighter-rouge">java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder</code></p>
 
 <h4 id="types-of-recordings">Types of recordings</h4>
 
@@ -512,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <ul>
   <li>
     <p>Timed-Recording<br />
-<code class="highlighter-rouge">jcmd 116 JFR.start name=MyRecording settings=profile duration=30s filename="/home/jfr_example.jfr"</code></p>
+<code class="language-plaintext highlighter-rouge">jcmd 116 JFR.start name=MyRecording settings=profile duration=30s filename="/home/jfr_example.jfr"</code></p>
   </li>
   <li>
     <p>Continuous Recording</p>
@@ -520,11 +522,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <ul>
       <li>
         <p>Add the following Application Setting:<br />
-<code class="highlighter-rouge">JAVA_OPTS=-XX:StartFlightRecording=disk=true,name=continuous_recording,dumponexit=true,maxsize=1024m,maxage=1d</code></p>
+<code class="language-plaintext highlighter-rouge">JAVA_OPTS=-XX:StartFlightRecording=disk=true,name=continuous_recording,dumponexit=true,maxsize=1024m,maxage=1d</code></p>
       </li>
       <li>
         <p>Once the recording has started, you can dump the current recording data at any time using the JFR.dump command.<br />
-<code class="highlighter-rouge">jcmd &lt;pid&gt; JFR.dump name=continuous_recording filename="/home/recording1.jfr"</code></p>
+<code class="language-plaintext highlighter-rouge">jcmd &lt;pid&gt; JFR.dump name=continuous_recording filename="/home/recording1.jfr"</code></p>
       </li>
     </ul>
   </li>
@@ -545,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-nav"><a class="previous" href="/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Troubleshoot High Memory Issues - Java Linux WebApp">Troubleshoot High Memory Issues - Java...</a><a class="next" href="/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="Custom JRE/JDK on Azure App Service - Windows">Custom JRE/JDK on Azure App Service...</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Custom JRE/JDK on Azure App Service - Windows">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li><li><a class="post-link" href="/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="Custom JRE/JDK on Azure App Service - Windows">Deploy Azure Java Function App (Windows) via GitHub Actions</a></li><li><a class="post-link" href="/2019/11/17/deploy-nodejs-webapp-via-github-actions.html" title="Custom JRE/JDK on Azure App Service - Windows">Deploy NodeJS WebApp via GitHub Actions</a></li><li><a class="post-link" href="/first/" title="Custom JRE/JDK on Azure App Service - Windows">First Blog Post!</a></li></ul>
+        <li><a class="post-link" href="/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="Custom JRE/JDK on Azure App Service - Windows">Deploy Azure Java Function App (Windows) via GitHub Actions</a></li><li><a class="post-link" href="/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" title="Custom JRE/JDK on Azure App Service - Windows">DBCP on Azure App Service Linux (MySQL)</a></li><li><a class="post-link" href="/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="Custom JRE/JDK on Azure App Service - Windows">Configure IonCube Loader - PHP Linux App Service</a></li><li><a class="post-link" href="/jekyll/update/2019/11/10/webapp-php-msi-sql.html" title="Custom JRE/JDK on Azure App Service - Windows">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 

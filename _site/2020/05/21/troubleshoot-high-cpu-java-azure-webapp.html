@@ -3,27 +3,29 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.6.1 -->
+    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Troubleshoot High CPU - Java - Azure WebApp - Linux | Gaurav’s GitHub Pages!</title>
-<meta name="generator" content="Jekyll v3.8.7" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Troubleshoot High CPU - Java - Azure WebApp - Linux" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="There are various ways to find what is leading to high CPU usage on any system. Here is something you could do while the issue is going on and you are seeing high CPU usage by a certain Java application hosted on Azure Linux WebApp:" />
 <meta property="og:description" content="There are various ways to find what is leading to high CPU usage on any system. Here is something you could do while the issue is going on and you are seeing high CPU usage by a certain Java application hosted on Azure Linux WebApp:" />
-<link rel="canonical" href="http://localhost:4000/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" />
-<meta property="og:url" content="http://localhost:4000/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" />
+<link rel="canonical" href="/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" />
+<meta property="og:url" content="/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" />
 <meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-21T02:06:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Troubleshoot High CPU - Java - Azure WebApp - Linux" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html","headline":"Troubleshoot High CPU - Java - Azure WebApp - Linux","dateModified":"2020-05-21T02:06:00+05:30","datePublished":"2020-05-21T02:06:00+05:30","description":"There are various ways to find what is leading to high CPU usage on any system. Here is something you could do while the issue is going on and you are seeing high CPU usage by a certain Java application hosted on Azure Linux WebApp:","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"headline":"Troubleshoot High CPU - Java - Azure WebApp - Linux","dateModified":"2020-05-21T02:06:00+05:30","datePublished":"2020-05-21T02:06:00+05:30","url":"/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html"},"description":"There are various ways to find what is leading to high CPU usage on any system. Here is something you could do while the issue is going on and you are seeing high CPU usage by a certain Java application hosted on Azure Linux WebApp:","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
@@ -469,7 +471,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p><strong>Get PID of the Java Process:</strong></p>
 
-<p>You can use <code class="highlighter-rouge">ps aux</code> or <code class="highlighter-rouge">jcmd</code> to get the PID of the Java Process.</p>
+<p>You can use <code class="language-plaintext highlighter-rouge">ps aux</code> or <code class="language-plaintext highlighter-rouge">jcmd</code> to get the PID of the Java Process.</p>
 
 <p><strong>List the threads:</strong></p>
 
@@ -478,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>top <span class="nt">-Hc</span> <span class="nt">-p</span> PID
 </code></pre></div></div>
 
-<p>After running the top command, you can arrange the threads as per CPU usage using <code class="highlighter-rouge">Shift + P</code></p>
+<p>After running the top command, you can arrange the threads as per CPU usage using <code class="language-plaintext highlighter-rouge">Shift + P</code></p>
 
 <p><strong>Get the ID of the thread:</strong></p>
 
@@ -506,7 +508,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-nav"><a class="previous" href="/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="Configure IonCube Loader - PHP Linux App Service">Configure IonCube Loader - PHP Linux...</a><a class="next" href="/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html" title="Troubleshoot - JVM Crash - Azure WebApp - Linux">Troubleshoot - JVM Crash - Azure...</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Troubleshoot - JVM Crash - Azure WebApp - Linux">Troubleshoot High Memory Issues - Java Linux WebApp</a></li><li><a class="post-link" href="/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="Troubleshoot - JVM Crash - Azure WebApp - Linux">Configure IonCube Loader - PHP Linux App Service</a></li><li><a class="post-link" href="/webappspringboot" title="Troubleshoot - JVM Crash - Azure WebApp - Linux">Deploy Spring Boot Application On Azure WebApp via ZipDeploy</a></li><li><a class="post-link" href="/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Troubleshoot - JVM Crash - Azure WebApp - Linux">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li></ul>
+        <li><a class="post-link" href="/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Troubleshoot - JVM Crash - Azure WebApp - Linux">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li><li><a class="post-link" href="/first/" title="Troubleshoot - JVM Crash - Azure WebApp - Linux">First Blog Post!</a></li><li><a class="post-link" href="/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html" title="Troubleshoot - JVM Crash - Azure WebApp - Linux">Troubleshoot - JVM Crash - Azure WebApp - Linux</a></li><li><a class="post-link" href="/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="Troubleshoot - JVM Crash - Azure WebApp - Linux">Enable Tomcat Manager app on Linux WebApp on Azure</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 
