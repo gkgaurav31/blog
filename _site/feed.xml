@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-04-01T01:42:04+05:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Using opencv-python on Linux App Service</title><link href="http://localhost:4000/2021/03/31/using-opencv-python-on-linux-app-service.html" rel="alternate" type="text/html" title="Using opencv-python on Linux App Service" /><published>2021-03-31T22:54:00+05:30</published><updated>2021-03-31T22:54:00+05:30</updated><id>http://localhost:4000/2021/03/31/using-opencv-python-on-linux-app-service</id><content type="html" xml:base="http://localhost:4000/2021/03/31/using-opencv-python-on-linux-app-service.html">&lt;p&gt;The &lt;a href=&quot;https://pypi.org/project/opencv-python/&quot;&gt;opencv-python&lt;/a&gt; module in Python has certain OS level dependencies, which could be missing in certain environment or Docker images. You could obviously create your own Custom Docker Image and use that to run Python application on Azure WebApp for Containers. But that comes up with an overhead of maintaining the Docker Image. In order to use opencv-python (or any other module which have certain missing dependencies in the environment you are running in), you could make use of a Startup Script to install the required libraries. Using apt install command via webSSH directly would not work, since the files are non-persistent outside of /home. Read more about persistence &lt;a href=&quot;https://docs.microsoft.com/en-us/archive/blogs/waws/things-you-should-know-web-apps-and-linux#if-youre-persisting-files-only-the-home-directory-is-persistedapplies-to-web-app-for-containers&quot;&gt;HERE&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So, the idea is to run a startup command/script while the container is coming up as part of the init script. You would need to follow the below steps to achieve this:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create a &lt;strong&gt;mystart.sh&lt;/strong&gt; file in the &lt;strong&gt;/home&lt;/strong&gt; directory. (You could name it anything. Just remember to use the same name later)&lt;/li&gt;
+  &lt;li&gt;On the Azure Portal of the Web App, under &lt;strong&gt;Configuration &amp;gt; General Settings &amp;gt; StartUp Command&lt;/strong&gt;, specify the path of this startup script as &lt;strong&gt;/home/mystart.sh&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;In your mystart.sh, you can add the following lines in case of a flask app:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt update
+apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;libgl1-mesa-glx &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;libgomp1 &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+gunicorn &lt;span class=&quot;nt&quot;&gt;--bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0.0.0.0 &lt;span class=&quot;nt&quot;&gt;--timeout&lt;/span&gt; 600 app:app
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Startup Command for Gunicorn: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/developer/python/tutorial-deploy-app-service-on-linux-04#django-startup-commands&quot;&gt;LINK&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You could always add your own commands to the above bash script if you need to install other libraries.&lt;/p&gt;
+
+&lt;p&gt;I hope this helps. :v:&lt;/p&gt;</content><author><name></name></author><summary type="html">The opencv-python module in Python has certain OS level dependencies, which could be missing in certain environment or Docker images. You could obviously create your own Custom Docker Image and use that to run Python application on Azure WebApp for Containers. But that comes up with an overhead of maintaining the Docker Image. In order to use opencv-python (or any other module which have certain missing dependencies in the environment you are running in), you could make use of a Startup Script to install the required libraries. Using apt install command via webSSH directly would not work, since the files are non-persistent outside of /home. Read more about persistence HERE</summary></entry><entry><title type="html">curl &amp;lt;3</title><link href="http://localhost:4000/2021/03/26/curl-3.html" rel="alternate" type="text/html" title="curl &lt;3" /><published>2021-03-26T22:35:00+05:30</published><updated>2021-03-26T22:35:00+05:30</updated><id>http://localhost:4000/2021/03/26/curl-3</id><content type="html" xml:base="http://localhost:4000/2021/03/26/curl-3.html">&lt;p&gt;One of the most useful command line tools which I have come across is CURL. :heart:&lt;/p&gt;
+
+&lt;p&gt;In this blog, I will mention some of ways we can make use of curl. I will keep adding more as and when I learn.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You can use -I paramter to get the HTTP response code, headers etc. The browsers can cache data so sometimes you are not sure if tha response is from the cache. With curl from command line, you’re sure.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-curl&quot;&gt;curl https://www.wikipedia.org/ -I
+HTTP/1.1 200 OK
+Date: Fri, 26 Mar 2021 08:26:46 GMT
+Cache-Control: s-maxage=86400, must-revalidate, max-age=3600
+Server: ATS/8.0.8
+ETag: W/&quot;10483-5be1dab9caf01&quot;
+Last-Modified: Mon, 22 Mar 2021 10:38:46 GMT
+Content-Type: text/html
+Vary: Accept-Encoding
+Age: 31310
+X-Cache: cp5009 hit, cp5009 hit/111166
+X-Cache-Status: hit-front
+Server-Timing: cache;desc=&quot;hit-front&quot;, host;desc=&quot;cp5009&quot;
+Strict-Transport-Security: max-age=106384710; includeSubDomains; preload
+Report-To: { &quot;group&quot;: &quot;wm_nel&quot;, &quot;max_age&quot;: 86400, &quot;endpoints&quot;: [{ &quot;url&quot;: &quot;https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&amp;amp;schema_uri=/w3c/reportingapi/network_error/1.0.0&quot; }] }
+NEL: { &quot;report_to&quot;: &quot;wm_nel&quot;, &quot;max_age&quot;: 86400, &quot;failure_fraction&quot;: 0.05, &quot;success_fraction&quot;: 0.0}
+Set-Cookie: WMF-Last-Access=26-Mar-2021;Path=/;HttpOnly;secure;Expires=Tue, 27 Apr 2021 12:00:00 GMT
+Set-Cookie: WMF-Last-Access-Global=26-Mar-2021;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Tue, 27 Apr 2021 12:00:00 GMT
+X-Client-IP: 49.207.200.163
+Set-Cookie: GeoIP=IN:KA:Bengaluru:12.96:77.59:v4; Path=/; secure; Domain=.wikipedia.org
+Accept-Ranges: bytes
+Content-Length: 66691
+Connection: keep-alive
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Did you know you could send many requests using a single curl command? Here’s how:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-curl&quot;&gt;curl -I https://www.wikipedia.org?[1-100]
+&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">One of the most useful command line tools which I have come across is CURL. :heart:</summary></entry><entry><title type="html">Detect Tomcat Version change on Azure App Service when using Auto-Update… and more</title><link href="http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" rel="alternate" type="text/html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more" /><published>2021-03-26T22:08:00+05:30</published><updated>2021-03-26T22:08:00+05:30</updated><id>http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more</id><content type="html" xml:base="http://localhost:4000/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html">&lt;p&gt;When using &lt;strong&gt;Auto-Update&lt;/strong&gt; for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official &lt;a href=&quot;https://github.com/Azure/app-service-announcements/issues&quot;&gt;announcement page&lt;/a&gt; for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.&lt;/p&gt;
+
+&lt;p&gt;Using &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/web-sites-monitor#alerts-and-autoscale&quot;&gt;Alerts&lt;/a&gt; on Azure App Service, you could setup an action to execute an Azure Function, Azure Logic App, Azure Automation etc. When there is a configuration change, the WebApp also restarts. Using these two data points, we could create an alert for &lt;strong&gt;“When the WebApp restarts, run Azure Automation to check the current Tomcat version and see if it has changed. Notify if it did.”&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The Kudu REST APIs (uses HTTP Basic Authentication) can be used to execute certain commands on Azure App Service.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-curl&quot;&gt;curl --location --request POST 'https://&amp;lt;webappname&amp;gt;.scm.azurewebsites.net/api/command' \
+--header 'Authorization: Basic xxxxxxxxxxxx' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: ARRAffinity=b5a9cc36272cdc0ce98dd1d4591de2a3387e634d23af23b5cfacc2627fff9108; ARRAffinitySameSite=b5a9cc36272cdc0ce98dd1d4591de2a3387e634d23af23b5cfacc2627fff9108' \
+--data-raw '{
+    &quot;command&quot;: '
+
+This will return the value of __AZURE_TOMCAT90_HOME__, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.
+
+General steps which you would need to follow:  
+
+- Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
+You could send e-mails using another Azure Automation if needed.
+Refer to this documentation: [Send an email from a runbook
+](https://docs.microsoft.com/en-us/azure/automation/automation-send-email
+).
+
+- Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its __action__.
+
+Here is a simple Python 3 runbook script which you could use:
+
+```python
+#!/usr/bin/env python3
+import requests
+import os
+import json
+import sys
+import automationassets
+
+url = 'https://gauktomcatwin.scm.azurewebsites.net/api/command';
+myobj = {'command': 'echo %AZURE_TOMCAT90_HOME%', 'dir':'site'};
+
+username = automationassets.get_automation_variable(&quot;username&quot;);
+password = automationassets.get_automation_variable(&quot;password&quot;);
+previous_tomcat_version = automationassets.get_automation_variable(&quot;tomcat_version&quot;);
+
+response = requests.post(url, json = myobj, auth=(username, password));
+
+current_tomcat_version = response.json()[&quot;Output&quot;].split(&quot;\&quot;)[2]
+
+automationassets.set_automation_variable(&quot;tomcat_version&quot;,current_tomcat_version);
+
+if(previous_tomcat_version == current_tomcat_version):
+    print (&quot;No Tomcat update. Version: &quot;, current_tomcat_version);
+else:
+    print(&quot;Tomcat version has changed from &quot;, previous_tomcat_version, &quot; to &quot;, current_tomcat_version);
+    #more code to send email to notify users
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.&lt;/p&gt;
+
+&lt;p&gt;I hope this helps. :v:
+‘echo %AZURE_TOMCAT90_HOME%’&lt;/p&gt;
+
+&lt;p&gt;This will return the value of &lt;strong&gt;AZURE_TOMCAT90_HOME&lt;/strong&gt;, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.&lt;/p&gt;
+
+&lt;p&gt;General steps which you would need to follow:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
+You could send e-mails using another Azure Automation if needed.
+Refer to this documentation: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/automation/automation-send-email&quot;&gt;Send an email from a runbook
+&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its &lt;strong&gt;action&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here is a simple Python 3 runbook script which you could use:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python3
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;automationassets&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://gauktomcatwin.scm.azurewebsites.net/api/command'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'command'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'echo %AZURE_TOMCAT90_HOME%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'dir'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'site'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;previous_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tomcat_version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Output&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)[2]
+
+automationassets.set_automation_variable(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tomcat_version&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;,current_tomcat_version);
+
+if(previous_tomcat_version == current_tomcat_version):
+    print (&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
+else:
+    print(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changed&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, previous_tomcat_version, &quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
+    #more code to send email to notify users
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.&lt;/p&gt;
+
+&lt;p&gt;I hope this helps. :v:
+‘,
+    “dir”: ‘&lt;/p&gt;
+
+&lt;p&gt;This will return the value of &lt;strong&gt;AZURE_TOMCAT90_HOME&lt;/strong&gt;, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.&lt;/p&gt;
+
+&lt;p&gt;General steps which you would need to follow:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
+You could send e-mails using another Azure Automation if needed.
+Refer to this documentation: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/automation/automation-send-email&quot;&gt;Send an email from a runbook
+&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its &lt;strong&gt;action&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here is a simple Python 3 runbook script which you could use:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python3
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;automationassets&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://gauktomcatwin.scm.azurewebsites.net/api/command'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'command'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'echo %AZURE_TOMCAT90_HOME%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'dir'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'site'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;previous_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tomcat_version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Output&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)[2]
+
+automationassets.set_automation_variable(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tomcat_version&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;,current_tomcat_version);
+
+if(previous_tomcat_version == current_tomcat_version):
+    print (&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
+else:
+    print(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changed&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, previous_tomcat_version, &quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
+    #more code to send email to notify users
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.&lt;/p&gt;
+
+&lt;p&gt;I hope this helps. :v:
+‘site’&lt;/p&gt;
+
+&lt;p&gt;This will return the value of &lt;strong&gt;AZURE_TOMCAT90_HOME&lt;/strong&gt;, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.&lt;/p&gt;
+
+&lt;p&gt;General steps which you would need to follow:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
+You could send e-mails using another Azure Automation if needed.
+Refer to this documentation: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/automation/automation-send-email&quot;&gt;Send an email from a runbook
+&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its &lt;strong&gt;action&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here is a simple Python 3 runbook script which you could use:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env python3
+&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;automationassets&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://gauktomcatwin.scm.azurewebsites.net/api/command'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'command'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'echo %AZURE_TOMCAT90_HOME%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'dir'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'site'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;previous_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automationassets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_automation_variable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tomcat_version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myobj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;current_tomcat_version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Output&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)[2]
+
+automationassets.set_automation_variable(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tomcat_version&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;,current_tomcat_version);
+
+if(previous_tomcat_version == current_tomcat_version):
+    print (&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Version&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
+else:
+    print(&quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tomcat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;has&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;changed&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, previous_tomcat_version, &quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, current_tomcat_version);
+    #more code to send email to notify users
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.&lt;/p&gt;
+
+&lt;p&gt;I hope this helps. :v:
+‘
+}’&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+This will return the value of __AZURE_TOMCAT90_HOME__, which contains the Tomcat version as well. The environment variable would be different for different frameworks, stack and even major version of same stack. Now that we have a way to get the Tomcat version, we would just need a way to automate it.
+
+General steps which you would need to follow:  
+
+- Create a Runbook in Azure Automation to detect when the Tomcat version has changed. We could store the current version in a variable. The automation can use the above Kudu REST API to get the current version being used. If both are NOT the same, send a notification.
+You could send e-mails using another Azure Automation if needed.
+Refer to this documentation: [Send an email from a runbook
+](https://docs.microsoft.com/en-us/azure/automation/automation-send-email
+).
+
+- Once we have the automation in place, we need a way to trigger it based on certain conditions. App Service alerts can help us here. You could create an Alert which runs when a WebApp is restarted. The alert can also call the Azure Automation as its __action__.
+
+Here is a simple Python 3 runbook script which you could use:
+
+```python
+#!/usr/bin/env python3
+import requests
+import os
+import json
+import sys
+import automationassets
+
+url = 'https://gauktomcatwin.scm.azurewebsites.net/api/command';
+myobj = {'command': 'echo %AZURE_TOMCAT90_HOME%', 'dir':'site'};
+
+username = automationassets.get_automation_variable(&quot;username&quot;);
+password = automationassets.get_automation_variable(&quot;password&quot;);
+previous_tomcat_version = automationassets.get_automation_variable(&quot;tomcat_version&quot;);
+
+response = requests.post(url, json = myobj, auth=(username, password));
+
+current_tomcat_version = response.json()[&quot;Output&quot;].split(&quot;\&quot;)[2]
+
+automationassets.set_automation_variable(&quot;tomcat_version&quot;,current_tomcat_version);
+
+if(previous_tomcat_version == current_tomcat_version):
+    print (&quot;No Tomcat update. Version: &quot;, current_tomcat_version);
+else:
+    print(&quot;Tomcat version has changed from &quot;, previous_tomcat_version, &quot; to &quot;, current_tomcat_version);
+    #more code to send email to notify users
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;With just the above steps, you have a place to check if the Tomcat version has changed. This can be extended to a great extent. Using the same KUDU API, you could run many different commands to check various other configurations.&lt;/p&gt;
+
+&lt;p&gt;I hope this helps. :v:&lt;/p&gt;</content><author><name></name></author><summary type="html">When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.</summary></entry><entry><title type="html">DBCP on Azure App Service Linux (MySQL)</title><link href="http://localhost:4000/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" rel="alternate" type="text/html" title="DBCP on Azure App Service Linux (MySQL)" /><published>2021-03-25T18:15:00+05:30</published><updated>2021-03-25T18:15:00+05:30</updated><id>http://localhost:4000/2021/03/25/dbcp-on-azure-app-service-linux-mysql</id><content type="html" xml:base="http://localhost:4000/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html">&lt;p&gt;Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://commons.apache.org/proper/commons-dbcp/&quot;&gt;DBCP DOCUMENTATION&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can configure DBCP on Azure App Service Linux by following the below steps:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;COPY tomcat from &lt;strong&gt;/usr/local/tomcat&lt;/strong&gt; to &lt;strong&gt;/home/tomcat&lt;/strong&gt;:&lt;br /&gt;
+mkdir -p /home/tomcat&lt;br /&gt;
+cp -a /usr/local/tomcat/ /home/&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Edit &lt;strong&gt;/home/tomcat/conf/context.xml&lt;/strong&gt;:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the &quot;License&quot;); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The contents of this file will be loaded for each web application --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;Context&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Default set of monitored resources. If one of these changes, the    --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- web application will be reloaded.                                   --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;WatchedResource&amp;gt;&lt;/span&gt;WEB-INF/web.xml&lt;span class=&quot;nt&quot;&gt;&amp;lt;/WatchedResource&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- In AppService we customize WatchedResource to /home/site/deployments/active --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;WatchedResource&amp;gt;&lt;/span&gt;/home/site/deployments/active&lt;span class=&quot;nt&quot;&gt;&amp;lt;/WatchedResource&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Uncomment this to disable session persistence across Tomcat restarts --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- In AppService we need to disable session persistence across Tomcat restarts--&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Manager&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;pathname=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Resource&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mydatasource&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;javax.sql.DataSource&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;url=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;jdbc:mysql://gaukmysql.mysql.database.azure.com:3306/testdb?serverTimezone=UTC&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;driverClassName=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.mysql.cj.jdbc.Driver&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;username=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;gauk@gaukmysql&quot;&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;password=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;xxxxx&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/Context&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Upload the mysql connector JAR:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;b48fe95eccb7:/home/tomcat/lib# &lt;span class=&quot;nb&quot;&gt;ls &lt;/span&gt;mysql-connector-java-8.0.21.jar
+mysql-connector-java-8.0.21.jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;LINK:&lt;/strong&gt; &lt;a href=&quot;https://dev.mysql.com/downloads/connector/j/&quot;&gt;https://dev.mysql.com/downloads/connector/j/&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You would also need to give permission to the user:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;GRANT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ALL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PRIVILEGES&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;testdb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TO&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'gauk'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%'&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IDENTIFIED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'xxxxx'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
+&lt;span class=&quot;n&quot;&gt;FLUSH&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PRIVILEGES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s all. :v:&lt;/p&gt;</content><author><name></name></author><summary type="html">Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally.</summary></entry><entry><title type="html">Enable Tomcat Manager app on Linux WebApp on Azure</title><link href="http://localhost:4000/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" rel="alternate" type="text/html" title="Enable Tomcat Manager app on Linux WebApp on Azure" /><published>2020-07-16T15:20:00+05:30</published><updated>2020-07-16T15:20:00+05:30</updated><id>http://localhost:4000/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure</id><content type="html" xml:base="http://localhost:4000/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html">&lt;p&gt;Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use &lt;a href=&quot;https://github.com/projectkudu/kudu/wiki/Deploying-WAR-files-using-wardeploy#why-wardeploy&quot;&gt;wardeploy API&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;steps&quot;&gt;&lt;strong&gt;STEPS&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Copy the manager application from your local system to the WebApp’s /home/site/wwwroot/webapps directory&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Manager app has a configuration that restricts access only to &lt;strong&gt;&lt;em&gt;localhost&lt;/em&gt;&lt;/strong&gt;. We can remove that restriction by removing the following configuration from context.xml of the manager application:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Remove:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;Valve&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;className=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.catalina.valves.RemoteAddrValve&quot;&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;allow=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;We would also need to add a user under Tomcat’s conf/tomcat-users.xml file. Since the files under only /home persist on a Linux WebApp, we can create a copy of Tomcat’s configuration under /home. The container has the logic to use Tomcat under /home is present:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;mkdir -p /home/tomcat
+cp -a /usr/local/tomcat/conf /home/tomcat/conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Edit the tomcat-users.xml file under /home/tomcat/conf and add the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;role&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rolename=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;manager-gui&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;role&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rolename=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;manager-script&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;user&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;username=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tomcatgui&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;password=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;s3cret&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;roles=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;manager-gui&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;user&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;username=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tomcattext&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;password=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mypassword&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;roles=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;manager-script&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Restart the WebApp&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s all. :v:&lt;/p&gt;
+
+&lt;p&gt;You should be able to access Tomcat Manager app via webappname.azurewebsites.net/manager URL. Use the username/password configured in the previous steps to login.&lt;/p&gt;</content><author><name></name></author><summary type="html">Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use wardeploy API.</summary></entry><entry><title type="html">Download files from Azure Linux WebApp using pscp</title><link href="http://localhost:4000/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" rel="alternate" type="text/html" title="Download files from Azure Linux WebApp using pscp" /><published>2020-06-01T20:06:00+05:30</published><updated>2020-06-01T20:06:00+05:30</updated><id>http://localhost:4000/2020/06/01/download-files-from-azure-linux-webapp-using-pscp</id><content type="html" xml:base="http://localhost:4000/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html">&lt;p&gt;There are multiple ways of downloading files from Azure WebApps, some of which include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/deploy-ftp&quot;&gt;FTP&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/projectkudu/kudu/wiki/REST-API#vfs&quot;&gt;Kudu VFS API&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There is another way, which does not require you to login to the Azure Portal, and it can be used for any Docker container which has SSH enabled.&lt;/p&gt;
+
+&lt;p&gt;:notebook_with_decorative_cover: Refer to the following documentation on how to configure SSH: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/containers/configure-custom-container#enable-ssh&quot;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;:exclamation: &lt;strong&gt;NOTE:&lt;/strong&gt; The documentation contains an example, and the actual commands/configurations would also depend on the base image being used in the Dockerfile.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Here is how you can use pscp to copy files to a WebApp for Containers (Linux) on Azure:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a remote connection using a tcp tunnel to your web app:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;az webapp create-remote-connection -g RESOURCE_GROUP -n APP_NAME -p 2222&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Then copy the required files using pscp:
+[ &lt;a href=&quot;https://www.ssh.com/ssh/putty/putty-manuals/0.68/Chapter5.html&quot;&gt;PSCP&lt;/a&gt; is part of the PuTTY tool suite for Windows ]&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;pscp -P 2222 root@localhost:/home/test.log .&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;:exclamation: &lt;strong&gt;NOTE:&lt;/strong&gt; You would need to provide the root password here. This is usually set using the following directive:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RUN echo &quot;root:Docker!&quot; | chpasswd&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;That’s it! :v:&lt;/p&gt;</content><author><name></name></author><summary type="html">There are multiple ways of downloading files from Azure WebApps, some of which include:</summary></entry><entry><title type="html">Custom JRE/JDK on Azure App Service - Windows</title><link href="http://localhost:4000/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" rel="alternate" type="text/html" title="Custom JRE/JDK on Azure App Service - Windows" /><published>2020-05-26T23:12:00+05:30</published><updated>2020-05-26T23:12:00+05:30</updated><id>http://localhost:4000/2020/05/26/custom-jre-jdk-on-azure-app-service-windows</id><content type="html" xml:base="http://localhost:4000/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html">&lt;p&gt;Here’s how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:&lt;/p&gt;
+
+&lt;h4 id=&quot;steps&quot;&gt;STEPS&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Upload your JRE/JDK via FTP or you can simply upload it via the Kudu Site. If you have a direct link to the zip file, you can use the curl command to download the zip directly on the WebApp:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/curl-jdk.png&quot; alt=&quot;snapshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can then extract the zip using the command: &lt;code class=&quot;highlighter-rouge&quot;&gt;unzip file.zip&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create a &lt;strong&gt;web.config&lt;/strong&gt; under D:\home\site\wwwroot with the following content:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;:exclamation: Modify the &lt;strong&gt;JRE_HOME&lt;/strong&gt; environment variable in web.config as per your configuration.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;system.webServer&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;handlers&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;add&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;httpplatformhandler&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;path=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;verb=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;modules=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;httpPlatformHandler&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resourceType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Unspecified&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/handlers&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;httpPlatform&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;processPath=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;D:\Program Files (x86)\apache-tomcat-8.5.37\bin\startup.bat&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;environmentVariables&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;environmentVariable&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;JRE_HOME&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;D:\home\site\wwwroot\java11&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/environmentVariables&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/httpPlatform&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/system.webServer&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s it!  :v:&lt;/p&gt;
+
+&lt;p&gt;You can verify that the WebApp is now using our Custom JDK by checking the &lt;strong&gt;Properties&lt;/strong&gt; of the Java Process from &lt;strong&gt;Process Explorer&lt;/strong&gt; tab in the kudu Console:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/kudu-java.png&quot; alt=&quot;snapshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you want more control over your application, you could also use a &lt;strong&gt;Custom Tomcat!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is a Template which you can use: &lt;a href=&quot;https://github.com/azure-appservice-samples/TomcatTemplate&quot;&gt;Tomcat Template&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Here’s how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:</summary></entry><entry><title type="html">Using Java Flight Recorder</title><link href="http://localhost:4000/2020/05/23/using-java-flight-recorder.html" rel="alternate" type="text/html" title="Using Java Flight Recorder" /><published>2020-05-23T02:46:00+05:30</published><updated>2020-05-23T02:46:00+05:30</updated><id>http://localhost:4000/2020/05/23/using-java-flight-recorder</id><content type="html" xml:base="http://localhost:4000/2020/05/23/using-java-flight-recorder.html">&lt;h4 id=&quot;you-can-now-use-java-flight-recorder-on-azure-app-services---linux&quot;&gt;You can now use Java Flight Recorder on Azure App Services - Linux!&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://azure.microsoft.com/en-in/updates/java-on-app-service-updates-and-improvements/&quot;&gt;Announcement Page&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;what-is-jfr&quot;&gt;What is JFR&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Java Flight Recorder (JFR) is a tool for collecting diagnostic and profiling data about a running Java application. It is integrated into the Java Virtual Machine (JVM) and causes almost no performance overhead, so it can be used even in heavily loaded production environments. When default settings are used, both internal testing and customer feedback indicate that performance impact is less than one percent. For some applications, it can be significantly lower. However, for short-running applications (which are not the kind of applications running in production environments), relative startup and warmup times can be larger, which might impact the performance by more than one percent. JFR collects data about the JVM as well as the Java application running on it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;benefits&quot;&gt;Benefits&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Low Overhead; Can be run in a prod environment as well&lt;/li&gt;
+  &lt;li&gt;Continuous recording is possible&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;java-mission-control-jmc&quot;&gt;Java Mission Control (JMC)&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Set of tools using which we can analyze JFR&lt;/li&gt;
+  &lt;li&gt;It’s a desktop application and runs on top of Eclipse&lt;/li&gt;
+  &lt;li&gt;Can be connected to a remote JVM via JMX (Java Management Extensions)&lt;/li&gt;
+  &lt;li&gt;JMX console can connect to the JVM and provide data in real time. We can create rules based on certain events to collect JFR for example.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;how-to-enable-jfr&quot;&gt;How to Enable JFR&lt;/h4&gt;
+
+&lt;p&gt;JFR can be enabled using the following JVM arguments:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;types-of-recordings&quot;&gt;Types of recordings&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Timed Fixed Recording&lt;/li&gt;
+  &lt;li&gt;Continuous Recording: uses a buffer (configurable size) to continuously collect information. once the buffer is full, old data gets discarded&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;jfr-event-settings&quot;&gt;JFR Event Settings&lt;/h4&gt;
+
+&lt;p&gt;By default there are two configurations are present for the JRF recordings:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Continuous — default.jfc - has less overhead&lt;/li&gt;
+  &lt;li&gt;Profiling — profile.jfc&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;note&quot;&gt;NOTE&lt;/h4&gt;
+
+&lt;p&gt;We can run multiple recordings at the same time, but the same buffer will be used by the JFR runtime. The final output will be the union of all the data which has been collected from all the recordings.&lt;/p&gt;
+
+&lt;h4 id=&quot;commands&quot;&gt;Commands&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Timed-Recording&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;jcmd 116 JFR.start name=MyRecording settings=profile duration=30s filename=&quot;/home/jfr_example.jfr&quot;&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Continuous Recording&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;Add the following Application Setting:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;JAVA_OPTS=-XX:StartFlightRecording=disk=true,name=continuous_recording,dumponexit=true,maxsize=1024m,maxage=1d&lt;/code&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Once the recording has started, you can dump the current recording data at any time using the JFR.dump command.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;jcmd &amp;lt;pid&amp;gt; JFR.dump name=continuous_recording filename=&quot;/home/recording1.jfr&quot;&lt;/code&gt;&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;references&quot;&gt;References&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Using JFR - &lt;a href=&quot;https://docs.azul.com/zing/UseZVM_JavaFlightRecorder_Overview.htm&quot;&gt;Zulu&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Zulu Mission Control: &lt;a href=&quot;http://docs.azul.com/zmc/ZMCUserGuide/Title.htm&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;JFR on Linux App Service - Azure: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/containers/configure-language-java#flight-recorder&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">You can now use Java Flight Recorder on Azure App Services - Linux!</summary></entry><entry><title type="html">Troubleshoot High Memory Issues - Java Linux WebApp</title><link href="http://localhost:4000/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" rel="alternate" type="text/html" title="Troubleshoot High Memory Issues - Java Linux WebApp" /><published>2020-05-23T01:40:00+05:30</published><updated>2020-05-23T01:40:00+05:30</updated><id>http://localhost:4000/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp</id><content type="html" xml:base="http://localhost:4000/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html">&lt;p&gt;There are different ways of dealing with Memory Issues. In this blog, I would like to share some steps you can take in order to find what could be causing memory leak.&lt;/p&gt;
+
+&lt;p&gt;It is always recommended to profile and test your application before deploying it to a Production environment. Using jVisualVM is a great way to quickly check the performance of your application.&lt;/p&gt;
+
+&lt;p&gt;This would be a good starting point: &lt;a href=&quot;https://visualvm.github.io/documentation.html&quot;&gt;jVisualVM&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The general symptoms when the memory usage high includes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The application slow down overall&lt;/li&gt;
+  &lt;li&gt;You would see higher rate of major/minor garbage collection&lt;/li&gt;
+  &lt;li&gt;The Eden space usage would change very frequently&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Using &lt;a href=&quot;https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr006.html&quot;&gt;JCMD&lt;/a&gt; - A Swiss-army knife for investigating and resolving issues with your JVM application&lt;/p&gt;
+
+&lt;p&gt;This is a a great way to quickly check the details of the JVM, while it is running.&lt;/p&gt;
+
+&lt;p&gt;Here are some useful command and flags which you can use:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Get PID of all the Java Processes:&lt;/strong&gt; jcmd&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Collect Thread dump:&lt;/strong&gt; jcmd PID Thread.print&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;JVM command line arguments:&lt;/strong&gt; jcmd PID VM.command_line&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Collect Heap Dump:&lt;/strong&gt; jcmd PID GC.heap_dump /home/dump&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Get Heap Memory Information:&lt;/strong&gt; jcmd PID GC.heap_info&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;best-practices-and-recommendations&quot;&gt;Best Practices and Recommendations&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Enable Garbage Collection Logs:&lt;/strong&gt;&lt;br /&gt;
+You can add the following Application Setting for your WebApp to configure GC logs:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;JAVA_OPTS=-Xloggc:/home/gc.log&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Collect Heap Dump automatically on OutOfMemoryException:&lt;/strong&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/heapdump/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Integrate your application with Application Insights:&lt;/strong&gt;&lt;br /&gt;
+You can use the Application Insights codeless agent to integrate your application with AI. This does not need any code changes:
+&lt;a href=&quot;https://docs.microsoft.com/en-us/azure/azure-monitor/app/java-in-process-agent&quot;&gt;Codeless Agent&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Use Java Flight Recorder:&lt;/strong&gt;&lt;br /&gt;
+The recoding can be collected in two way - Timed and Continuous. Continuous recording is helpful when dealing with intermittent issues:
+&lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/containers/configure-language-java#flight-recorder&quot;&gt;JFR&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;other-useful-links&quot;&gt;Other useful links&lt;/h3&gt;
+
+&lt;p&gt;Using Eclipse Memory Analyzer Tool: &lt;a href=&quot;https://www.youtube.com/watch?v=sLoifF_YA4w&quot;&gt;MAT&lt;/a&gt;&lt;br /&gt;
+Zulu Mission Control: &lt;a href=&quot;http://docs.azul.com/zmc/ZMCUserGuide/Title.htm&quot;&gt;User Guide&lt;/a&gt;&lt;br /&gt;
+Application Insights: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/azure-monitor/app/java-get-started?tabs=maven#performance-counters&quot;&gt;Performance Counters&lt;/a&gt;&lt;br /&gt;
+Analyze memory dump using jhat: &lt;a href=&quot;https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jhat.html&quot;&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">There are different ways of dealing with Memory Issues. In this blog, I would like to share some steps you can take in order to find what could be causing memory leak.</summary></entry><entry><title type="html">Troubleshoot - JVM Crash - Azure WebApp - Linux</title><link href="http://localhost:4000/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html" rel="alternate" type="text/html" title="Troubleshoot - JVM Crash - Azure WebApp - Linux" /><published>2020-05-22T00:09:00+05:30</published><updated>2020-05-22T00:09:00+05:30</updated><id>http://localhost:4000/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux</id><content type="html" xml:base="http://localhost:4000/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html">&lt;p&gt;On Azure WebApp Linux, if your JVM is crashing and is unable to come up, you would see a generic “Application Error” message when trying to browse your site. In order to find what might be causing this issue, we could need to determine if the JVM is crashing. If yes, then we can collect the crash dump to find out the root cause of the issue.&lt;/p&gt;
+
+&lt;h3 id=&quot;steps&quot;&gt;STEPS&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Enable App Service Logs:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to get the stdout/stderr logs for the WebApp, you will need to enable container logs for the WebApp.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Check logs:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, you should be able to access the logs via Log Stream from Azure Portal. This can also be accessed via the Kudu Site (accessible via &lt;strong&gt;Advanced Tools&lt;/strong&gt; blade of the WebApp)
+You can also use the following Azure CLI command to stream the logs on your local terminal:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-cli&quot;&gt;az webapp log tail -g RESOURCE_GROUP -n WEBAPP_NAME
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Analyze the logs:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you see something like the following image, it indicates that the JVM is crashing while trying to come up:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/jvm-crash.png&quot; alt=&quot;snapshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Collect the Crash Dump:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;On Linux WebApp, by default, the files under /home only persist. So, we would need to configure our JVM to dump the logs to /home.
+This can be done by using the JVM argument: -XX:ErrorFile=/home/hs_err_pid%p.log. In order to configure this on the WebApp, add the following Application Setting via Configuration blade of the WebApp:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;JAVA_OPTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;XX:&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ErrorFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hs_err_pid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;log&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/app-setting-java-opts.png&quot; alt=&quot;snapshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The easiest way to access the log file generated is by going to the Kudu site from Advanced Tools blade of the WebApp -&amp;gt; Files -&amp;gt; Open the link which would look like:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://&amp;lt;webappname&amp;gt;.scm.azurewebsites.net/api/vfs/hs_err_pid123.log&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The crash dump will indicate the reason why JVM is failing to come up. If the problem is due to memory, you could try configure the heap memory using the following JVM argument: &lt;code class=&quot;highlighter-rouge&quot;&gt;-Xms1024m -Xmx1024m&lt;/code&gt;. This will set the minimum and maximum heap memory for the JVM to 1 GB.&lt;/p&gt;</content><author><name></name></author><summary type="html">On Azure WebApp Linux, if your JVM is crashing and is unable to come up, you would see a generic “Application Error” message when trying to browse your site. In order to find what might be causing this issue, we could need to determine if the JVM is crashing. If yes, then we can collect the crash dump to find out the root cause of the issue.</summary></entry></feed>
