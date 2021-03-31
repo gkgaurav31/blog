@@ -28,7 +28,7 @@ twitter_username: gkgaurav31
 github_username:  gkgaurav31
 
 # Build settings
-theme: minima
+theme: jekyll-theme-yat
 
 plugins:
   - jekyll-feed
@@ -36,13 +36,19 @@ plugins:
   - jemoji
 
 defaults:
-  -
+  - 
     scope:
       path: "blog"
       type: "posts"
     values:
       layout: "post"
-      
+  - 
+    scope:
+      path: ""
+    values:
+      heading: "A blog for anyone..."
+      subheading: "and everyone."
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
