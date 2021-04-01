@@ -4,21 +4,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Custom JRE/JDK on Azure App Service - Windows | Gaurav’s GitHub Pages!</title>
+<title>Enable trace logs - Java Function App | Gaurav’s GitHub Pages!</title>
 <meta name="generator" content="Jekyll v4.2.0" />
-<meta property="og:title" content="Custom JRE/JDK on Azure App Service - Windows" />
+<meta property="og:title" content="Enable trace logs - Java Function App" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Here’s how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:" />
-<meta property="og:description" content="Here’s how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:" />
-<link rel="canonical" href="/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" />
-<meta property="og:url" content="/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" />
+<meta name="description" content="Enable trace logs - Java Function App" />
+<meta property="og:description" content="Enable trace logs - Java Function App" />
+<link rel="canonical" href="/2021/04/01/enable-trace-logs-java-function-app.html" />
+<meta property="og:url" content="/2021/04/01/enable-trace-logs-java-function-app.html" />
 <meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-05-26T23:12:00+05:30" />
+<meta property="article:published_time" content="2021-04-01T22:28:00+05:30" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Custom JRE/JDK on Azure App Service - Windows" />
+<meta property="twitter:title" content="Enable trace logs - Java Function App" />
 <script type="application/ld+json">
-{"headline":"Custom JRE/JDK on Azure App Service - Windows","dateModified":"2020-05-26T23:12:00+05:30","datePublished":"2020-05-26T23:12:00+05:30","url":"/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html","mainEntityOfPage":{"@type":"WebPage","@id":"/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html"},"description":"Here’s how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"headline":"Enable trace logs - Java Function App","dateModified":"2021-04-01T22:28:00+05:30","datePublished":"2021-04-01T22:28:00+05:30","url":"/2021/04/01/enable-trace-logs-java-function-app.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/04/01/enable-trace-logs-java-function-app.html"},"description":"Enable trace logs - Java Function App","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   <h3 class="post-subtitle">and everyone.</h3>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2020-05-26T23:12:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> May 26, 2020
+    <time class="dt-published" datetime="2021-04-01T22:28:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Apr 1, 2021
     </time>
 
     
@@ -461,65 +461,54 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>Here’s how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:</p>
+      <h2 id="enable-trace-logs---java-function-app">Enable trace logs - Java Function App</h2>
 
-<h4 id="steps">STEPS</h4>
+<p>The Java Functions use azure-functions-java-library which uses java.util.logging for logging. You could print the logs using the following code:</p>
 
-<ul>
-  <li>Upload your JRE/JDK via FTP or you can simply upload it via the Kudu Site. If you have a direct link to the zip file, you can use the curl command to download the zip directly on the WebApp:</li>
-</ul>
+<h3 id="code-snippet">code snippet</h3>
 
-<p>Example:</p>
-
-<p><img src="/assets/curl-jdk.png" alt="snapshot"></p>
-
-<p>You can then extract the zip using the command: <code class="language-plaintext highlighter-rouge">unzip file.zip</code></p>
-
-<ul>
-  <li>Create a <strong>web.config</strong> under D:\home\site\wwwroot with the following content:</li>
-</ul>
-
-<p><img class="emoji" title=":exclamation:" alt=":exclamation:" src="https://github.githubassets.com/images/icons/emoji/unicode/2757.png" height="20" width="20"> Modify the <strong>JRE_HOME</strong> environment variable in web.config as per your configuration.</p>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="nt">&lt;configuration&gt;</span>
-  <span class="nt">&lt;system.webServer&gt;</span>
-    <span class="nt">&lt;handlers&gt;</span>
-      <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">"httpplatformhandler"</span> <span class="na">path=</span><span class="s">"*"</span> <span class="na">verb=</span><span class="s">"*"</span> <span class="na">modules=</span><span class="s">"httpPlatformHandler"</span> <span class="na">resourceType=</span><span class="s">"Unspecified"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/handlers&gt;</span>
-    <span class="nt">&lt;httpPlatform</span> <span class="na">processPath=</span><span class="s">"D:\Program Files (x86)\apache-tomcat-8.5.37\bin\startup.bat"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;environmentVariables&gt;</span>
-        <span class="nt">&lt;environmentVariable</span> <span class="na">name=</span><span class="s">"JRE_HOME"</span> <span class="na">value=</span><span class="s">"D:\home\site\wwwroot\java11"</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;/environmentVariables&gt;</span>
-    <span class="nt">&lt;/httpPlatform&gt;</span>
-  <span class="nt">&lt;/system.webServer&gt;</span>
-<span class="nt">&lt;/configuration&gt;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">context</span><span class="o">.</span><span class="na">getLogger</span><span class="o">().</span><span class="na">fine</span><span class="o">(</span><span class="s">"context logtest fine"</span><span class="o">);</span>
+<span class="n">context</span><span class="o">.</span><span class="na">getLogger</span><span class="o">().</span><span class="na">finer</span><span class="o">(</span><span class="s">"context logtest finer"</span><span class="o">);</span>
+<span class="n">context</span><span class="o">.</span><span class="na">getLogger</span><span class="o">().</span><span class="na">finest</span><span class="o">(</span><span class="s">"context logtest finest"</span><span class="o">);</span>
+<span class="n">context</span><span class="o">.</span><span class="na">getLogger</span><span class="o">().</span><span class="na">info</span><span class="o">(</span><span class="s">"context logtest info"</span><span class="o">);</span>
+<span class="n">context</span><span class="o">.</span><span class="na">getLogger</span><span class="o">().</span><span class="na">warning</span><span class="o">(</span><span class="s">"context logtest warning"</span><span class="o">);</span>
+<span class="n">context</span><span class="o">.</span><span class="na">getLogger</span><span class="o">().</span><span class="na">severe</span><span class="o">(</span><span class="s">"context logtest severe"</span><span class="o">);</span>
 </code></pre></div></div>
 
-<p>That’s it!  <img class="emoji" title=":v:" alt=":v:" src="https://github.githubassets.com/images/icons/emoji/unicode/270c.png" height="20" width="20"></p>
+<p>You’d notice that the anything above info level logs would not get printed by default. To log these, you would need to change the logging level at the Function Host level. This can be done using the following host.json:</p>
 
-<p>You can verify that the WebApp is now using our Custom JDK by checking the <strong>Properties</strong> of the Java Process from <strong>Process Explorer</strong> tab in the kudu Console:</p>
+<h3 id="hostjson">host.json</h3>
 
-<p><img src="/assets/kudu-java.png" alt="snapshot"></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"extensionBundle"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microsoft.Azure.Functions.ExtensionBundle"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[2.*, 3.0.0)"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"logging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"logLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trace"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
-<p>If you want more control over your application, you could also use a <strong>Custom Tomcat!</strong></p>
-
-<p>Here is a Template which you can use: <a href="https://github.com/azure-appservice-samples/TomcatTemplate">Tomcat Template</a></p>
+<p>That’s it! <img class="emoji" title=":v:" alt=":v:" src="https://github.githubassets.com/images/icons/emoji/unicode/270c.png" height="20" width="20"></p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html" title="Using Java Flight Recorder">Using Java Flight Recorder</a><a class="next" href="/azure_webapp/pscp/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" title="Download files from Azure Linux WebApp using pscp">Download files from Azure Linux WebApp...</a>
+<a class="previous" href="/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html" title="Using opencv-python on Linux App Service">Using opencv-python on Linux App Service...</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html" title="Download files from Azure Linux WebApp using pscp">Using opencv-python on Linux App Service</a></li>
-<li><a class="post-link" href="/2019/11/10/create-a-post-in-jekyll-from-command-line.html" title="Download files from Azure Linux WebApp using pscp">Create a post in Jekyll via command line</a></li>
-<li><a class="post-link" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Download files from Azure Linux WebApp using pscp">Troubleshoot High Memory Issues - Java Linux WebApp</a></li>
-<li><a class="post-link" href="/java/azure_webapp/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Download files from Azure Linux WebApp using pscp">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li>
+        <li><a class="post-link" href="/2021/03/26/curl-3.html" title="">curl &lt;3</a></li>
+<li><a class="post-link" href="/ioncube/php/azure_webapp/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="">Configure IonCube Loader - PHP Linux App Service</a></li>
+<li><a class="post-link" href="/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="">Enable Tomcat Manager app on Linux WebApp on Azure</a></li>
+<li><a class="post-link" href="/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html" title="">Using opencv-python on Linux App Service</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
