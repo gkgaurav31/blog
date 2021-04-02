@@ -463,7 +463,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
       <p>Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use <a href="https://github.com/projectkudu/kudu/wiki/Deploying-WAR-files-using-wardeploy#why-wardeploy">wardeploy API</a>.</p>
 
-<h4 id="steps"><strong>STEPS</strong></h4>
+<h4 id="steps">STEPS</h4>
+
+<h5 id="upload-manager-app">Upload manager app</h5>
 
 <ul>
   <li>
@@ -474,11 +476,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
   </li>
 </ul>
 
-<p><strong>Remove:</strong></p>
+<h5 id="allow-access-from-any-ip">Allow access from any IP</h5>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;Valve</span> <span class="na">className=</span><span class="s">"org.apache.catalina.valves.RemoteAddrValve"</span>
          <span class="na">allow=</span><span class="s">"127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
+
+<h5 id="copy-tomcat-to-home">Copy Tomcat to /home</h5>
 
 <ul>
   <li>We would also need to add a user under Tomcat’s conf/tomcat-users.xml file. Since the files under only /home persist on a Linux WebApp, we can create a copy of Tomcat’s configuration under /home. The container has the logic to use Tomcat under /home is present:</li>
@@ -488,6 +492,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 cp -a /usr/local/tomcat/conf /home/tomcat/conf
 </code></pre>
 
+<h5 id="add-a-user-for-tomcat-manager">Add a user for Tomcat Manager</h5>
+
 <p>Edit the tomcat-users.xml file under /home/tomcat/conf and add the following:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">"manager-gui"</span><span class="nt">/&gt;</span>
@@ -496,9 +502,7 @@ cp -a /usr/local/tomcat/conf /home/tomcat/conf
   <span class="nt">&lt;user</span> <span class="na">username=</span><span class="s">"tomcattext"</span> <span class="na">password=</span><span class="s">"mypassword"</span> <span class="na">roles=</span><span class="s">"manager-script"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
 
-<ul>
-  <li>Restart the WebApp</li>
-</ul>
+<h5 id="restart-the-webapp">Restart the WebApp</h5>
 
 <p>That’s all. <img class="emoji" title=":v:" alt=":v:" src="https://github.githubassets.com/images/icons/emoji/unicode/270c.png" height="20" width="20"></p>
 
@@ -514,10 +518,10 @@ cp -a /usr/local/tomcat/conf /home/tomcat/conf
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html" title="DBCP on Azure App Service Linux (MySQL)">Using opencv-python on Linux App Service</a></li>
-<li><a class="post-link" href="/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="DBCP on Azure App Service Linux (MySQL)">Access SQL Database via Azure Function App - Python</a></li>
+        <li><a class="post-link" href="/first/" title="DBCP on Azure App Service Linux (MySQL)">First Blog Post!</a></li>
 <li><a class="post-link" href="/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="DBCP on Azure App Service Linux (MySQL)">Custom JRE/JDK on Azure App Service - Windows</a></li>
-<li><a class="post-link" href="/2021/04/01/enable-trace-logs-java-function-app.html" title="DBCP on Azure App Service Linux (MySQL)">Enable trace logs - Java Function App</a></li>
+<li><a class="post-link" href="/2021/03/26/curl-3.html" title="DBCP on Azure App Service Linux (MySQL)">curl &lt;3</a></li>
+<li><a class="post-link" href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="DBCP on Azure App Service Linux (MySQL)">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
