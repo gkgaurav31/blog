@@ -244,10 +244,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <div class="wrapper">
       <div class="page-banner-inner"><div class="page-banner-default">
             <h1 class="page-banner-heading">
-              A blog for anyone...
+              WE LEARN SOMETHING...
             </h1>
             <h2 class="page-banner-subheading">
-              and everyone.
+              EVERYDAY
             </h2>
           </div></div>
     </div>
@@ -416,6 +416,96 @@ document.addEventListener('DOMContentLoaded', function(event) {
   <div class="pagination">
   <!-- Post list links -->
   <ul class="post-list">
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <h2 class="post-title">
+<a class="post-link" href="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html">
+          Remove Server Header from Nginx (Linux WebApp - Wordpress Image)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 8, 2021</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <p class="post-excerpt">
+        The Docker Image appsvcorg/wordpress-alpine-php:0.72 for WordPress uses Nginx. In order to remove the Server header of Nginx, you can follow the below steps:
+
+CREATE A DOCKERFILE
+
+FROM appsvcorg/wordpress-alpine-php:0.72
+RUN apk update &amp;&amp; apk add nginx-mod-http-headers-more
+COPY nginx.conf /etc/nginx/
+
+
+CREATE nginx.conf file
+
+user  ngin...
+      </p>
+      <div class="post-tags"></div>
+    </li>
 <li>
       
 
@@ -2327,7 +2417,7 @@ How to get the access token
   <ul>
     <li>
       <a href="/index.html">
-        All<span>22</span>
+        All<span>23</span>
       </a>
     </li>
 

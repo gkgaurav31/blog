@@ -1,4 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-04-02T10:16:03+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Enable trace logs - Java Function App</title><link href="/2021/04/01/enable-trace-logs-java-function-app.html" rel="alternate" type="text/html" title="Enable trace logs - Java Function App" /><published>2021-04-01T22:28:00+05:30</published><updated>2021-04-01T22:28:00+05:30</updated><id>/2021/04/01/enable-trace-logs-java-function-app</id><content type="html" xml:base="/2021/04/01/enable-trace-logs-java-function-app.html">&lt;h2 id=&quot;enable-trace-logs---java-function-app&quot;&gt;Enable trace logs - Java Function App&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-04-08T22:17:28+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Remove Server Header from Nginx (Linux WebApp - Wordpress Image)</title><link href="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html" rel="alternate" type="text/html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)" /><published>2021-04-08T18:32:00+05:30</published><updated>2021-04-08T18:32:00+05:30</updated><id>/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image</id><content type="html" xml:base="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html">&lt;p&gt;The Docker Image &lt;a href=&quot;https://hub.docker.com/r/appsvcorg/wordpress-alpine-php&quot;&gt;appsvcorg/wordpress-alpine-php:0.72&lt;/a&gt; for WordPress uses &lt;a href=&quot;https://www.nginx.com/&quot;&gt;Nginx&lt;/a&gt;. In order to remove the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server&quot;&gt;Server header&lt;/a&gt; of Nginx, you can follow the below steps:&lt;/p&gt;
+
+&lt;h2 id=&quot;create-a-dockerfile&quot;&gt;CREATE A DOCKERFILE&lt;/h2&gt;
+
+&lt;div class=&quot;language-Dockerfile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; appsvcorg/wordpress-alpine-php:0.72&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;RUN &lt;/span&gt;apk update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apk add nginx-mod-http-headers-more
+&lt;span class=&quot;k&quot;&gt;COPY&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; nginx.conf /etc/nginx/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;create-nginxconf-file&quot;&gt;CREATE nginx.conf file&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-nginx.conf&quot;&gt;user  nginx;
+worker_processes  auto;
+
+load_module /usr/lib/nginx/modules/ngx_http_headers_more_filter_module.so;
+
+error_log  /var/log/nginx/error.log error;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  2048;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+    more_clear_headers 'Server';
+    log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+                      '$status $body_bytes_sent &quot;$http_referer&quot; '
+                      '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+
+    access_log  off;
+
+    sendfile        on;
+
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/modules-enabled/*.conf;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;build-the-image-and-push-it-to-your-docker-registry&quot;&gt;BUILD THE IMAGE (AND PUSH IT TO YOUR DOCKER REGISTRY)&lt;/h2&gt;
+
+&lt;p&gt;docker build -t myapp .
+docker rm -f test
+docker run -d -p 8080:80 –name test myapp&lt;/p&gt;
+
+&lt;h2 id=&quot;you-can-use-curl-to-test-locally-as-well&quot;&gt;YOU CAN USE CURL TO TEST LOCALLY AS WELL&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-curl&quot;&gt;curl http://localhost:8080 -I
+HTTP/1.1 302 Found
+Date: Thu, 08 Apr 2021 16:38:35 GMT
+Content-Type: text/html; charset=UTF-8
+Connection: keep-alive
+X-Powered-By: PHP/7.2.13
+Location: http://localhost:8080/wp-admin/setup-config.php
+Fastcgi-Cache: MISS
+X-Xss-Protection: 1; mode=block
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/gkgaurav31/wordpress-alpine-php-0.72-test.git&quot;&gt;SOURCE CODE&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;That’s it. :v:&lt;/p&gt;</content><author><name></name></author><summary type="html">The Docker Image appsvcorg/wordpress-alpine-php:0.72 for WordPress uses Nginx. In order to remove the Server header of Nginx, you can follow the below steps:</summary></entry><entry><title type="html">Enable trace logs - Java Function App</title><link href="/2021/04/01/enable-trace-logs-java-function-app.html" rel="alternate" type="text/html" title="Enable trace logs - Java Function App" /><published>2021-04-01T22:28:00+05:30</published><updated>2021-04-01T22:28:00+05:30</updated><id>/2021/04/01/enable-trace-logs-java-function-app</id><content type="html" xml:base="/2021/04/01/enable-trace-logs-java-function-app.html">&lt;h2 id=&quot;enable-trace-logs---java-function-app&quot;&gt;Enable trace logs - Java Function App&lt;/h2&gt;
 
 &lt;p&gt;The Java Functions use azure-functions-java-library which uses java.util.logging for logging. You could print the logs using the following code:&lt;/p&gt;
 
@@ -428,62 +493,4 @@ cp -a /usr/local/tomcat/conf /home/tomcat/conf
   &lt;li&gt;Using JFR - &lt;a href=&quot;https://docs.azul.com/zing/UseZVM_JavaFlightRecorder_Overview.htm&quot;&gt;Zulu&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Zulu Mission Control: &lt;a href=&quot;http://docs.azul.com/zmc/ZMCUserGuide/Title.htm&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;JFR on Linux App Service - Azure: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/containers/configure-language-java#flight-recorder&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="java" /><category term="jfr" /><category term="performance" /><summary type="html">You can now use Java Flight Recorder on Azure App Services - Linux!</summary></entry><entry><title type="html">Troubleshoot High Memory Issues - Java Linux WebApp</title><link href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" rel="alternate" type="text/html" title="Troubleshoot High Memory Issues - Java Linux WebApp" /><published>2020-05-23T01:40:00+05:30</published><updated>2020-05-23T01:40:00+05:30</updated><id>/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp</id><content type="html" xml:base="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html">&lt;p&gt;There are different ways of dealing with Memory Issues. In this blog, I would like to share some steps you can take in order to find what could be causing memory leak.&lt;/p&gt;
-
-&lt;p&gt;It is always recommended to profile and test your application before deploying it to a Production environment. Using jVisualVM is a great way to quickly check the performance of your application.&lt;/p&gt;
-
-&lt;p&gt;This would be a good starting point: &lt;a href=&quot;https://visualvm.github.io/documentation.html&quot;&gt;jVisualVM&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The general symptoms when the memory usage high includes:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The application slow down overall&lt;/li&gt;
-  &lt;li&gt;You would see higher rate of major/minor garbage collection&lt;/li&gt;
-  &lt;li&gt;The Eden space usage would change very frequently&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Using &lt;a href=&quot;https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr006.html&quot;&gt;JCMD&lt;/a&gt; - A Swiss-army knife for investigating and resolving issues with your JVM application&lt;/p&gt;
-
-&lt;p&gt;This is a a great way to quickly check the details of the JVM, while it is running.&lt;/p&gt;
-
-&lt;p&gt;Here are some useful command and flags which you can use:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Get PID of all the Java Processes:&lt;/strong&gt; jcmd&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Collect Thread dump:&lt;/strong&gt; jcmd PID Thread.print&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;JVM command line arguments:&lt;/strong&gt; jcmd PID VM.command_line&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Collect Heap Dump:&lt;/strong&gt; jcmd PID GC.heap_dump /home/dump&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Get Heap Memory Information:&lt;/strong&gt; jcmd PID GC.heap_info&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;best-practices-and-recommendations&quot;&gt;Best Practices and Recommendations&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Enable Garbage Collection Logs:&lt;/strong&gt;&lt;br /&gt;
-You can add the following Application Setting for your WebApp to configure GC logs:&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JAVA_OPTS=-Xloggc:/home/gc.log&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Collect Heap Dump automatically on OutOfMemoryException:&lt;/strong&gt;&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/home/heapdump/&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Integrate your application with Application Insights:&lt;/strong&gt;&lt;br /&gt;
-You can use the Application Insights codeless agent to integrate your application with AI. This does not need any code changes:
-&lt;a href=&quot;https://docs.microsoft.com/en-us/azure/azure-monitor/app/java-in-process-agent&quot;&gt;Codeless Agent&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Use Java Flight Recorder:&lt;/strong&gt;&lt;br /&gt;
-The recoding can be collected in two way - Timed and Continuous. Continuous recording is helpful when dealing with intermittent issues:
-&lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/containers/configure-language-java#flight-recorder&quot;&gt;JFR&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;other-useful-links&quot;&gt;Other useful links&lt;/h3&gt;
-
-&lt;p&gt;Using Eclipse Memory Analyzer Tool: &lt;a href=&quot;https://www.youtube.com/watch?v=sLoifF_YA4w&quot;&gt;MAT&lt;/a&gt;&lt;br /&gt;
-Zulu Mission Control: &lt;a href=&quot;http://docs.azul.com/zmc/ZMCUserGuide/Title.htm&quot;&gt;User Guide&lt;/a&gt;&lt;br /&gt;
-Application Insights: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/azure-monitor/app/java-get-started?tabs=maven#performance-counters&quot;&gt;Performance Counters&lt;/a&gt;&lt;br /&gt;
-Analyze memory dump using jhat: &lt;a href=&quot;https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jhat.html&quot;&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="java" /><category term="azure_webapp" /><category term="memory" /><summary type="html">There are different ways of dealing with Memory Issues. In this blog, I would like to share some steps you can take in order to find what could be causing memory leak.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name></name></author><category term="java" /><category term="jfr" /><category term="performance" /><summary type="html">You can now use Java Flight Recorder on Azure App Services - Linux!</summary></entry></feed>

@@ -48,8 +48,8 @@ defaults:
     scope:
       path: ""
     values:
-      heading: "A blog for anyone..."
-      subheading: "and everyone."
+      heading: "WE LEARN SOMETHING..."
+      subheading: "EVERYDAY"
       banner: "assets/banner.jpg"
 
 # Exclude from processing.
