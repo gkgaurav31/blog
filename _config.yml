@@ -48,7 +48,7 @@ defaults:
     scope:
       path: ""
     values:
-      heading: "WE LEARN SOMETHING..."
+      heading: "WE LEARN SOMETHING NEW..."
       subheading: "EVERYDAY"
       banner: "assets/banner.jpg"
 
