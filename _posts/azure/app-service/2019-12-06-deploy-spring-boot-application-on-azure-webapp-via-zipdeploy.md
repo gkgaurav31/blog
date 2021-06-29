@@ -27,7 +27,7 @@ __Steps:__
 </configuration>
 ```
 
-- When using zip deploy, the contents of the zip gets transferred to D:\home\site\wwwroot of the WebApp
+- When using zip deploy, the contents of the zip gets transferred to ```D:\home\site\wwwroot``` of the WebApp
 
 - Now, just call the Zip Deploy API to deploy your app.
 
