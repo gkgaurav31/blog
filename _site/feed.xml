@@ -1,4 +1,136 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-06-29T16:41:00+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Remove Server Header from Nginx (Linux WebApp - Wordpress Image)</title><link href="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html" rel="alternate" type="text/html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)" /><published>2021-04-08T18:32:00+05:30</published><updated>2021-04-08T18:32:00+05:30</updated><id>/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image</id><content type="html" xml:base="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html">&lt;p&gt;The Docker Image &lt;a href=&quot;https://hub.docker.com/r/appsvcorg/wordpress-alpine-php&quot;&gt;appsvcorg/wordpress-alpine-php:0.72&lt;/a&gt; for WordPress uses &lt;a href=&quot;https://www.nginx.com/&quot;&gt;Nginx&lt;/a&gt;. In order to remove the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server&quot;&gt;Server header&lt;/a&gt; of Nginx, you can follow the below steps:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-06-29T17:13:58+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Using Minikube on Linux (Ubuntu)</title><link href="/2021/06/29/using-minikube-on-linux-ubuntu.html" rel="alternate" type="text/html" title="Using Minikube on Linux (Ubuntu)" /><published>2021-06-29T16:47:00+05:30</published><updated>2021-06-29T16:47:00+05:30</updated><id>/2021/06/29/using-minikube-on-linux-ubuntu</id><content type="html" xml:base="/2021/06/29/using-minikube-on-linux-ubuntu.html">&lt;p&gt;Minikube quickly sets up a local Kubernetes cluster, which is great for learning!&lt;/p&gt;
+
+&lt;p&gt;These are the pre-requisites, as of today, as per the minikube documentation:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;2 CPUs or more&lt;br /&gt;
+2GB of free memory&lt;br /&gt;
+20GB of free disk space&lt;br /&gt;
+Internet connection&lt;br /&gt;
+Container or virtual machine manager, such as: Docker, Hyperkit, Hyper-V, KVM, Parallels, Podman, VirtualBox, or VMWare&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Follow these steps to get started with minikube -&lt;/p&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt update&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arch&lt;/code&gt; command to get the architecture:&lt;br /&gt;
+In our case, it is: &lt;strong&gt;x86_64&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;install-minikube&quot;&gt;Install minikube&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo dpkg -i minikube_latest_amd64.deb&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://minikube.sigs.k8s.io/docs/start/&quot;&gt;Install minikube on x86-64 Linux using Debian package&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If you see the below error, you would need to install one of the Supported Drivers for Minikube. In this case, we will be using Docker.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-TEXT&quot;&gt;$ minikube start
+😄  minikube v1.21.0 on Ubuntu 20.04
+👎  Unable to pick a default driver. Here is what was considered, in preference order:
+    ▪ docker: Not installed: exec: &quot;docker&quot;: executable file not found in $PATH
+    ▪ kvm2: Not installed: exec: &quot;virsh&quot;: executable file not found in $PATH
+    ▪ vmware: Not installed: exec: &quot;docker-machine-driver-vmware&quot;: executable file not found in $PATH
+    ▪ podman: Not installed: exec: &quot;podman&quot;: executable file not found in $PATH
+    ▪ virtualbox: Not installed: unable to find VBoxManage in $PATH
+
+❌  Exiting due to DRV_NOT_DETECTED: No possible driver was detected. Try specifying --driver, or see https://minikube.sigs.k8s.io/docs/start/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;install-docker&quot;&gt;Install Docker&lt;/h4&gt;
+
+&lt;p&gt;Install docker from here: &lt;a href=&quot;https://docs.docker.com/engine/install/ubuntu/&quot;&gt;https://docs.docker.com/engine/install/ubuntu/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We would get the following error if we try to start minkube now:&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo minikube start
+😄  minikube v1.21.0 on Ubuntu 20.04
+✨  Automatically selected the docker driver. Other choices: none, ssh
+🛑  The &quot;docker&quot; driver should not be used with root privileges.
+💡  If you are running minikube within a VM, consider using --driver=none:
+📘    https://minikube.sigs.k8s.io/docs/reference/drivers/none/
+
+❌  Exiting due to DRV_AS_ROOT: The &quot;docker&quot; driver should not be used with root privileges.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;manage-docker-as-non-root-user&quot;&gt;Manage Docker as non-root user&lt;/h4&gt;
+
+&lt;p&gt;Follow the steps mentioned here to manage Docker as a non-root user: &lt;a href=&quot;https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user&quot;&gt;https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You are ready now ready to start your minikube single node cluster.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-minikube&quot;&gt;Using Minikube&lt;/h3&gt;
+
+&lt;h4 id=&quot;start-minikube&quot;&gt;Start Minikube&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;minikube start
+😄  minikube v1.21.0 on Ubuntu 20.04
+✨  Automatically selected the docker driver. Other choices: none, ssh
+👍  Starting control plane node minikube &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;cluster minikube
+🚜  Pulling base image ...
+💾  Downloading Kubernetes v1.20.7 preload ...
+    &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; preloaded-images-k8s-v11-v1...: 492.20 MiB / 492.20 MiB  100.00% 97.36 Mi
+    &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; gcr.io/k8s-minikube/kicbase...: 359.09 MiB / 359.09 MiB  100.00% 12.86 Mi
+
+🔥  Creating docker container &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;CPUs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2, &lt;span class=&quot;nv&quot;&gt;Memory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2200MB&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ...
+🐳  Preparing Kubernetes v1.20.7 on Docker 20.10.7 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🌟  Enabled addons: default-storageclass, storage-provisioner
+💡  kubectl not found. If you need it, try: &lt;span class=&quot;s1&quot;&gt;'minikube kubectl -- get pods -A'&lt;/span&gt;
+🏄  Done! kubectl is now configured to use &lt;span class=&quot;s2&quot;&gt;&quot;minikube&quot;&lt;/span&gt; cluster and &lt;span class=&quot;s2&quot;&gt;&quot;default&quot;&lt;/span&gt; namespace by default
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;test&quot;&gt;Test&lt;/h4&gt;
+
+&lt;p&gt;You can now use the minikube kubectl command to test if everything works.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;minikube kubectl &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; get pods &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; kubectl.sha256: 64 B / 64 B &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;--------------------------&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; 100.00% ? p/s 0s
+    &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; kubectl: 38.36 MiB / 38.36 MiB &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-------------&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; 100.00% 1.09 GiB p/s 200ms
+NAMESPACE     NAME                               READY   STATUS    RESTARTS   AGE
+kube-system   coredns-74ff55c5b-ht448            0/1     Running   0          31s
+kube-system   etcd-minikube                      0/1     Running   0          46s
+kube-system   kube-apiserver-minikube            1/1     Running   0          46s
+kube-system   kube-controller-manager-minikube   0/1     Running   0          46s
+kube-system   kube-proxy-pq5hc                   1/1     Running   0          31s
+kube-system   kube-scheduler-minikube            0/1     Running   0          46s
+kube-system   storage-provisioner                1/1     Running   0          44s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;install-kubectl&quot;&gt;Install kubectl&lt;/h4&gt;
+
+&lt;p&gt;The most common way to connect with you Kubernetes Cluster is by using kubectl command line tool.&lt;/p&gt;
+
+&lt;p&gt;Install Kubectl from here: &lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/&quot;&gt;LINK&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;use-kubectl&quot;&gt;Use kubectl&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;kubectl get pods &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt;
+NAMESPACE     NAME                               READY   STATUS    RESTARTS   AGE
+kube-system   coredns-74ff55c5b-ht448            1/1     Running   0          2m27s
+kube-system   etcd-minikube                      1/1     Running   0          2m42s
+kube-system   kube-apiserver-minikube            1/1     Running   0          2m42s
+kube-system   kube-controller-manager-minikube   1/1     Running   0          2m42s
+kube-system   kube-proxy-pq5hc                   1/1     Running   0          2m27s
+kube-system   kube-scheduler-minikube            1/1     Running   0          2m42s
+kube-system   storage-provisioner                1/1     Running   1          2m40s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;other-useful-commands&quot;&gt;Other useful commands&lt;/h4&gt;
+
+&lt;p&gt;Access the Minikube dashboard remotely:&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl proxy --address='0.0.0.0' --disable-filter=true&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Get dashboard URL:&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;minikube dashboard --url&lt;/code&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Minikube quickly sets up a local Kubernetes cluster, which is great for learning!</summary></entry><entry><title type="html">Remove Server Header from Nginx (Linux WebApp - Wordpress Image)</title><link href="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html" rel="alternate" type="text/html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)" /><published>2021-04-08T18:32:00+05:30</published><updated>2021-04-08T18:32:00+05:30</updated><id>/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image</id><content type="html" xml:base="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html">&lt;p&gt;The Docker Image &lt;a href=&quot;https://hub.docker.com/r/appsvcorg/wordpress-alpine-php&quot;&gt;appsvcorg/wordpress-alpine-php:0.72&lt;/a&gt; for WordPress uses &lt;a href=&quot;https://www.nginx.com/&quot;&gt;Nginx&lt;/a&gt;. In order to remove the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server&quot;&gt;Server header&lt;/a&gt; of Nginx, you can follow the below steps:&lt;/p&gt;
 
 &lt;h2 id=&quot;create-a-dockerfile&quot;&gt;CREATE A DOCKERFILE&lt;/h2&gt;
 
@@ -413,84 +545,4 @@ cp -a /usr/local/tomcat/conf /home/tomcat/conf
 
 &lt;p&gt;If you want more control over your application, you could also use a &lt;strong&gt;Custom Tomcat!&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Here is a Template which you can use: &lt;a href=&quot;https://github.com/azure-appservice-samples/TomcatTemplate&quot;&gt;Tomcat Template&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="azure_webapp" /><category term="java" /><summary type="html">Here’s how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:</summary></entry><entry><title type="html">Using Java Flight Recorder</title><link href="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html" rel="alternate" type="text/html" title="Using Java Flight Recorder" /><published>2020-05-23T02:46:00+05:30</published><updated>2020-05-23T02:46:00+05:30</updated><id>/java/jfr/performance/2020/05/23/using-java-flight-recorder</id><content type="html" xml:base="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html">&lt;h4 id=&quot;you-can-now-use-java-flight-recorder-on-azure-app-services---linux&quot;&gt;You can now use Java Flight Recorder on Azure App Services - Linux!&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://azure.microsoft.com/en-in/updates/java-on-app-service-updates-and-improvements/&quot;&gt;Announcement Page&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;what-is-jfr&quot;&gt;What is JFR&lt;/h4&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Java Flight Recorder (JFR) is a tool for collecting diagnostic and profiling data about a running Java application. It is integrated into the Java Virtual Machine (JVM) and causes almost no performance overhead, so it can be used even in heavily loaded production environments. When default settings are used, both internal testing and customer feedback indicate that performance impact is less than one percent. For some applications, it can be significantly lower. However, for short-running applications (which are not the kind of applications running in production environments), relative startup and warmup times can be larger, which might impact the performance by more than one percent. JFR collects data about the JVM as well as the Java application running on it.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;benefits&quot;&gt;Benefits&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Low Overhead; Can be run in a prod environment as well&lt;/li&gt;
-  &lt;li&gt;Continuous recording is possible&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;java-mission-control-jmc&quot;&gt;Java Mission Control (JMC)&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Set of tools using which we can analyze JFR&lt;/li&gt;
-  &lt;li&gt;It’s a desktop application and runs on top of Eclipse&lt;/li&gt;
-  &lt;li&gt;Can be connected to a remote JVM via JMX (Java Management Extensions)&lt;/li&gt;
-  &lt;li&gt;JMX console can connect to the JVM and provide data in real time. We can create rules based on certain events to collect JFR for example.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;how-to-enable-jfr&quot;&gt;How to Enable JFR&lt;/h4&gt;
-
-&lt;p&gt;JFR can be enabled using the following JVM arguments:&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;types-of-recordings&quot;&gt;Types of recordings&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Timed Fixed Recording&lt;/li&gt;
-  &lt;li&gt;Continuous Recording: uses a buffer (configurable size) to continuously collect information. once the buffer is full, old data gets discarded&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;jfr-event-settings&quot;&gt;JFR Event Settings&lt;/h4&gt;
-
-&lt;p&gt;By default there are two configurations are present for the JRF recordings:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Continuous — default.jfc - has less overhead&lt;/li&gt;
-  &lt;li&gt;Profiling — profile.jfc&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;note&quot;&gt;NOTE&lt;/h4&gt;
-
-&lt;p&gt;We can run multiple recordings at the same time, but the same buffer will be used by the JFR runtime. The final output will be the union of all the data which has been collected from all the recordings.&lt;/p&gt;
-
-&lt;h4 id=&quot;commands&quot;&gt;Commands&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Timed-Recording&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jcmd 116 JFR.start name=MyRecording settings=profile duration=30s filename=&quot;/home/jfr_example.jfr&quot;&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Continuous Recording&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;Add the following Application Setting:&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JAVA_OPTS=-XX:StartFlightRecording=disk=true,name=continuous_recording,dumponexit=true,maxsize=1024m,maxage=1d&lt;/code&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;Once the recording has started, you can dump the current recording data at any time using the JFR.dump command.&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jcmd &amp;lt;pid&amp;gt; JFR.dump name=continuous_recording filename=&quot;/home/recording1.jfr&quot;&lt;/code&gt;&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;references&quot;&gt;References&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Using JFR - &lt;a href=&quot;https://docs.azul.com/zing/UseZVM_JavaFlightRecorder_Overview.htm&quot;&gt;Zulu&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Zulu Mission Control: &lt;a href=&quot;http://docs.azul.com/zmc/ZMCUserGuide/Title.htm&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;JFR on Linux App Service - Azure: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/containers/configure-language-java#flight-recorder&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><category term="java" /><category term="jfr" /><category term="performance" /><summary type="html">You can now use Java Flight Recorder on Azure App Services - Linux!</summary></entry></feed>
+&lt;p&gt;Here is a Template which you can use: &lt;a href=&quot;https://github.com/azure-appservice-samples/TomcatTemplate&quot;&gt;Tomcat Template&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="azure_webapp" /><category term="java" /><summary type="html">Here’s how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:</summary></entry></feed>

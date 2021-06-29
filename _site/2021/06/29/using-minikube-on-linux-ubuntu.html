@@ -4,21 +4,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Access SQL Database via Azure Function App - Python | Gaurav’s GitHub Pages!</title>
+<title>Using Minikube on Linux (Ubuntu) | Gaurav’s GitHub Pages!</title>
 <meta name="generator" content="Jekyll v4.2.0" />
-<meta property="og:title" content="Access SQL Database via Azure Function App - Python" />
+<meta property="og:title" content="Using Minikube on Linux (Ubuntu)" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Sample Code - Access Azure SQL Database via Python Function App" />
-<meta property="og:description" content="Sample Code - Access Azure SQL Database via Python Function App" />
-<link rel="canonical" href="/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html" />
-<meta property="og:url" content="/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html" />
+<meta name="description" content="Minikube quickly sets up a local Kubernetes cluster, which is great for learning!" />
+<meta property="og:description" content="Minikube quickly sets up a local Kubernetes cluster, which is great for learning!" />
+<link rel="canonical" href="/2021/06/29/using-minikube-on-linux-ubuntu.html" />
+<meta property="og:url" content="/2021/06/29/using-minikube-on-linux-ubuntu.html" />
 <meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-11-17T00:01:00+05:30" />
+<meta property="article:published_time" content="2021-06-29T16:47:00+05:30" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Access SQL Database via Azure Function App - Python" />
+<meta property="twitter:title" content="Using Minikube on Linux (Ubuntu)" />
 <script type="application/ld+json">
-{"url":"/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html","headline":"Access SQL Database via Azure Function App - Python","dateModified":"2019-11-17T00:01:00+05:30","datePublished":"2019-11-17T00:01:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html"},"description":"Sample Code - Access Azure SQL Database via Python Function App","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/2021/06/29/using-minikube-on-linux-ubuntu.html","headline":"Using Minikube on Linux (Ubuntu)","dateModified":"2021-06-29T16:47:00+05:30","datePublished":"2021-06-29T16:47:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/06/29/using-minikube-on-linux-ubuntu.html"},"description":"Minikube quickly sets up a local Kubernetes cluster, which is great for learning!","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   <h2 class="post-subtitle">EVERYDAY</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2019-11-17T00:01:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 17, 2019
+    <time class="dt-published" datetime="2021-06-29T16:47:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Jun 29, 2021
     </time>
 
     
@@ -488,7 +488,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
   </p></header>
 </div>
     </div>
@@ -663,48 +663,148 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <h1 id="sample-code---access-azure-sql-database-via-python-function-app">Sample Code - Access Azure SQL Database via Python Function App</h1>
+      <p>Minikube quickly sets up a local Kubernetes cluster, which is great for learning!</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">logging</span>
+<p>These are the pre-requisites, as of today, as per the minikube documentation:</p>
 
-<span class="kn">import</span> <span class="nn">azure.functions</span> <span class="k">as</span> <span class="n">func</span>
-<span class="kn">import</span> <span class="nn">pypyodbc</span> <span class="k">as</span> <span class="n">pyodbc</span>
+<blockquote>
+  <p>2 CPUs or more<br />
+2GB of free memory<br />
+20GB of free disk space<br />
+Internet connection<br />
+Container or virtual machine manager, such as: Docker, Hyperkit, Hyper-V, KVM, Parallels, Podman, VirtualBox, or VMWare</p>
+</blockquote>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">func</span><span class="p">.</span><span class="n">HttpRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">func</span><span class="p">.</span><span class="n">HttpResponse</span><span class="p">:</span>
-    <span class="n">logging</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">'Python HTTP trigger function processed a request.'</span><span class="p">)</span>
+<p>Follow these steps to get started with minikube -</p>
 
-    <span class="n">server</span> <span class="o">=</span> <span class="s">'tcp:mydb.database.windows.net'</span> 
-    <span class="n">database</span> <span class="o">=</span> <span class="s">'mydb'</span> 
-    <span class="n">username</span> <span class="o">=</span> <span class="s">'myusername'</span> 
-    <span class="n">password</span> <span class="o">=</span> <span class="s">'******'</span> 
-    <span class="n">cnxn</span> <span class="o">=</span> <span class="n">pyodbc</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">'DRIVER={ODBC Driver 17 for SQL Server};SERVER='</span><span class="o">+</span><span class="n">server</span><span class="o">+</span><span class="s">';DATABASE='</span><span class="o">+</span><span class="n">database</span><span class="o">+</span><span class="s">';UID='</span><span class="o">+</span><span class="n">username</span><span class="o">+</span><span class="s">';PWD='</span><span class="o">+</span> <span class="n">password</span><span class="p">)</span>
-    <span class="n">cursor</span> <span class="o">=</span> <span class="n">cnxn</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+<h3 id="installation">Installation</h3>
 
-    <span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT @@version;"</span><span class="p">)</span> 
-    <span class="n">row</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchone</span><span class="p">()</span> 
+<p><code class="language-plaintext highlighter-rouge">sudo apt update</code></p>
 
-    <span class="n">version</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<p>Use <code class="language-plaintext highlighter-rouge">arch</code> command to get the architecture:<br />
+In our case, it is: <strong>x86_64</strong></p>
 
-    <span class="k">return</span> <span class="n">func</span><span class="p">.</span><span class="n">HttpResponse</span><span class="p">(</span><span class="sa">f</span><span class="s">"Hello </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s">!"</span><span class="p">)</span>
+<h4 id="install-minikube">Install minikube</h4>
+
+<p><code class="language-plaintext highlighter-rouge">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb</code>
+<code class="language-plaintext highlighter-rouge">sudo dpkg -i minikube_latest_amd64.deb</code></p>
+
+<p><a href="https://minikube.sigs.k8s.io/docs/start/">Install minikube on x86-64 Linux using Debian package</a></p>
+
+<p>If you see the below error, you would need to install one of the Supported Drivers for Minikube. In this case, we will be using Docker.</p>
+
+<pre><code class="language-TEXT">$ minikube start
+😄  minikube v1.21.0 on Ubuntu 20.04
+👎  Unable to pick a default driver. Here is what was considered, in preference order:
+    ▪ docker: Not installed: exec: "docker": executable file not found in $PATH
+    ▪ kvm2: Not installed: exec: "virsh": executable file not found in $PATH
+    ▪ vmware: Not installed: exec: "docker-machine-driver-vmware": executable file not found in $PATH
+    ▪ podman: Not installed: exec: "podman": executable file not found in $PATH
+    ▪ virtualbox: Not installed: unable to find VBoxManage in $PATH
+
+❌  Exiting due to DRV_NOT_DETECTED: No possible driver was detected. Try specifying --driver, or see https://minikube.sigs.k8s.io/docs/start/
+</code></pre>
+
+<h4 id="install-docker">Install Docker</h4>
+
+<p>Install docker from here: <a href="https://docs.docker.com/engine/install/ubuntu/">https://docs.docker.com/engine/install/ubuntu/</a></p>
+
+<p>We would get the following error if we try to start minkube now:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo minikube start
+😄  minikube v1.21.0 on Ubuntu 20.04
+✨  Automatically selected the docker driver. Other choices: none, ssh
+🛑  The "docker" driver should not be used with root privileges.
+💡  If you are running minikube within a VM, consider using --driver=none:
+📘    https://minikube.sigs.k8s.io/docs/reference/drivers/none/
+
+❌  Exiting due to DRV_AS_ROOT: The "docker" driver should not be used with root privileges.
 
 </code></pre></div></div>
 
-<p><strong>Reference:</strong></p>
+<h4 id="manage-docker-as-non-root-user">Manage Docker as non-root user</h4>
 
-<p><a href="https://docs.microsoft.com/en-us/sql/connect/python/pyodbc/step-3-proof-of-concept-connecting-to-sql-using-pyodbc?view=sql-server-ver15#step-1--connect">https://docs.microsoft.com/en-us/sql/connect/python/pyodbc/step-3-proof-of-concept-connecting-to-sql-using-pyodbc?view=sql-server-ver15#step-1–connect</a></p>
+<p>Follow the steps mentioned here to manage Docker as a non-root user: <a href="https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user">https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user</a></p>
 
-<p><strong>Deploy to Function App:</strong></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func azure functionapp publish myFunctionAppName --build remote --build-native-deps
+<p>You are ready now ready to start your minikube single node cluster.</p>
+
+<h3 id="using-minikube">Using Minikube</h3>
+
+<h4 id="start-minikube">Start Minikube</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>minikube start
+😄  minikube v1.21.0 on Ubuntu 20.04
+✨  Automatically selected the docker driver. Other choices: none, ssh
+👍  Starting control plane node minikube <span class="k">in </span>cluster minikube
+🚜  Pulling base image ...
+💾  Downloading Kubernetes v1.20.7 preload ...
+    <span class="o">&gt;</span> preloaded-images-k8s-v11-v1...: 492.20 MiB / 492.20 MiB  100.00% 97.36 Mi
+    <span class="o">&gt;</span> gcr.io/k8s-minikube/kicbase...: 359.09 MiB / 359.09 MiB  100.00% 12.86 Mi
+
+🔥  Creating docker container <span class="o">(</span><span class="nv">CPUs</span><span class="o">=</span>2, <span class="nv">Memory</span><span class="o">=</span>2200MB<span class="o">)</span> ...
+🐳  Preparing Kubernetes v1.20.7 on Docker 20.10.7 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🌟  Enabled addons: default-storageclass, storage-provisioner
+💡  kubectl not found. If you need it, try: <span class="s1">'minikube kubectl -- get pods -A'</span>
+🏄  Done! kubectl is now configured to use <span class="s2">"minikube"</span> cluster and <span class="s2">"default"</span> namespace by default
 </code></pre></div></div>
+
+<h4 id="test">Test</h4>
+
+<p>You can now use the minikube kubectl command to test if everything works.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>minikube kubectl <span class="nt">--</span> get pods <span class="nt">-A</span>
+    <span class="o">&gt;</span> kubectl.sha256: 64 B / 64 B <span class="o">[</span><span class="nt">--------------------------</span><span class="o">]</span> 100.00% ? p/s 0s
+    <span class="o">&gt;</span> kubectl: 38.36 MiB / 38.36 MiB <span class="o">[</span><span class="nt">-------------</span><span class="o">]</span> 100.00% 1.09 GiB p/s 200ms
+NAMESPACE     NAME                               READY   STATUS    RESTARTS   AGE
+kube-system   coredns-74ff55c5b-ht448            0/1     Running   0          31s
+kube-system   etcd-minikube                      0/1     Running   0          46s
+kube-system   kube-apiserver-minikube            1/1     Running   0          46s
+kube-system   kube-controller-manager-minikube   0/1     Running   0          46s
+kube-system   kube-proxy-pq5hc                   1/1     Running   0          31s
+kube-system   kube-scheduler-minikube            0/1     Running   0          46s
+kube-system   storage-provisioner                1/1     Running   0          44s
+</code></pre></div></div>
+
+<h4 id="install-kubectl">Install kubectl</h4>
+
+<p>The most common way to connect with you Kubernetes Cluster is by using kubectl command line tool.</p>
+
+<p>Install Kubectl from here: <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/">LINK</a></p>
+
+<h4 id="use-kubectl">Use kubectl</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl get pods <span class="nt">-A</span>
+NAMESPACE     NAME                               READY   STATUS    RESTARTS   AGE
+kube-system   coredns-74ff55c5b-ht448            1/1     Running   0          2m27s
+kube-system   etcd-minikube                      1/1     Running   0          2m42s
+kube-system   kube-apiserver-minikube            1/1     Running   0          2m42s
+kube-system   kube-controller-manager-minikube   1/1     Running   0          2m42s
+kube-system   kube-proxy-pq5hc                   1/1     Running   0          2m27s
+kube-system   kube-scheduler-minikube            1/1     Running   0          2m42s
+kube-system   storage-provisioner                1/1     Running   1          2m40s
+</code></pre></div></div>
+
+<h4 id="other-useful-commands">Other useful commands</h4>
+
+<p>Access the Minikube dashboard remotely:<br />
+<code class="language-plaintext highlighter-rouge">kubectl proxy --address='0.0.0.0' --disable-filter=true</code></p>
+
+<p>Get dashboard URL:<br />
+<code class="language-plaintext highlighter-rouge">minikube dashboard --url</code></p>
 
 
     </div>
 
 </article>
-<div class="post-nav"><a class="previous" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="Stop and remove all Docker containers at once">Stop and remove all Docker containers...</a><a class="next" href="/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html" title="Deploy NodeJS WebApp via GitHub Actions">Deploy NodeJS WebApp via GitHub Actions...</a></div><div class="post-related">
+<div class="post-nav"><a class="previous" href="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)">Remove Server Header from Nginx (Linux...</a><span></span></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2021/03/26/curl-3.html" title="Deploy NodeJS WebApp via GitHub Actions">curl &lt;3</a></li><li><a class="post-link" href="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html" title="Deploy NodeJS WebApp via GitHub Actions">Remove Server Header from Nginx (Linux WebApp - Wordpress Image)</a></li><li><a class="post-link" href="/dbcp/azure_webapp/mysql/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" title="Deploy NodeJS WebApp via GitHub Actions">DBCP on Azure App Service Linux (MySQL)</a></li><li><a class="post-link" href="/sql/azure_webapp/php/msi/2019/11/10/webapp-php-msi-sql.html" title="Deploy NodeJS WebApp via GitHub Actions">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li></ul>
+        <li><a class="post-link" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="">Troubleshoot High Memory Issues - Java Linux WebApp</a></li><li><a class="post-link" href="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html" title="">Using Java Flight Recorder</a></li><li><a class="post-link" href="/2021/04/01/enable-trace-logs-java-function-app.html" title="">Enable trace logs - Java Function App</a></li><li><a class="post-link" href="/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="">Access SQL Database via Azure Function App - Python</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 
