@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Deploy NodeJS WebApp via GitHub Actions | Gaurav’s GitHub Pages!</title>
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Deploy NodeJS WebApp via GitHub Actions" />
@@ -18,14 +18,13 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Deploy NodeJS WebApp via GitHub Actions" />
 <script type="application/ld+json">
-{"headline":"Deploy NodeJS WebApp via GitHub Actions","dateModified":"2019-11-17T00:41:00+05:30","datePublished":"2019-11-17T00:41:00+05:30","url":"/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html","mainEntityOfPage":{"@type":"WebPage","@id":"/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html"},"description":"Steps to deploy a NodeJS application on Azure App Service","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html","headline":"Deploy NodeJS WebApp via GitHub Actions","dateModified":"2019-11-17T00:41:00+05:30","datePublished":"2019-11-17T00:41:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html"},"description":"Steps to deploy a NodeJS application on Azure App Service","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
@@ -119,7 +118,111 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 </style>
 </head>
-  <body>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -167,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </header>
 
 <script>
-  (function() {
+  function initHeader() {
     var lastScrollY = getScrollPos().y;
     var documentElement = document.documentElement;
 
@@ -192,7 +295,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     });
 
     storeScrollData();
-  })();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
 </script>
 
 
@@ -237,14 +341,114 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-  <section class="page-banner">
-    <div class="page-banner-img">
-      <div style="background-image: url(/assets/banner.jpg)"></div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="page-banner">
+    <div class="page-banner-img"><div style="background-image: url(/assets/banner.jpg)"></div>
+        <img class="img-placeholder" src="/assets/banner.jpg"></div>
     <div class="wrapper">
       <div class="page-banner-inner"><header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">WE LEARN SOMETHING...</h1>
-  <h3 class="post-subtitle">EVERYDAY</h3>
+  <h1 class="post-title p-name" itemprop="name headline">WE LEARN SOMETHING NEW...</h1>
+  <h2 class="post-subtitle">EVERYDAY</h2>
 
   <p class="post-meta">
     <time class="dt-published" datetime="2019-11-17T00:41:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 17, 2019
@@ -291,6 +495,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   </section><script>
   function hashLocate(hashValue) {
     hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
     var element = document.getElementById(hashValue);
 
     if (!element) {
@@ -558,7 +763,7 @@ This will require a publish profile which will be set as a secret. Follow the be
 <div class="post-nav"><a class="previous" href="/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="Access SQL Database via Azure Function App - Python">Access SQL Database via Azure Function...</a><a class="next" href="/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Deploy Azure Java Function App (Windows)...</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/ioncube/php/azure_webapp/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Configure IonCube Loader - PHP Linux App Service</a></li><li><a class="post-link" href="/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Custom JRE/JDK on Azure App Service - Windows</a></li><li><a class="post-link" href="/java/azure_webapp/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li><li><a class="post-link" href="/2021/04/01/enable-trace-logs-java-function-app.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Enable trace logs - Java Function App</a></li></ul>
+        <li><a class="post-link" href="/webappspringboot" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Deploy Spring Boot Application On Azure WebApp via ZipDeploy</a></li><li><a class="post-link" href="/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Enable Tomcat Manager app on Linux WebApp on Azure</a></li><li><a class="post-link" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Stop and remove all Docker containers at once</a></li><li><a class="post-link" href="/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Deploy NodeJS WebApp via GitHub Actions</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 
@@ -695,8 +900,7 @@ This will require a publish profile which will be set as a secret. Follow the be
   <data class="u-url" href="/"></data>
 
   <div class="wrapper">
-    <div class="site-footer-inner">
-      <div> </div>
+    <div class="site-footer-inner"><div></div>
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>

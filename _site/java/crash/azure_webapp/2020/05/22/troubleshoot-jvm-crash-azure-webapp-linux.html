@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Troubleshoot - JVM Crash - Azure WebApp - Linux | Gaurav’s GitHub Pages!</title>
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Troubleshoot - JVM Crash - Azure WebApp - Linux" />
@@ -18,14 +18,13 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Troubleshoot - JVM Crash - Azure WebApp - Linux" />
 <script type="application/ld+json">
-{"headline":"Troubleshoot - JVM Crash - Azure WebApp - Linux","dateModified":"2020-05-22T00:09:00+05:30","datePublished":"2020-05-22T00:09:00+05:30","url":"/java/crash/azure_webapp/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html","mainEntityOfPage":{"@type":"WebPage","@id":"/java/crash/azure_webapp/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html"},"description":"On Azure WebApp Linux, if your JVM is crashing and is unable to come up, you would see a generic “Application Error” message when trying to browse your site. In order to find what might be causing this issue, we could need to determine if the JVM is crashing. If yes, then we can collect the crash dump to find out the root cause of the issue.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/java/crash/azure_webapp/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html","headline":"Troubleshoot - JVM Crash - Azure WebApp - Linux","dateModified":"2020-05-22T00:09:00+05:30","datePublished":"2020-05-22T00:09:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/java/crash/azure_webapp/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html"},"description":"On Azure WebApp Linux, if your JVM is crashing and is unable to come up, you would see a generic “Application Error” message when trying to browse your site. In order to find what might be causing this issue, we could need to determine if the JVM is crashing. If yes, then we can collect the crash dump to find out the root cause of the issue.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
@@ -119,7 +118,111 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 </style>
 </head>
-  <body>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -167,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </header>
 
 <script>
-  (function() {
+  function initHeader() {
     var lastScrollY = getScrollPos().y;
     var documentElement = document.documentElement;
 
@@ -192,7 +295,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     });
 
     storeScrollData();
-  })();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
 </script>
 
 
@@ -237,14 +341,114 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-  <section class="page-banner">
-    <div class="page-banner-img">
-      <div style="background-image: url(/assets/banner.jpg)"></div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="page-banner">
+    <div class="page-banner-img"><div style="background-image: url(/assets/banner.jpg)"></div>
+        <img class="img-placeholder" src="/assets/banner.jpg"></div>
     <div class="wrapper">
       <div class="page-banner-inner"><header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">WE LEARN SOMETHING...</h1>
-  <h3 class="post-subtitle">EVERYDAY</h3>
+  <h1 class="post-title p-name" itemprop="name headline">WE LEARN SOMETHING NEW...</h1>
+  <h2 class="post-subtitle">EVERYDAY</h2>
 
   <p class="post-meta">
     <time class="dt-published" datetime="2020-05-22T00:09:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> May 22, 2020
@@ -291,6 +495,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   </section><script>
   function hashLocate(hashValue) {
     hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
     var element = document.getElementById(hashValue);
 
     if (!element) {
@@ -503,7 +708,7 @@ This can be done by using the JVM argument: -XX:ErrorFile=/home/hs_err_pid%p.log
 <div class="post-nav"><a class="previous" href="/java/azure_webapp/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Troubleshoot High CPU - Java - Azure WebApp - Linux">Troubleshoot High CPU - Java -...</a><a class="next" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Troubleshoot High Memory Issues - Java Linux WebApp">Troubleshoot High Memory Issues - Java...</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/java/azure_webapp/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Troubleshoot High Memory Issues - Java Linux WebApp">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li><li><a class="post-link" href="/first/" title="Troubleshoot High Memory Issues - Java Linux WebApp">First Blog Post!</a></li><li><a class="post-link" href="/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="Troubleshoot High Memory Issues - Java Linux WebApp">Enable Tomcat Manager app on Linux WebApp on Azure</a></li><li><a class="post-link" href="/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html" title="Troubleshoot High Memory Issues - Java Linux WebApp">Using opencv-python on Linux App Service</a></li></ul>
+        <li><a class="post-link" href="/webappspringboot" title="Troubleshoot High Memory Issues - Java Linux WebApp">Deploy Spring Boot Application On Azure WebApp via ZipDeploy</a></li><li><a class="post-link" href="/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="Troubleshoot High Memory Issues - Java Linux WebApp">Deploy Azure Java Function App (Windows) via GitHub Actions</a></li><li><a class="post-link" href="/2021/03/26/curl-3.html" title="Troubleshoot High Memory Issues - Java Linux WebApp">curl &lt;3</a></li><li><a class="post-link" href="/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="Troubleshoot High Memory Issues - Java Linux WebApp">Access SQL Database via Azure Function App - Python</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 
@@ -640,8 +845,7 @@ This can be done by using the JVM argument: -XX:ErrorFile=/home/hs_err_pid%p.log
   <data class="u-url" href="/"></data>
 
   <div class="wrapper">
-    <div class="site-footer-inner">
-      <div> </div>
+    <div class="site-footer-inner"><div></div>
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>

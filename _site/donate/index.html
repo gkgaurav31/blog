@@ -4,21 +4,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Deploy Spring Boot Application On Azure WebApp via ZipDeploy | Gaurav’s GitHub Pages!</title>
+<title>Donate | Gaurav’s GitHub Pages!</title>
 <meta name="generator" content="Jekyll v4.2.0" />
-<meta property="og:title" content="Deploy Spring Boot Application On Azure WebApp via ZipDeploy" />
+<meta property="og:title" content="Donate" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Here is one of the simplest ways to deploy a Spring Boot application (JAR with embedded Tomcat) to Azure WebApp (Windows)" />
-<meta property="og:description" content="Here is one of the simplest ways to deploy a Spring Boot application (JAR with embedded Tomcat) to Azure WebApp (Windows)" />
-<link rel="canonical" href="/webappspringboot" />
-<meta property="og:url" content="/webappspringboot" />
+<meta name="description" content="Just another blog." />
+<meta property="og:description" content="Just another blog." />
+<link rel="canonical" href="/donate/" />
+<meta property="og:url" content="/donate/" />
 <meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-12-06T02:29:00+05:30" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Deploy Spring Boot Application On Azure WebApp via ZipDeploy" />
+<meta property="twitter:title" content="Donate" />
 <script type="application/ld+json">
-{"url":"/webappspringboot","headline":"Deploy Spring Boot Application On Azure WebApp via ZipDeploy","dateModified":"2019-12-06T02:29:00+05:30","datePublished":"2019-12-06T02:29:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/webappspringboot"},"description":"Here is one of the simplest ways to deploy a Spring Boot application (JAR with embedded Tomcat) to Azure WebApp (Windows)","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/donate/","headline":"Donate","description":"Just another blog.","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -446,51 +444,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <div class="page-banner-img"><div style="background-image: url(/assets/banner.jpg)"></div>
         <img class="img-placeholder" src="/assets/banner.jpg"></div>
     <div class="wrapper">
-      <div class="page-banner-inner"><header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">WE LEARN SOMETHING NEW...</h1>
-  <h2 class="post-subtitle">EVERYDAY</h2>
-
-  <p class="post-meta">
-    <time class="dt-published" datetime="2019-12-06T02:29:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 6, 2019
-    </time>
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-  </p></header>
-</div>
+      <div class="page-banner-inner"><div class="page-banner-default">
+            <h1 class="page-banner-heading">
+              WE LEARN SOMETHING NEW...
+            </h1>
+            <h2 class="page-banner-subheading">
+              EVERYDAY
+            </h2>
+          </div></div>
     </div>
   </section><script>
   function hashLocate(hashValue) {
@@ -645,202 +606,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="framework">
-  <section class="main">
-
-     <div class="post">
-  <section>
-
-
-
-
-
-
-
-
-
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-    <div class="post-content e-content" itemprop="articleBody">
-
-      <h1 id="here-is-one-of-the-simplest-ways-to-deploy-a-spring-boot-application-jar-with-embedded-tomcat-to-azure-webapp-windows">Here is one of the simplest ways to deploy a Spring Boot application (JAR with embedded Tomcat) to Azure WebApp (Windows)</h1>
-
-<p><strong>Steps:</strong></p>
-
-<ul>
-  <li>Create zip file which contains the JAR file and a web.config</li>
-  <li>Here is a sample web.config which you can use:</li>
-</ul>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="nt">&lt;configuration&gt;</span>
- <span class="nt">&lt;system.webServer&gt;</span>
-  <span class="nt">&lt;handlers&gt;</span>
-    <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">"httpPlatformHandler"</span> <span class="na">path=</span><span class="s">"*"</span> <span class="na">verb=</span><span class="s">"*"</span>   <span class="na">modules=</span><span class="s">"httpPlatformHandler"</span> <span class="na">resourceType=</span><span class="s">"Unspecified"</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/handlers&gt;</span>
-  <span class="nt">&lt;httpPlatform</span> <span class="na">processPath=</span><span class="s">"%JAVA_HOME%\bin\java.exe"</span> <span class="na">arguments=</span><span class="s">"-Djava.net.preferIPv4Stack=true -Dserver.port=%HTTP_PLATFORM_PORT% -jar &amp;quot;%HOME%\site\wwwroot\app.jar&amp;quot;"</span> 
-      <span class="na">startupRetryCount=</span><span class="s">'10'</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/httpPlatform&gt;</span>
- <span class="nt">&lt;/system.webServer&gt;</span>
-<span class="nt">&lt;/configuration&gt;</span>
-</code></pre></div></div>
-
-<ul>
-  <li>
-    <p>When using zip deploy, the contents of the zip gets transferred to D:\home\site\wwwroot of the WebApp</p>
-  </li>
-  <li>
-    <p>Now, just call the Zip Deploy API to deploy your app.</p>
-  </li>
-</ul>
-
-<p><strong>Example (using cURL):</strong></p>
-
-<pre><code class="language-curl">curl -X POST -u &lt;deployment_user&gt; --data-binary @"&lt;zip_file_path&gt;" https://&lt;app_name&gt;.scm.azurewebsites.net/api/zipdeploy
-</code></pre>
-
-<p><img src="/assets/zipdeploy.jpg" alt="snapshot" /></p>
-
-<p><strong>Documentation:</strong>: <a href="https://docs.microsoft.com/en-us/azure/app-service/deploy-zip#rest">https://docs.microsoft.com/en-us/azure/app-service/deploy-zip#rest</a></p>
-
-
-    </div>
-
-</article>
-<div class="post-nav"><a class="previous" href="/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Deploy Azure Java Function App (Windows)...</a><a class="next" href="/ioncube/php/azure_webapp/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="Configure IonCube Loader - PHP Linux App Service">Configure IonCube Loader - PHP Linux...</a></div><div class="post-related">
-      <div>Related Articles</div>
-      <ul>
-        <li><a class="post-link" href="/java/azure_webapp/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Configure IonCube Loader - PHP Linux App Service">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li><li><a class="post-link" href="/webappspringboot" title="Configure IonCube Loader - PHP Linux App Service">Deploy Spring Boot Application On Azure WebApp via ZipDeploy</a></li><li><a class="post-link" href="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html" title="Configure IonCube Loader - PHP Linux App Service">Using Java Flight Recorder</a></li><li><a class="post-link" href="/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="Configure IonCube Loader - PHP Linux App Service">Access SQL Database via Azure Function App - Python</a></li></ul>
-    </div><div class="post-comments"></div></section>
-</div>
-
-
-  </section>
-  <section class="sidebar" style="margin-left: 15px;">
-    <!-- Get sidebar items --><style type="text/css" media="screen">
-.post-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-</style>
-
-<div class="post-menu">
-  <div class="post-menu-title">TOC</div>
-  <div class="post-menu-content"></div>
-</div>
-
-<script>
-  function generateContent() {
-    var menu = document.querySelector(".post-menu");
-    var menuContent =  menu.querySelector(".post-menu-content");
-    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
-
-    // Hide menu when no headings
-    if (headings.length === 0) {
-      return menu.style.display = "none";
-    }
-
-    // Generate post menu
-    var menuHTML = '';
-    for (var i = 0; i < headings.length; i++) {
-      var h = headings[i];
-      menuHTML += (
-        '<li class="h-' + h.tagName.toLowerCase() + '">'
-        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
-    }
-
-    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
-
-    // The header element
-    var header = document.querySelector('header.site-header');
-
-    function doMenuCollapse(index, over_items) {
-      var items = menuContent.firstChild.children;
-
-      if (over_items == undefined) {
-        over_items = 20;
-      }
-
-      if (items.length < over_items) {
-        return;
-      }
-
-      var activeItem = items[index];
-      var beginItem = activeItem
-      var endItem = activeItem
-      var beginIndex = index;
-      var endIndex = index + 1;
-      while (beginIndex >= 0
-        && !items[beginIndex].classList.contains('h-h2')) {
-        beginIndex -= 1;
-      }
-      while (endIndex < items.length
-        && !items[endIndex].classList.contains('h-h2')) {
-        endIndex += 1;
-      }
-      for (var i = 0; i < beginIndex; i++) {
-        item = items[i]
-        if (!item.classList.contains('h-h2')) {
-          item.style.display = 'none';
-        }
-      }
-      for (var i = beginIndex + 1; i < endIndex; i++) {
-        item = items[i]
-        // if (!item.classList.contains('h-h2')) {
-          item.style.display = '';
-        // }
-      }
-      for (var i = endIndex; i < items.length; i++) {
-        item = items[i]
-        if (!item.classList.contains('h-h2')) {
-          item.style.display = 'none';
-        }
-      }
-    }
-
-    // Init menu collapsed
-    doMenuCollapse(-1);
-
-    // Active the menu item
-    window.addEventListener('scroll', function (event) {
-      var lastActive = menuContent.querySelector('.active');
-      var changed = true;
-      var activeIndex = -1;
-      for (var i = headings.length - 1; i >= 0; i--) {
-        var h = headings[i];
-        var headingRect = h.getBoundingClientRect();
-        var headerRect = header.getBoundingClientRect();
-        var headerTop = Math.floor(headerRect.top);
-        var headerHeight = Math.floor(headerRect.height);
-        var headerHeight = headerTop + headerHeight + 20;
-        if (headingRect.top <= headerHeight) {
-          var id = 'h-' + h.getAttribute('id');
-          var a = menuContent.querySelector('a[href="#' + id  + '"]');
-          var curActive = a.parentNode;
-          if (curActive) {
-            curActive.classList.add('active');
-            activeIndex = i;
-          }
-          if (lastActive == curActive) {
-            changed = false;
-          }
-          break;
-        }
-      }
-      if (changed) {
-        if (lastActive) {
-          lastActive.classList.remove('active');
-        }
-        doMenuCollapse(activeIndex);
-      }
-      event.preventDefault();
-    });
-  }
-  generateContent();
-</script>
-</section>
-</div>
+        <p><a href="http://donatecoins.org/btc/1NED5ECTN7zKGRhSLEsVSzKr8ANce5r5Ci"><img src="http://donatecoins.org/btc/1NED5ECTN7zKGRhSLEsVSzKr8ANce5r5Ci.svg" alt="Donatecoins" /></a></p>
 
       </div>
     </main><footer class="site-footer h-card">

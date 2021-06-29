@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Using opencv-python on Linux App Service | Gaurav’s GitHub Pages!</title>
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Using opencv-python on Linux App Service" />
@@ -18,14 +18,13 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Using opencv-python on Linux App Service" />
 <script type="application/ld+json">
-{"headline":"Using opencv-python on Linux App Service","dateModified":"2021-03-31T22:54:00+05:30","datePublished":"2021-03-31T22:54:00+05:30","url":"/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html","mainEntityOfPage":{"@type":"WebPage","@id":"/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html"},"description":"The opencv-python module in Python has certain OS level dependencies, which could be missing in certain environment or Docker images. You could obviously create your own Custom Docker Image and use that to run Python application on Azure WebApp for Containers. But that comes up with an overhead of maintaining the Docker Image. In order to use opencv-python (or any other module which have certain missing dependencies in the environment you are running in), you could make use of a Startup Script to install the required libraries. Using apt install command via webSSH directly would not work, since the files are non-persistent outside of /home. Read more about persistence HERE","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html","headline":"Using opencv-python on Linux App Service","dateModified":"2021-03-31T22:54:00+05:30","datePublished":"2021-03-31T22:54:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html"},"description":"The opencv-python module in Python has certain OS level dependencies, which could be missing in certain environment or Docker images. You could obviously create your own Custom Docker Image and use that to run Python application on Azure WebApp for Containers. But that comes up with an overhead of maintaining the Docker Image. In order to use opencv-python (or any other module which have certain missing dependencies in the environment you are running in), you could make use of a Startup Script to install the required libraries. Using apt install command via webSSH directly would not work, since the files are non-persistent outside of /home. Read more about persistence HERE","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Gaurav's GitHub Pages!" /><link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
@@ -119,7 +118,111 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 </style>
 </head>
-  <body>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -169,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 </header>
 
 <script>
-  (function() {
+  function initHeader() {
     var lastScrollY = getScrollPos().y;
     var documentElement = document.documentElement;
 
@@ -194,7 +297,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     });
 
     storeScrollData();
-  })();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
 </script>
 
 
@@ -239,15 +343,117 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-  <section class="page-banner">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="page-banner">
     <div class="page-banner-img">
-      <div style="background-image: url(/assets/banner.jpg)"></div>
-    </div>
+<div style="background-image: url(/assets/banner.jpg)"></div>
+        <img class="img-placeholder" src="/assets/banner.jpg">
+</div>
     <div class="wrapper">
       <div class="page-banner-inner">
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">WE LEARN SOMETHING...</h1>
-  <h3 class="post-subtitle">EVERYDAY</h3>
+  <h1 class="post-title p-name" itemprop="name headline">WE LEARN SOMETHING NEW...</h1>
+  <h2 class="post-subtitle">EVERYDAY</h2>
 
   <p class="post-meta">
     <time class="dt-published" datetime="2021-03-31T22:54:00+05:30" itemprop="datePublished"><i class="fa fa-calendar"></i> Mar 31, 2021
@@ -294,6 +500,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   </section><script>
   function hashLocate(hashValue) {
     hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
     var element = document.getElementById(hashValue);
 
     if (!element) {
@@ -494,10 +701,10 @@ gunicorn <span class="nt">--bind</span><span class="o">=</span>0.0.0.0 <span cla
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2019/11/10/create-a-post-in-jekyll-from-command-line.html" title="Enable trace logs - Java Function App">Create a post in Jekyll via command line</a></li>
-<li><a class="post-link" href="/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="Enable trace logs - Java Function App">Enable Tomcat Manager app on Linux WebApp on Azure</a></li>
-<li><a class="post-link" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Enable trace logs - Java Function App">Troubleshoot High Memory Issues - Java Linux WebApp</a></li>
-<li><a class="post-link" href="/azure_webapp/pscp/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" title="Enable trace logs - Java Function App">Download files from Azure Linux WebApp using pscp</a></li>
+        <li><a class="post-link" href="/sql/azure_webapp/php/msi/2019/11/10/webapp-php-msi-sql.html" title="Enable trace logs - Java Function App">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li>
+<li><a class="post-link" href="/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html" title="Enable trace logs - Java Function App">Using opencv-python on Linux App Service</a></li>
+<li><a class="post-link" href="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html" title="Enable trace logs - Java Function App">Using Java Flight Recorder</a></li>
+<li><a class="post-link" href="/2021/03/26/curl-3.html" title="Enable trace logs - Java Function App">curl &lt;3</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
@@ -637,7 +844,7 @@ gunicorn <span class="nt">--bind</span><span class="o">=</span>0.0.0.0 <span cla
 
   <div class="wrapper">
     <div class="site-footer-inner">
-      <div> </div>
+<div></div>
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>

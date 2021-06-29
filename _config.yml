@@ -30,6 +30,7 @@ github_username:  gkgaurav31
 # Build settings
 #theme: jekyll-theme-yat
 remote_theme: "jeffreytse/jekyll-theme-yat"
+#theme: minima
 
 plugins:
   - jekyll-feed
