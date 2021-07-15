@@ -5,7 +5,7 @@ date: 2019-11-10 21:26 +0530
 categories: java dump azure_webapp
 ---
 
-# Below are some of the ways using which you can collect Thread Dump on Azure WebApps (Windows)
+## Below are some of the ways using which you can collect Thread Dump on Azure WebApps (Windows)
 
 - Using Diagnose & Solve Problems blade of the WebApp:
   - As of now, this works for the Java Versions for which JDK is available on the platform. You can directly go to "Diagnose & Solve Problems" blade and search for "Thread Dump" which will show up the tool to collect Java Thread Dumps.  
