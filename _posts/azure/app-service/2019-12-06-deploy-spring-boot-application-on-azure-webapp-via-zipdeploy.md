@@ -6,7 +6,7 @@ permalink: '/webappspringboot'
 categories: java spring_boot azure_webapp deployment
 ---
 
-# Here is one of the simplest ways to deploy a Spring Boot application (JAR with embedded Tomcat) to Azure WebApp (Windows)
+## Here is one of the simplest ways to deploy a Spring Boot application (JAR with embedded Tomcat) to Azure WebApp (Windows)
 
 __Steps:__
 
@@ -39,5 +39,8 @@ curl -X POST -u <deployment_user> --data-binary @"<zip_file_path>" https://<app_
 
 ![snapshot]({{ site.baseurl }}/assets/zipdeploy.jpg)
 
-
 __Documentation:__: [https://docs.microsoft.com/en-us/azure/app-service/deploy-zip#rest](https://docs.microsoft.com/en-us/azure/app-service/deploy-zip#rest)
+
+__UPDATE:__
+
+Now, you can simple rename your Spring Boot JAR file as app.jar and push it to D:\home\site\wwwroot. No web.config required.
