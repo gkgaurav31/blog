@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Log Originating Client IP on Linux App Service (Tomcat)" />
 <script type="application/ld+json">
-{"url":"/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html","headline":"Log Originating Client IP on Linux App Service (Tomcat)","dateModified":"2021-09-25T00:39:00+05:30","datePublished":"2021-09-25T00:39:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html"},"description":"The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"dateModified":"2021-09-25T00:39:00+05:30","datePublished":"2021-09-25T00:39:00+05:30","url":"/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html"},"headline":"Log Originating Client IP on Linux App Service (Tomcat)","description":"The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -758,6 +758,13 @@ Replace the following:</li>
 
 <p><img src="/assets/clientip-tomcat.jpg" alt="Access Logs"></p>
 
+<p>Know More:</p>
+
+<ul>
+  <li><a href="https://tomcat.apache.org/tomcat-8.5-doc/api/org/apache/catalina/valves/RemoteIpValve.html">RemoteIpValve</a></li>
+  <li><a href="https://tomcat.apache.org/tomcat-9.0-doc/config/filter.html#Basic_configuration_to_handle_'x-forwarded-for'">Basic configuration to handle ‘x-forwarded-for’</a></li>
+</ul>
+
 <p>That’s it! <img class="emoji" title=":v:" alt=":v:" src="https://github.githubassets.com/images/icons/emoji/unicode/270c.png" height="20" width="20"></p>
 
 
@@ -770,10 +777,10 @@ Replace the following:</li>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/first/" title="">First Blog Post!</a></li>
-<li><a class="post-link" href="/java/azure_webapp/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li>
+        <li><a class="post-link" href="/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="">Access SQL Database via Azure Function App - Python</a></li>
+<li><a class="post-link" href="/2021/03/26/curl-3.html" title="">curl &lt;3</a></li>
 <li><a class="post-link" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="">Troubleshoot High Memory Issues - Java Linux WebApp</a></li>
-<li><a class="post-link" href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li>
+<li><a class="post-link" href="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html" title="">Using Java Flight Recorder</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

@@ -92,4 +92,9 @@ Now, restart the WebApp and you should see the originating client IP in the acce
 
 ![Access Logs]({{ site.baseurl }}/assets/clientip-tomcat.jpg)
 
+Know More:
+
+- [RemoteIpValve](https://tomcat.apache.org/tomcat-8.5-doc/api/org/apache/catalina/valves/RemoteIpValve.html)
+- [Basic configuration to handle 'x-forwarded-for'](https://tomcat.apache.org/tomcat-9.0-doc/config/filter.html#Basic_configuration_to_handle_'x-forwarded-for')  
+
 That's it! :v:
