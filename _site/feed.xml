@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-09-25T01:11:08+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Log Originating Client IP on Linux App Service (Tomcat)</title><link href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" rel="alternate" type="text/html" title="Log Originating Client IP on Linux App Service (Tomcat)" /><published>2021-09-25T00:39:00+05:30</published><updated>2021-09-25T00:39:00+05:30</updated><id>/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat</id><content type="html" xml:base="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-09-25T01:15:06+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Log Originating Client IP on Linux App Service (Tomcat)</title><link href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" rel="alternate" type="text/html" title="Log Originating Client IP on Linux App Service (Tomcat)" /><published>2021-09-25T00:39:00+05:30</published><updated>2021-09-25T00:39:00+05:30</updated><id>/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat</id><content type="html" xml:base="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html">&lt;h3 id=&quot;log-originating-client-ip-on-linux-app-service-tomcat&quot;&gt;Log Originating Client IP on Linux App Service (Tomcat)&lt;/h3&gt;
+
+&lt;blockquote&gt;
   &lt;p&gt;The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used.&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -22,7 +24,7 @@
 
 &lt;p&gt;In this blog, I will be covering how this can be done by configuring Tomcat so that we can get it directly from the Access logs of Tomcat.&lt;/p&gt;
 
-&lt;p&gt;Follow the below steps:&lt;/p&gt;
+&lt;h4 id=&quot;steps&quot;&gt;Steps&lt;/h4&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -87,14 +89,14 @@ Replace the following:&lt;/li&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/clientip-tomcat.jpg&quot; alt=&quot;Access Logs&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Know More:&lt;/p&gt;
+&lt;h4 id=&quot;know-more&quot;&gt;Know More&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://tomcat.apache.org/tomcat-8.5-doc/api/org/apache/catalina/valves/RemoteIpValve.html&quot;&gt;RemoteIpValve&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://tomcat.apache.org/tomcat-9.0-doc/config/filter.html#Basic_configuration_to_handle_'x-forwarded-for'&quot;&gt;Basic configuration to handle ‘x-forwarded-for’&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;That’s it! :v:&lt;/p&gt;</content><author><name></name></author><summary type="html">The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used.</summary></entry><entry><title type="html">Using Minikube on Linux (Ubuntu)</title><link href="/2021/06/29/using-minikube-on-linux-ubuntu.html" rel="alternate" type="text/html" title="Using Minikube on Linux (Ubuntu)" /><published>2021-06-29T16:47:00+05:30</published><updated>2021-06-29T16:47:00+05:30</updated><id>/2021/06/29/using-minikube-on-linux-ubuntu</id><content type="html" xml:base="/2021/06/29/using-minikube-on-linux-ubuntu.html">&lt;p&gt;Minikube quickly sets up a local Kubernetes cluster, which is great for learning!&lt;/p&gt;
+&lt;p&gt;That’s it! :v:&lt;/p&gt;</content><author><name></name></author><summary type="html">Log Originating Client IP on Linux App Service (Tomcat)</summary></entry><entry><title type="html">Using Minikube on Linux (Ubuntu)</title><link href="/2021/06/29/using-minikube-on-linux-ubuntu.html" rel="alternate" type="text/html" title="Using Minikube on Linux (Ubuntu)" /><published>2021-06-29T16:47:00+05:30</published><updated>2021-06-29T16:47:00+05:30</updated><id>/2021/06/29/using-minikube-on-linux-ubuntu</id><content type="html" xml:base="/2021/06/29/using-minikube-on-linux-ubuntu.html">&lt;p&gt;Minikube quickly sets up a local Kubernetes cluster, which is great for learning!&lt;/p&gt;
 
 &lt;p&gt;These are the pre-requisites, as of today, as per the minikube documentation:&lt;/p&gt;
 

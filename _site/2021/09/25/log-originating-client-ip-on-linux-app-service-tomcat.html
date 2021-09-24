@@ -8,8 +8,8 @@
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Log Originating Client IP on Linux App Service (Tomcat)" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used." />
-<meta property="og:description" content="The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used." />
+<meta name="description" content="Log Originating Client IP on Linux App Service (Tomcat)" />
+<meta property="og:description" content="Log Originating Client IP on Linux App Service (Tomcat)" />
 <link rel="canonical" href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" />
 <meta property="og:url" content="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" />
 <meta property="og:site_name" content="Gaurav’s GitHub Pages!" />
@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Log Originating Client IP on Linux App Service (Tomcat)" />
 <script type="application/ld+json">
-{"dateModified":"2021-09-25T00:39:00+05:30","datePublished":"2021-09-25T00:39:00+05:30","url":"/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html"},"headline":"Log Originating Client IP on Linux App Service (Tomcat)","description":"The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html","headline":"Log Originating Client IP on Linux App Service (Tomcat)","dateModified":"2021-09-25T00:39:00+05:30","datePublished":"2021-09-25T00:39:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html"},"description":"Log Originating Client IP on Linux App Service (Tomcat)","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -668,7 +668,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <blockquote>
+      <h3 id="log-originating-client-ip-on-linux-app-service-tomcat">Log Originating Client IP on Linux App Service (Tomcat)</h3>
+
+<blockquote>
   <p>The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used.</p>
 </blockquote>
 
@@ -692,7 +694,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>In this blog, I will be covering how this can be done by configuring Tomcat so that we can get it directly from the Access logs of Tomcat.</p>
 
-<p>Follow the below steps:</p>
+<h4 id="steps">Steps</h4>
 
 <ol>
   <li>
@@ -758,7 +760,7 @@ Replace the following:</li>
 
 <p><img src="/assets/clientip-tomcat.jpg" alt="Access Logs"></p>
 
-<p>Know More:</p>
+<h4 id="know-more">Know More</h4>
 
 <ul>
   <li><a href="https://tomcat.apache.org/tomcat-8.5-doc/api/org/apache/catalina/valves/RemoteIpValve.html">RemoteIpValve</a></li>
@@ -777,10 +779,10 @@ Replace the following:</li>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="">Access SQL Database via Azure Function App - Python</a></li>
-<li><a class="post-link" href="/2021/03/26/curl-3.html" title="">curl &lt;3</a></li>
+        <li><a class="post-link" href="/2021/06/29/using-minikube-on-linux-ubuntu.html" title="">Using Minikube on Linux (Ubuntu)</a></li>
 <li><a class="post-link" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="">Troubleshoot High Memory Issues - Java Linux WebApp</a></li>
-<li><a class="post-link" href="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html" title="">Using Java Flight Recorder</a></li>
+<li><a class="post-link" href="/first/" title="">First Blog Post!</a></li>
+<li><a class="post-link" href="/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="">Enable Tomcat Manager app on Linux WebApp on Azure</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

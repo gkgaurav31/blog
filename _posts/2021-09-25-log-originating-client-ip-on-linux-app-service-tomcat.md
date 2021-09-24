@@ -4,6 +4,8 @@ title: Log Originating Client IP on Linux App Service (Tomcat)
 date: 2021-09-25 00:39 +0530
 ---
 
+### Log Originating Client IP on Linux App Service (Tomcat)
+
 > The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used.
 
 [MDN Web Docs: X-Forwarded-For](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For)
@@ -27,7 +29,7 @@ __Credits:__ [Mkyong: How to get client Ip Address in Java](https://mkyong.com/j
 
 In this blog, I will be covering how this can be done by configuring Tomcat so that we can get it directly from the Access logs of Tomcat.
 
-Follow the below steps:
+#### Steps
 
 1. Go to the [Kudu](https://docs.microsoft.com/en-us/azure/app-service/resources-kudu) and use [SSH](https://docs.microsoft.com/en-us/azure/app-service/configure-linux-open-ssh-session) into your application container. [The app needs to be running for this to work]
 https://<<webappname>>.scm.azurewebsites.net/webssh/host
@@ -92,7 +94,7 @@ Now, restart the WebApp and you should see the originating client IP in the acce
 
 ![Access Logs]({{ site.baseurl }}/assets/clientip-tomcat.jpg)
 
-Know More:
+#### Know More
 
 - [RemoteIpValve](https://tomcat.apache.org/tomcat-8.5-doc/api/org/apache/catalina/valves/RemoteIpValve.html)
 - [Basic configuration to handle 'x-forwarded-for'](https://tomcat.apache.org/tomcat-9.0-doc/config/filter.html#Basic_configuration_to_handle_'x-forwarded-for')  
