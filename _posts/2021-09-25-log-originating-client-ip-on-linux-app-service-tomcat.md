@@ -90,6 +90,6 @@ with:
 
 Now, restart the WebApp and you should see the originating client IP in the access logs available under __/home/LogFiles/http/RawLogs__
 
-![Access Logs](/assets/clientip-tomcat.jpg)
+![Access Logs]({{ site.baseurl }}/assets/clientip-tomcat.jpg)
 
 That's it! :v:

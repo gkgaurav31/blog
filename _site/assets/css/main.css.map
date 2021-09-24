@@ -3,15 +3,15 @@
 	"file": "main.css",
 	"sources": [
 		"main.scss",
-		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-28076-1dcakrw/_sass/yat.scss",
-		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-28076-1dcakrw/_sass/yat/_base.scss",
-		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-28076-1dcakrw/_sass/yat/_layout.scss",
-		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-28076-1dcakrw/_sass/yat/_dark.scss",
-		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-28076-1dcakrw/_sass/misc/theme-toggle.scss",
-		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-28076-1dcakrw/_sass/misc/article-menu.scss",
-		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-28076-1dcakrw/_sass/misc/common-list.scss",
-		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-28076-1dcakrw/_sass/misc/google-translate.scss",
-		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-28076-1dcakrw/_sass/misc/gitment.scss"
+		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-17572-6vkrpe/_sass/yat.scss",
+		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-17572-6vkrpe/_sass/yat/_base.scss",
+		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-17572-6vkrpe/_sass/yat/_layout.scss",
+		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-17572-6vkrpe/_sass/yat/_dark.scss",
+		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-17572-6vkrpe/_sass/misc/theme-toggle.scss",
+		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-17572-6vkrpe/_sass/misc/article-menu.scss",
+		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-17572-6vkrpe/_sass/misc/common-list.scss",
+		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-17572-6vkrpe/_sass/misc/google-translate.scss",
+		"../../../AppData/Local/Temp/jekyll-remote-theme-20210925-17572-6vkrpe/_sass/misc/gitment.scss"
 	],
 	"sourcesContent": [
 		"// Default theme colors\n$theme-colors: (\n  \"coolblack\": #090a0b,\n  \"spacegrey\": #353535,\n  \"snowwhite\": #ffffff,\n);\n\n// Default brand colors\n$brand-colors: (\n  \"orangered\": #ff5100,\n  \"greatgold\": #f2cb05,\n  \"greenblue\": #389092,\n);\n\n$theme-name: \"\";\n$brand-name: \"\";\n$theme-color: map-get($theme-colors, \"snowwhite\");\n$brand-color: map-get($brand-colors, \"orangered\");\n\n@if map-has-key($theme-colors, $theme-name) {\n  $theme-color: map-get($theme-colors, $theme-name);\n} @else if str-index($theme-name, \"#\") == 1 {\n  $theme-color: #ffffff;\n}\n\n@if map-has-key($brand-colors, $brand-name) {\n  $brand-color: map-get($brand-colors, $brand-name);\n} @else if str-index($brand-name, \"#\") == 1 {\n  $brand-color: #ff5100;\n}\n\n$content-width: 920px;\n\n@import \"yat\";\n",

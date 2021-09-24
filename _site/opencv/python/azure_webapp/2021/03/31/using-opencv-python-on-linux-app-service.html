@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Using opencv-python on Linux App Service" />
 <script type="application/ld+json">
-{"dateModified":"2021-03-31T22:54:00+05:30","datePublished":"2021-03-31T22:54:00+05:30","url":"/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html","mainEntityOfPage":{"@type":"WebPage","@id":"/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html"},"headline":"Using opencv-python on Linux App Service","description":"The opencv-python module in Python has certain OS level dependencies, which could be missing in certain environment or Docker images. You could obviously create your own Custom Docker Image and use that to run Python application on Azure WebApp for Containers. But that comes up with an overhead of maintaining the Docker Image. In order to use opencv-python (or any other module which have certain missing dependencies in the environment you are running in), you could make use of a Startup Script to install the required libraries. Using apt install command via webSSH directly would not work, since the files are non-persistent outside of /home. Read more about persistence HERE","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html","headline":"Using opencv-python on Linux App Service","dateModified":"2021-03-31T22:54:00+05:30","datePublished":"2021-03-31T22:54:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html"},"description":"The opencv-python module in Python has certain OS level dependencies, which could be missing in certain environment or Docker images. You could obviously create your own Custom Docker Image and use that to run Python application on Azure WebApp for Containers. But that comes up with an overhead of maintaining the Docker Image. In order to use opencv-python (or any other module which have certain missing dependencies in the environment you are running in), you could make use of a Startup Script to install the required libraries. Using apt install command via webSSH directly would not work, since the files are non-persistent outside of /home. Read more about persistence HERE","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -701,10 +701,10 @@ gunicorn <span class="nt">--bind</span><span class="o">=</span>0.0.0.0 <span cla
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="Enable trace logs - Java Function App">Enable Tomcat Manager app on Linux WebApp on Azure</a></li>
-<li><a class="post-link" href="/2019/11/10/create-a-post-in-jekyll-from-command-line.html" title="Enable trace logs - Java Function App">Create a post in Jekyll via command line</a></li>
+        <li><a class="post-link" href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" title="Enable trace logs - Java Function App">Log Originating Client IP on Linux App Service (Tomcat)</a></li>
+<li><a class="post-link" href="/2021/04/01/enable-trace-logs-java-function-app.html" title="Enable trace logs - Java Function App">Enable trace logs - Java Function App</a></li>
+<li><a class="post-link" href="/2021/03/26/curl-3.html" title="Enable trace logs - Java Function App">curl &lt;3</a></li>
 <li><a class="post-link" href="/sql/azure_webapp/php/msi/2019/11/10/webapp-php-msi-sql.html" title="Enable trace logs - Java Function App">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li>
-<li><a class="post-link" href="/java/dump/azure_webapp/2019/11/10/collecting-thread-dump-on-azure-webapp.html" title="Enable trace logs - Java Function App">Collecting Thread Dump on Azure WebApp</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
