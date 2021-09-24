@@ -1,4 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-06-29T17:24:43+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Using Minikube on Linux (Ubuntu)</title><link href="/2021/06/29/using-minikube-on-linux-ubuntu.html" rel="alternate" type="text/html" title="Using Minikube on Linux (Ubuntu)" /><published>2021-06-29T16:47:00+05:30</published><updated>2021-06-29T16:47:00+05:30</updated><id>/2021/06/29/using-minikube-on-linux-ubuntu</id><content type="html" xml:base="/2021/06/29/using-minikube-on-linux-ubuntu.html">&lt;p&gt;Minikube quickly sets up a local Kubernetes cluster, which is great for learning!&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-09-25T01:01:05+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Log Originating Client IP on Linux App Service (Tomcat)</title><link href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" rel="alternate" type="text/html" title="Log Originating Client IP on Linux App Service (Tomcat)" /><published>2021-09-25T00:39:00+05:30</published><updated>2021-09-25T00:39:00+05:30</updated><id>/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat</id><content type="html" xml:base="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html">&lt;blockquote&gt;
+  &lt;p&gt;The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For&quot;&gt;MDN Web Docs: X-Forwarded-For&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We can get the value of this header using multiple ways. One of the common ways is via code. Here is a sample &lt;strong&gt;Java Code&lt;/strong&gt; you could use:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getClientIp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remoteAddr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;remoteAddr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getHeader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;X-FORWARDED-FOR&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remoteAddr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remoteAddr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;remoteAddr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRemoteAddr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remoteAddr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Credits:&lt;/strong&gt; &lt;a href=&quot;https://mkyong.com/java/how-to-get-client-ip-address-in-java/&quot;&gt;Mkyong: How to get client Ip Address in Java&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In this blog, I will be covering how this can be done by configuring Tomcat so that we can get it directly from the Access logs of Tomcat.&lt;/p&gt;
+
+&lt;p&gt;Follow the below steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Go to the &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/resources-kudu&quot;&gt;Kudu&lt;/a&gt; and use &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/configure-linux-open-ssh-session&quot;&gt;SSH&lt;/a&gt; into your application container. [The app needs to be running for this to work]
+https://«webappname».scm.azurewebsites.net/webssh/host&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Copy default Tomcat configurations to &lt;strong&gt;/home&lt;/strong&gt;.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; /home/tomcat  
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; /usr/local/tomcat/conf /home/tomcat/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Edit the &lt;strong&gt;server.xml&lt;/strong&gt; under &lt;strong&gt;/home/tomcat/conf&lt;/strong&gt;&lt;br /&gt;
+Replace the following:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- In AppService below is customized to add : unpackWARs=&quot;${site.unpackWARs}&quot; and workDir=&quot;${site.tempdir}--&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;Host&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;localhost&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;appBase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.root}&quot;&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;unpackWARs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.unpackWARs}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autoDeploy=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;workDir=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.tempdir}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- SingleSignOn valve, share authentication between web applications
+             Documentation at: /docs/config/valve.html --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!--
+        &amp;lt;Valve className=&quot;org.apache.catalina.authenticator.SingleSignOn&quot; /&amp;gt;
+        --&amp;gt;&lt;/span&gt;
+
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern=&quot;common&quot; --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- In AppService prefix and pattern are customized--&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;Valve&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;className=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.catalina.valves.AccessLogValve&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;directory=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.logdir}/http/RawLogs&quot;&lt;/span&gt;
+               &lt;span class=&quot;na&quot;&gt;prefix=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;site_access_log.${catalina.instance.name}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;suffix=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.txt&quot;&lt;/span&gt;
+               &lt;span class=&quot;na&quot;&gt;pattern=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%h %l %u %t &amp;amp;quot;%r&amp;amp;quot; %s %b %D %{x-arr-log-id}i&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Host&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;with:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- In AppService below is customized to add : unpackWARs=&quot;${site.unpackWARs}&quot; and workDir=&quot;${site.tempdir}--&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;Host&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;localhost&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;appBase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.root}&quot;&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;unpackWARs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.unpackWARs}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autoDeploy=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;workDir=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.tempdir}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- SingleSignOn valve, share authentication between web applications
+             Documentation at: /docs/config/valve.html --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!--
+        &amp;lt;Valve className=&quot;org.apache.catalina.authenticator.SingleSignOn&quot; /&amp;gt;
+        --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Remote IP Valve --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;Valve&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;className=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.catalina.valves.RemoteIpValve&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern=&quot;common&quot; --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- In AppService prefix and pattern are customized--&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;Valve&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;className=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.catalina.valves.AccessLogValve&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;directory=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.logdir}/http/RawLogs&quot;&lt;/span&gt;
+               &lt;span class=&quot;na&quot;&gt;prefix=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;site_access_log.${catalina.instance.name}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;suffix=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.txt&quot;&lt;/span&gt;
+               &lt;span class=&quot;na&quot;&gt;pattern=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%{X-Forwarded-For}i %l %u %t &amp;amp;quot;%r&amp;amp;quot; %s %b %D %{x-arr-log-id}i&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Host&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, restart the WebApp and you should see the originating client IP in the access logs available under &lt;strong&gt;/home/LogFiles/http/RawLogs&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/clientip-tomcat.jpg&quot; alt=&quot;Access Logs&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;That’s it! :v:&lt;/p&gt;</content><author><name></name></author><summary type="html">The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used.</summary></entry><entry><title type="html">Using Minikube on Linux (Ubuntu)</title><link href="/2021/06/29/using-minikube-on-linux-ubuntu.html" rel="alternate" type="text/html" title="Using Minikube on Linux (Ubuntu)" /><published>2021-06-29T16:47:00+05:30</published><updated>2021-06-29T16:47:00+05:30</updated><id>/2021/06/29/using-minikube-on-linux-ubuntu</id><content type="html" xml:base="/2021/06/29/using-minikube-on-linux-ubuntu.html">&lt;p&gt;Minikube quickly sets up a local Kubernetes cluster, which is great for learning!&lt;/p&gt;
 
 &lt;p&gt;These are the pre-requisites, as of today, as per the minikube documentation:&lt;/p&gt;
 
@@ -502,47 +591,4 @@ cp -a /usr/local/tomcat/conf /home/tomcat/conf
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RUN echo &quot;root:Docker!&quot; | chpasswd&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;That’s it! :v:&lt;/p&gt;</content><author><name></name></author><category term="azure_webapp" /><category term="pscp" /><summary type="html">There are multiple ways of downloading files from Azure WebApps, some of which include:</summary></entry><entry><title type="html">Custom JRE/JDK on Azure App Service - Windows</title><link href="/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" rel="alternate" type="text/html" title="Custom JRE/JDK on Azure App Service - Windows" /><published>2020-05-26T23:12:00+05:30</published><updated>2020-05-26T23:12:00+05:30</updated><id>/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows</id><content type="html" xml:base="/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html">&lt;p&gt;Here’s how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:&lt;/p&gt;
-
-&lt;h4 id=&quot;steps&quot;&gt;STEPS&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Upload your JRE/JDK via FTP or you can simply upload it via the Kudu Site. If you have a direct link to the zip file, you can use the curl command to download the zip directly on the WebApp:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/curl-jdk.png&quot; alt=&quot;snapshot&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can then extract the zip using the command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unzip file.zip&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Create a &lt;strong&gt;web.config&lt;/strong&gt; under D:\home\site\wwwroot with the following content:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;:exclamation: Modify the &lt;strong&gt;JRE_HOME&lt;/strong&gt; environment variable in web.config as per your configuration.&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;system.webServer&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;handlers&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;add&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;httpplatformhandler&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;path=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;verb=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;modules=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;httpPlatformHandler&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;resourceType=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Unspecified&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/handlers&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;httpPlatform&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;processPath=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;D:\Program Files (x86)\apache-tomcat-8.5.37\bin\startup.bat&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;environmentVariables&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;environmentVariable&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;JRE_HOME&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;D:\home\site\wwwroot\java11&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/environmentVariables&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/httpPlatform&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/system.webServer&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;That’s it!  :v:&lt;/p&gt;
-
-&lt;p&gt;You can verify that the WebApp is now using our Custom JDK by checking the &lt;strong&gt;Properties&lt;/strong&gt; of the Java Process from &lt;strong&gt;Process Explorer&lt;/strong&gt; tab in the kudu Console:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/kudu-java.png&quot; alt=&quot;snapshot&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;If you want more control over your application, you could also use a &lt;strong&gt;Custom Tomcat!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Here is a Template which you can use: &lt;a href=&quot;https://github.com/azure-appservice-samples/TomcatTemplate&quot;&gt;Tomcat Template&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="azure_webapp" /><category term="java" /><summary type="html">Here’s how you can use a Custom JRE/JDK for your Java Application deployed on Azure WebApp:</summary></entry></feed>
+&lt;p&gt;That’s it! :v:&lt;/p&gt;</content><author><name></name></author><category term="azure_webapp" /><category term="pscp" /><summary type="html">There are multiple ways of downloading files from Azure WebApps, some of which include:</summary></entry></feed>

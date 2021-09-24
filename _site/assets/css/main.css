@@ -177,11 +177,11 @@ html[data-scroll-status='down'] .framework .sidebar { top: 20px; }
 
 .pagination .post-link { font-size: 23.1px; font-weight: 600; color: #333; }
 
-.pagination .post-excerpt { color: #777; }
+.pagination .post-excerpt { color: #777; word-break: break-word; overflow-wrap: break-word; }
 
-.pagination .post-tags .post-tag { text-decoration: none; border: 1px solid; padding: 2px 4px; border-radius: 2px; transition: color 0.2s; }
+.pagination .post-tags .post-tag { display: inline-block; text-decoration: none; border: 1px solid; padding: 2px 4px; border-radius: 2px; transition: color 0.2s; margin-bottom: 8px; }
 
-.pagination .post-tags .post-tag:not(:first-child) { margin-left: 8px; }
+.pagination .post-tags .post-tag:not(:last-child) { margin-right: 8px; }
 
 .pagination .post-tags .post-tag:hover { color: #787878; }
 
@@ -444,15 +444,15 @@ html[data-theme="dark"] .post-menu .post-menu-content ul a:hover { color: #fff !
 
 .post-menu .post-menu-content ul { border-left: 1px solid #e9ecef; }
 
-.post-menu .post-menu-content ul .h-h2 { padding-inline-start: 3.5px; font-size: 16.8px; line-height: 1.4; }
+.post-menu .post-menu-content ul .h-h2 { padding-inline-start: 3.5px; font-size: 15.4px; line-height: 1.4; }
 
-.post-menu .post-menu-content ul .h-h3 { padding-inline-start: 21.7px; font-size: 16.8px; line-height: 1.4; }
+.post-menu .post-menu-content ul .h-h3 { padding-inline-start: 21.7px; font-size: 15.4px; line-height: 1.4; }
 
-.post-menu .post-menu-content ul .h-h4 { padding-inline-start: 39.9px; font-size: 16.8px; line-height: 1.4; }
+.post-menu .post-menu-content ul .h-h4 { padding-inline-start: 39.9px; font-size: 15.4px; line-height: 1.4; }
 
-.post-menu .post-menu-content ul .h-h5 { padding-inline-start: 58.1px; font-size: 16.8px; line-height: 1.4; }
+.post-menu .post-menu-content ul .h-h5 { padding-inline-start: 58.1px; font-size: 15.4px; line-height: 1.4; }
 
-.post-menu .post-menu-content ul .h-h6 { padding-inline-start: 76.3px; font-size: 16.8px; line-height: 1.4; }
+.post-menu .post-menu-content ul .h-h6 { padding-inline-start: 76.3px; font-size: 15.4px; line-height: 1.4; }
 
 .post-menu .post-menu-content ul a { display: flex; padding: 2px 8px; color: #2c2c2c; }
 
