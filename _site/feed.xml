@@ -1,4 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-09-25T01:15:06+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Log Originating Client IP on Linux App Service (Tomcat)</title><link href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" rel="alternate" type="text/html" title="Log Originating Client IP on Linux App Service (Tomcat)" /><published>2021-09-25T00:39:00+05:30</published><updated>2021-09-25T00:39:00+05:30</updated><id>/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat</id><content type="html" xml:base="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html">&lt;h3 id=&quot;log-originating-client-ip-on-linux-app-service-tomcat&quot;&gt;Log Originating Client IP on Linux App Service (Tomcat)&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-09-30T17:36:38+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Hide Tomcat Server Information on Azure App Service</title><link href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" rel="alternate" type="text/html" title="Hide Tomcat Server Information on Azure App Service" /><published>2021-09-30T17:10:00+05:30</published><updated>2021-09-30T17:10:00+05:30</updated><id>/2021/09/30/hide-tomcat-server-information-on-azure-app-service</id><content type="html" xml:base="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html">&lt;h3 id=&quot;hide-tomcat-server-information-on-azure-app-service&quot;&gt;Hide Tomcat Server Information on Azure App Service&lt;/h3&gt;
+
+&lt;p&gt;The default error page of Tomcat shows the Tomcat version:
+&lt;img src=&quot;/assets/tomcat-404.jpg&quot; alt=&quot;Tomcat-404&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You could hide the version information by adding a Valve to Tomcat’s configuration file server.xml.&lt;/p&gt;
+
+&lt;h4 id=&quot;tomcat-valves&quot;&gt;TOMCAT VALVES&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A Valve element represents a component that will be inserted into the request processing pipeline for the associated Catalina container (Engine, Host, or Context).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Know More: &lt;a href=&quot;https://tomcat.apache.org/tomcat-7.0-doc/config/valve.html#Introduction&quot;&gt;Tomcat Valves&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Tomcat binaries on App Services are present in a read-only location, like: D:\Program Files\apache-tomcat-8.5.58. So, changing the configurations directly is not possible. However, you could follow the steps below to customize the configurations:&lt;/p&gt;
+
+&lt;h4 id=&quot;steps&quot;&gt;STEPS&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Go to the Kudu site of the WebApp: https://«webappname».scm.azurewebsites.net/DebugConsole&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the following commands:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;D:&lt;span class=&quot;se&quot;&gt;\h&lt;/span&gt;ome&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;omcat&lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;D:&lt;span class=&quot;se&quot;&gt;\h&lt;/span&gt;ome&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;omcat
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;D:&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\P&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;rogram Files&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\a&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;pache-tomcat-8.5.58&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\c&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;onf&quot;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add the following Valve in server.xml under D:\home\tomcat\conf -&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;Valve&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;className=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.catalina.valves.ErrorReportValve&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;showReport=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;showServerInfo=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It can be added in the following Host element:
+[Keep the other elemnts as is]&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;...
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;Host&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;appBase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.appbase}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlBase=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.xmlbase}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;unpackWARs=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.unpackwars}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;workDir=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.tempdir}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;localhost&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;autoDeploy=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- SingleSignOn valve, share authentication between web applications
+    Documentation at: /docs/config/valve.html --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!--
+&amp;lt;Valve className=&quot;org.apache.catalina.authenticator.SingleSignOn&quot; /&amp;gt;
+--&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Access log processes all example.
+    Documentation at: /docs/config/valve.html
+    Note: The pattern used is equivalent to using pattern=&quot;common&quot; --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Valve&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;prefix=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;site_access_log.${catalina.instance.name}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;pattern=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%h %l %u %t &amp;amp;quot;%r&amp;amp;quot; %s %b %D %{x-arr-log-id}i&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;directory=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${site.logdir}/http/RawLogs&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;className=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.catalina.valves.AccessLogValve&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;suffix=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.txt&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Valve&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;className=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.catalina.valves.ErrorReportValve&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;showReport=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;showServerInfo=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/Host&amp;gt;&lt;/span&gt;
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now just restart the WebApp and you should not see the Tomcat Server version anymore.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/tomcat-404-hidden.jpg&quot; alt=&quot;Tomcat-404-hidden&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;note&quot;&gt;NOTE&lt;/h4&gt;
+
+&lt;p&gt;The recommended way to modify Tomcat Configuration files is by using XSLT, which is documented &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/configure-language-java?pivots=platform-windows#transforms&quot;&gt;HERE&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;That’s All! :v:&lt;/p&gt;</content><author><name></name></author><summary type="html">Hide Tomcat Server Information on Azure App Service</summary></entry><entry><title type="html">Log Originating Client IP on Linux App Service (Tomcat)</title><link href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" rel="alternate" type="text/html" title="Log Originating Client IP on Linux App Service (Tomcat)" /><published>2021-09-25T00:39:00+05:30</published><updated>2021-09-25T00:39:00+05:30</updated><id>/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat</id><content type="html" xml:base="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html">&lt;h3 id=&quot;log-originating-client-ip-on-linux-app-service-tomcat&quot;&gt;Log Originating Client IP on Linux App Service (Tomcat)&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used.&lt;/p&gt;
@@ -567,37 +634,4 @@ cp -a /usr/local/tomcat/conf /home/tomcat/conf
 
 &lt;p&gt;That’s all. :v:&lt;/p&gt;
 
-&lt;p&gt;You should be able to access Tomcat Manager app via webappname.azurewebsites.net/manager URL. Use the username/password configured in the previous steps to login.&lt;/p&gt;</content><author><name></name></author><category term="tomcat" /><category term="azure_webapp" /><summary type="html">Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use wardeploy API.</summary></entry><entry><title type="html">Download files from Azure Linux WebApp using pscp</title><link href="/azure_webapp/pscp/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" rel="alternate" type="text/html" title="Download files from Azure Linux WebApp using pscp" /><published>2020-06-01T20:06:00+05:30</published><updated>2020-06-01T20:06:00+05:30</updated><id>/azure_webapp/pscp/2020/06/01/download-files-from-azure-linux-webapp-using-pscp</id><content type="html" xml:base="/azure_webapp/pscp/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html">&lt;p&gt;There are multiple ways of downloading files from Azure WebApps, some of which include:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/deploy-ftp&quot;&gt;FTP&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/projectkudu/kudu/wiki/REST-API#vfs&quot;&gt;Kudu VFS API&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;There is another way, which does not require you to login to the Azure Portal, and it can be used for any Docker container which has SSH enabled.&lt;/p&gt;
-
-&lt;p&gt;:notebook_with_decorative_cover: Refer to the following documentation on how to configure SSH: &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/containers/configure-custom-container#enable-ssh&quot;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;:exclamation: &lt;strong&gt;NOTE:&lt;/strong&gt; The documentation contains an example, and the actual commands/configurations would also depend on the base image being used in the Dockerfile.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Here is how you can use pscp to copy files to a WebApp for Containers (Linux) on Azure:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Create a remote connection using a tcp tunnel to your web app:&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;az webapp create-remote-connection -g RESOURCE_GROUP -n APP_NAME -p 2222&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Then copy the required files using pscp:
-[ &lt;a href=&quot;https://www.ssh.com/ssh/putty/putty-manuals/0.68/Chapter5.html&quot;&gt;PSCP&lt;/a&gt; is part of the PuTTY tool suite for Windows ]&lt;br /&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pscp -P 2222 root@localhost:/home/test.log .&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;:exclamation: &lt;strong&gt;NOTE:&lt;/strong&gt; You would need to provide the root password here. This is usually set using the following directive:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RUN echo &quot;root:Docker!&quot; | chpasswd&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;That’s it! :v:&lt;/p&gt;</content><author><name></name></author><category term="azure_webapp" /><category term="pscp" /><summary type="html">There are multiple ways of downloading files from Azure WebApps, some of which include:</summary></entry></feed>
+&lt;p&gt;You should be able to access Tomcat Manager app via webappname.azurewebsites.net/manager URL. Use the username/password configured in the previous steps to login.&lt;/p&gt;</content><author><name></name></author><category term="tomcat" /><category term="azure_webapp" /><summary type="html">Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use wardeploy API.</summary></entry></feed>
