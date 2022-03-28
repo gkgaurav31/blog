@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"></meta><!-- Begin Jekyll SEO tag v2.7.1 -->
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c"><!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>curl &lt;3 | Gaurav’s GitHub Pages!</title>
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="curl &lt;3" />
@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="curl &lt;3" />
 <script type="application/ld+json">
-{"url":"/2021/03/26/curl-3.html","headline":"curl &lt;3","dateModified":"2021-03-26T22:35:00+05:30","datePublished":"2021-03-26T22:35:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/03/26/curl-3.html"},"description":"One of the most useful command line tools which I have come across is CURL. :heart:","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"dateModified":"2021-03-26T22:35:00+05:30","datePublished":"2021-03-26T22:35:00+05:30","url":"/2021/03/26/curl-3.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/03/26/curl-3.html"},"headline":"curl &lt;3","description":"One of the most useful command line tools which I have come across is CURL. :heart:","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -708,6 +708,34 @@ Connection: keep-alive
 <pre><code class="language-curl">curl -I https://www.wikipedia.org?[1-100]
 </code></pre>
 
+<ul>
+  <li>You can measure the time taken for the server to respond using cURL:</li>
+</ul>
+
+<pre><code class="language-curl">curl -s -o /dev/null -w  "%{time_total}\n" https://bing.com
+</code></pre>
+
+<p>To look at the break-down of the total time using cURL, you can use this:</p>
+
+<p>1.Create a file named curl-format.txt and add the following contents:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  time_namelookup:  %{time_namelookup}s\n
+  time_connect:  %{time_connect}s\n
+  time_appconnect:  %{time_appconnect}s\n
+  time_pretransfer:  %{time_pretransfer}s\n
+  time_redirect:  %{time_redirect}s\n
+  time_starttransfer:  %{time_starttransfer}s\n
+          ----------\n
+  time_total:  %{time_total}s\n
+</code></pre></div></div>
+
+<p>2.Make a request:</p>
+
+<pre><code class="language-curl">curl -w "@curl-format.txt" -o /dev/null -s "http://wordpress.com/"
+</code></pre>
+
+<p><a href="https://stackoverflow.com/a/22625150">REFERENCE</a></p>
+
 
     </div>
 
@@ -718,10 +746,10 @@ Connection: keep-alive
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="Using opencv-python on Linux App Service">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li>
-<li><a class="post-link" href="/ioncube/php/azure_webapp/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="Using opencv-python on Linux App Service">Configure IonCube Loader - PHP Linux App Service</a></li>
-<li><a class="post-link" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="Using opencv-python on Linux App Service">Stop and remove all Docker containers at once</a></li>
-<li><a class="post-link" href="/java/dump/azure_webapp/2019/11/10/collecting-thread-dump-on-azure-webapp.html" title="Using opencv-python on Linux App Service">Collecting Thread Dump on Azure WebApp</a></li>
+        <li><a class="post-link" href="/first/" title="Using opencv-python on Linux App Service">First Blog Post!</a></li>
+<li><a class="post-link" href="/java/azure_webapp/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Using opencv-python on Linux App Service">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li>
+<li><a class="post-link" href="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html" title="Using opencv-python on Linux App Service">Using Java Flight Recorder</a></li>
+<li><a class="post-link" href="/2021/04/01/enable-trace-logs-java-function-app.html" title="Using opencv-python on Linux App Service">Enable trace logs - Java Function App</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>
@@ -863,7 +891,7 @@ Connection: keep-alive
     <div class="site-footer-inner">
 <div></div>
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
-      generator." href="http://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
       <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
 </div>

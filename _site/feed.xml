@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2021-09-30T17:36:38+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Hide Tomcat Server Information on Azure App Service</title><link href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" rel="alternate" type="text/html" title="Hide Tomcat Server Information on Azure App Service" /><published>2021-09-30T17:10:00+05:30</published><updated>2021-09-30T17:10:00+05:30</updated><id>/2021/09/30/hide-tomcat-server-information-on-azure-app-service</id><content type="html" xml:base="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html">&lt;h3 id=&quot;hide-tomcat-server-information-on-azure-app-service&quot;&gt;Hide Tomcat Server Information on Azure App Service&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-03-28T16:59:07+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Hide Tomcat Server Information on Azure App Service</title><link href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" rel="alternate" type="text/html" title="Hide Tomcat Server Information on Azure App Service" /><published>2021-09-30T17:10:00+05:30</published><updated>2021-09-30T17:10:00+05:30</updated><id>/2021/09/30/hide-tomcat-server-information-on-azure-app-service</id><content type="html" xml:base="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html">&lt;h3 id=&quot;hide-tomcat-server-information-on-azure-app-service&quot;&gt;Hide Tomcat Server Information on Azure App Service&lt;/h3&gt;
 
 &lt;p&gt;The default error page of Tomcat shows the Tomcat version:
 &lt;img src=&quot;/assets/tomcat-404.jpg&quot; alt=&quot;Tomcat-404&quot; /&gt;&lt;/p&gt;
@@ -450,7 +450,35 @@ Connection: keep-alive
 &lt;/ul&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-curl&quot;&gt;curl -I https://www.wikipedia.org?[1-100]
-&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">One of the most useful command line tools which I have come across is CURL. :heart:</summary></entry><entry><title type="html">Detect Tomcat Version change on Azure App Service when using Auto-Update… and more</title><link href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" rel="alternate" type="text/html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update… and more" /><published>2021-03-26T22:08:00+05:30</published><updated>2021-03-26T22:08:00+05:30</updated><id>/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more</id><content type="html" xml:base="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html">&lt;p&gt;When using &lt;strong&gt;Auto-Update&lt;/strong&gt; for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official &lt;a href=&quot;https://github.com/Azure/app-service-announcements/issues&quot;&gt;announcement page&lt;/a&gt; for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You can measure the time taken for the server to respond using cURL:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-curl&quot;&gt;curl -s -o /dev/null -w  &quot;%{time_total}\n&quot; https://bing.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To look at the break-down of the total time using cURL, you can use this:&lt;/p&gt;
+
+&lt;p&gt;1.Create a file named curl-format.txt and add the following contents:&lt;/p&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  time_namelookup:  %{time_namelookup}s\n
+  time_connect:  %{time_connect}s\n
+  time_appconnect:  %{time_appconnect}s\n
+  time_pretransfer:  %{time_pretransfer}s\n
+  time_redirect:  %{time_redirect}s\n
+  time_starttransfer:  %{time_starttransfer}s\n
+          ----------\n
+  time_total:  %{time_total}s\n
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;2.Make a request:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-curl&quot;&gt;curl -w &quot;@curl-format.txt&quot; -o /dev/null -s &quot;http://wordpress.com/&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/a/22625150&quot;&gt;REFERENCE&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">One of the most useful command line tools which I have come across is CURL. :heart:</summary></entry><entry><title type="html">Detect Tomcat Version change on Azure App Service when using Auto-Update… and more</title><link href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" rel="alternate" type="text/html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update… and more" /><published>2021-03-26T22:08:00+05:30</published><updated>2021-03-26T22:08:00+05:30</updated><id>/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more</id><content type="html" xml:base="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html">&lt;p&gt;When using &lt;strong&gt;Auto-Update&lt;/strong&gt; for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official &lt;a href=&quot;https://github.com/Azure/app-service-announcements/issues&quot;&gt;announcement page&lt;/a&gt; for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.&lt;/p&gt;
 
 &lt;p&gt;Using &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/app-service/web-sites-monitor#alerts-and-autoscale&quot;&gt;Alerts&lt;/a&gt; on Azure App Service, you could setup an action to execute an Azure Function, Azure Logic App, Azure Automation etc. When there is a configuration change, the WebApp also restarts. Using these two data points, we could create an alert for &lt;strong&gt;“When the WebApp restarts, run Azure Automation to check the current Tomcat version and see if it has changed. Notify if it did.”&lt;/strong&gt;&lt;/p&gt;
 
