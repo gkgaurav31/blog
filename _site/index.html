@@ -608,6 +608,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -623,6 +641,104 @@ document.addEventListener('DOMContentLoaded', function(event) {
   <div class="pagination">
   <!-- Post list links -->
   <ul class="post-list">
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/2022/06/25/download-torrents-in-raspberry-pi-transmission.html">
+          Download Torrents in Raspberry Pi - Transmission
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jun 25, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/2022/06/25/download-torrents-in-raspberry-pi-transmission.html">
+        <p>
+        Download Torrents in Raspberry Pi using Transmission
+
+INSTALLATION &amp; CONFIGURATION
+
+
+  
+    sudo apt install transmission-daemon
+  
+  
+    sudo systemctl start transmission-daemon
+  
+  
+    sudo systemctl enable transmission-daemon
+(auto-start on reboot)
+  
+  
+    sudo nano /etc/transmission-daemon/settings.json
+  
+  
+    allow your IP addre... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"></div>
+    </li>
 <li>
       
 
@@ -2883,7 +2999,7 @@ How to get the access token
   <ul>
     <li>
       <a href="/index.html">
-        All<span>26</span>
+        All<span>27</span>
       </a>
     </li>
 

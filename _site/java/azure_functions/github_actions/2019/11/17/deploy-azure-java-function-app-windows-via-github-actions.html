@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Deploy Azure Java Function App (Windows) via GitHub Actions" />
 <script type="application/ld+json">
-{"dateModified":"2019-11-17T02:32:00+05:30","datePublished":"2019-11-17T02:32:00+05:30","url":"/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html","mainEntityOfPage":{"@type":"WebPage","@id":"/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html"},"headline":"Deploy Azure Java Function App (Windows) via GitHub Actions","description":"Deploy a Java Function App on Azure using GitHub Actions: Create a Java Function App. (You can create it from the Azure Portal)","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html","headline":"Deploy Azure Java Function App (Windows) via GitHub Actions","dateModified":"2019-11-17T02:32:00+05:30","datePublished":"2019-11-17T02:32:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html"},"description":"Deploy a Java Function App on Azure using GitHub Actions: Create a Java Function App. (You can create it from the Azure Portal)","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -643,6 +643,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -777,7 +795,7 @@ You can use the following YAML sample:<br />
 <div class="post-nav"><a class="previous" href="/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html" title="Deploy NodeJS WebApp via GitHub Actions">Deploy NodeJS WebApp via GitHub Actions...</a><a class="next" href="/webappspringboot" title="Deploy Spring Boot Application On Azure WebApp via ZipDeploy">Deploy Spring Boot Application On Azure...</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" title="Deploy Spring Boot Application On Azure WebApp via ZipDeploy">Hide Tomcat Server Information on Azure App Service</a></li><li><a class="post-link" href="/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="Deploy Spring Boot Application On Azure WebApp via ZipDeploy">Custom JRE/JDK on Azure App Service - Windows</a></li><li><a class="post-link" href="/sql/azure_webapp/php/msi/2019/11/10/webapp-php-msi-sql.html" title="Deploy Spring Boot Application On Azure WebApp via ZipDeploy">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li><li><a class="post-link" href="/azure_webapp/pscp/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" title="Deploy Spring Boot Application On Azure WebApp via ZipDeploy">Download files from Azure Linux WebApp using pscp</a></li></ul>
+        <li><a class="post-link" href="/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html" title="Deploy Spring Boot Application On Azure WebApp via ZipDeploy">Deploy NodeJS WebApp via GitHub Actions</a></li><li><a class="post-link" href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="Deploy Spring Boot Application On Azure WebApp via ZipDeploy">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li><li><a class="post-link" href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" title="Deploy Spring Boot Application On Azure WebApp via ZipDeploy">Hide Tomcat Server Information on Azure App Service</a></li><li><a class="post-link" href="/dbcp/azure_webapp/mysql/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" title="Deploy Spring Boot Application On Azure WebApp via ZipDeploy">DBCP on Azure App Service Linux (MySQL)</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 

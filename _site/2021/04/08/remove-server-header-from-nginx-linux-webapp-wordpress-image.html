@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)" />
 <script type="application/ld+json">
-{"dateModified":"2021-04-08T18:32:00+05:30","datePublished":"2021-04-08T18:32:00+05:30","url":"/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html"},"headline":"Remove Server Header from Nginx (Linux WebApp - Wordpress Image)","description":"The Docker Image appsvcorg/wordpress-alpine-php:0.72 for WordPress uses Nginx. In order to remove the Server header of Nginx, you can follow the below steps:","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html","headline":"Remove Server Header from Nginx (Linux WebApp - Wordpress Image)","dateModified":"2021-04-08T18:32:00+05:30","datePublished":"2021-04-08T18:32:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html"},"description":"The Docker Image appsvcorg/wordpress-alpine-php:0.72 for WordPress uses Nginx. In order to remove the Server header of Nginx, you can follow the below steps:","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -648,6 +648,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -745,10 +763,10 @@ X-Content-Type-Options: nosniff
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html" title="Using Minikube on Linux (Ubuntu)">Deploy NodeJS WebApp via GitHub Actions</a></li>
+        <li><a class="post-link" href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" title="Using Minikube on Linux (Ubuntu)">Hide Tomcat Server Information on Azure App Service</a></li>
+<li><a class="post-link" href="/sql/azure_webapp/php/msi/2019/11/10/webapp-php-msi-sql.html" title="Using Minikube on Linux (Ubuntu)">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li>
+<li><a class="post-link" href="/2022/06/25/download-torrents-in-raspberry-pi-transmission.html" title="Using Minikube on Linux (Ubuntu)">Download Torrents in Raspberry Pi - Transmission</a></li>
 <li><a class="post-link" href="/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="Using Minikube on Linux (Ubuntu)">Enable Tomcat Manager app on Linux WebApp on Azure</a></li>
-<li><a class="post-link" href="/2021/06/29/using-minikube-on-linux-ubuntu.html" title="Using Minikube on Linux (Ubuntu)">Using Minikube on Linux (Ubuntu)</a></li>
-<li><a class="post-link" href="/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html" title="Using Minikube on Linux (Ubuntu)">Using opencv-python on Linux App Service</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

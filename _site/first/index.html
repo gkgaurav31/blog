@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="First Blog Post!" />
 <script type="application/ld+json">
-{"dateModified":"2019-11-10T02:27:00+05:30","datePublished":"2019-11-10T02:27:00+05:30","url":"/first/","mainEntityOfPage":{"@type":"WebPage","@id":"/first/"},"headline":"First Blog Post!","description":"This is my first blog post.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/first/","headline":"First Blog Post!","dateModified":"2019-11-10T02:27:00+05:30","datePublished":"2019-11-10T02:27:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/first/"},"description":"This is my first blog post.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -643,6 +643,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -672,7 +690,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-nav"><span></span><a class="next" href="/sql/azure_webapp/php/msi/2019/11/10/webapp-php-msi-sql.html" title="Access Azure SQL Database using Managed Identity - PHP WebApp">Access Azure SQL Database using Managed...</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/java/dump/azure_webapp/2019/11/10/collecting-thread-dump-on-azure-webapp.html" title="Access Azure SQL Database using Managed Identity - PHP WebApp">Collecting Thread Dump on Azure WebApp</a></li><li><a class="post-link" href="/sql/azure_webapp/php/msi/2019/11/10/webapp-php-msi-sql.html" title="Access Azure SQL Database using Managed Identity - PHP WebApp">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li><li><a class="post-link" href="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html" title="Access Azure SQL Database using Managed Identity - PHP WebApp">Using Java Flight Recorder</a></li><li><a class="post-link" href="/2021/03/26/curl-3.html" title="Access Azure SQL Database using Managed Identity - PHP WebApp">curl &lt;3</a></li></ul>
+        <li><a class="post-link" href="/dbcp/azure_webapp/mysql/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" title="Access Azure SQL Database using Managed Identity - PHP WebApp">DBCP on Azure App Service Linux (MySQL)</a></li><li><a class="post-link" href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="Access Azure SQL Database using Managed Identity - PHP WebApp">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li><li><a class="post-link" href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" title="Access Azure SQL Database using Managed Identity - PHP WebApp">Hide Tomcat Server Information on Azure App Service</a></li><li><a class="post-link" href="/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" title="Access Azure SQL Database using Managed Identity - PHP WebApp">Enable Tomcat Manager app on Linux WebApp on Azure</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 

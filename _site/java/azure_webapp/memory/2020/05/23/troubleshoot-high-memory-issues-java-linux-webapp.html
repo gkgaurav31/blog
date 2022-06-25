@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Troubleshoot High Memory Issues - Java Linux WebApp" />
 <script type="application/ld+json">
-{"dateModified":"2020-05-23T01:40:00+05:30","datePublished":"2020-05-23T01:40:00+05:30","url":"/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html","mainEntityOfPage":{"@type":"WebPage","@id":"/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html"},"headline":"Troubleshoot High Memory Issues - Java Linux WebApp","description":"There are different ways of dealing with Memory Issues. In this blog, I would like to share some steps you can take in order to find what could be causing memory leak.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html","headline":"Troubleshoot High Memory Issues - Java Linux WebApp","dateModified":"2020-05-23T01:40:00+05:30","datePublished":"2020-05-23T01:40:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html"},"description":"There are different ways of dealing with Memory Issues. In this blog, I would like to share some steps you can take in order to find what could be causing memory leak.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -643,6 +643,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -730,7 +748,7 @@ Analyze memory dump using jhat: <a href="https://docs.oracle.com/javase/8/docs/t
 <div class="post-nav"><a class="previous" href="/java/crash/azure_webapp/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html" title="Troubleshoot - JVM Crash - Azure WebApp - Linux">Troubleshoot - JVM Crash - Azure...</a><a class="next" href="/java/jfr/performance/2020/05/23/using-java-flight-recorder.html" title="Using Java Flight Recorder">Using Java Flight Recorder</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Using Java Flight Recorder">Troubleshoot High Memory Issues - Java Linux WebApp</a></li><li><a class="post-link" href="/sql/azure_webapp/php/msi/2019/11/10/webapp-php-msi-sql.html" title="Using Java Flight Recorder">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li><li><a class="post-link" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="Using Java Flight Recorder">Stop and remove all Docker containers at once</a></li><li><a class="post-link" href="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html" title="Using Java Flight Recorder">Remove Server Header from Nginx (Linux WebApp - Wordpress Image)</a></li></ul>
+        <li><a class="post-link" href="/java/crash/azure_webapp/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html" title="Using Java Flight Recorder">Troubleshoot - JVM Crash - Azure WebApp - Linux</a></li><li><a class="post-link" href="/sql/azure_webapp/php/msi/2019/11/10/webapp-php-msi-sql.html" title="Using Java Flight Recorder">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li><li><a class="post-link" href="/2022/06/25/download-torrents-in-raspberry-pi-transmission.html" title="Using Java Flight Recorder">Download Torrents in Raspberry Pi - Transmission</a></li><li><a class="post-link" href="/2021/03/26/curl-3.html" title="Using Java Flight Recorder">curl &lt;3</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 

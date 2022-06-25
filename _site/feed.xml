@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-03-28T16:59:07+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Hide Tomcat Server Information on Azure App Service</title><link href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" rel="alternate" type="text/html" title="Hide Tomcat Server Information on Azure App Service" /><published>2021-09-30T17:10:00+05:30</published><updated>2021-09-30T17:10:00+05:30</updated><id>/2021/09/30/hide-tomcat-server-information-on-azure-app-service</id><content type="html" xml:base="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html">&lt;h3 id=&quot;hide-tomcat-server-information-on-azure-app-service&quot;&gt;Hide Tomcat Server Information on Azure App Service&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-06-25T15:03:22+05:30</updated><id>/feed.xml</id><title type="html">Gaurav’s GitHub Pages!</title><subtitle>Just another blog. </subtitle><entry><title type="html">Download Torrents in Raspberry Pi - Transmission</title><link href="/2022/06/25/download-torrents-in-raspberry-pi-transmission.html" rel="alternate" type="text/html" title="Download Torrents in Raspberry Pi - Transmission" /><published>2022-06-25T14:59:00+05:30</published><updated>2022-06-25T14:59:00+05:30</updated><id>/2022/06/25/download-torrents-in-raspberry-pi-transmission</id><content type="html" xml:base="/2022/06/25/download-torrents-in-raspberry-pi-transmission.html">&lt;h2 id=&quot;download-torrents-in-raspberry-pi-using-transmission&quot;&gt;Download Torrents in Raspberry Pi using Transmission&lt;/h2&gt;
+
+&lt;h3 id=&quot;installation--configuration&quot;&gt;INSTALLATION &amp;amp; CONFIGURATION&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;sudo apt install transmission-daemon&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;sudo systemctl start transmission-daemon&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;sudo systemctl enable transmission-daemon
+(auto-start on reboot)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;sudo nano /etc/transmission-daemon/settings.json&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;allow your IP address:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;rpc-whitelist&quot;: &quot;127.0.0.1,192.168.0.*&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Access the UI:
+http://&lt;your local=&quot;&quot; IP=&quot;&quot; address=&quot;&quot;&gt;:9091&lt;/your&gt;&lt;/p&gt;
+
+&lt;p&gt;Default username/password: transmission/transmission&lt;/p&gt;
+
+&lt;p&gt;That’s it. :v:&lt;/p&gt;</content><author><name></name></author><summary type="html">Download Torrents in Raspberry Pi using Transmission</summary></entry><entry><title type="html">Hide Tomcat Server Information on Azure App Service</title><link href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" rel="alternate" type="text/html" title="Hide Tomcat Server Information on Azure App Service" /><published>2021-09-30T17:10:00+05:30</published><updated>2021-09-30T17:10:00+05:30</updated><id>/2021/09/30/hide-tomcat-server-information-on-azure-app-service</id><content type="html" xml:base="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html">&lt;h3 id=&quot;hide-tomcat-server-information-on-azure-app-service&quot;&gt;Hide Tomcat Server Information on Azure App Service&lt;/h3&gt;
 
 &lt;p&gt;The default error page of Tomcat shows the Tomcat version:
 &lt;img src=&quot;/assets/tomcat-404.jpg&quot; alt=&quot;Tomcat-404&quot; /&gt;&lt;/p&gt;
@@ -617,49 +648,4 @@ mysql-connector-java-8.0.21.jar
 &lt;span class=&quot;n&quot;&gt;FLUSH&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PRIVILEGES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;That’s all. :v:&lt;/p&gt;</content><author><name></name></author><category term="dbcp" /><category term="azure_webapp" /><category term="mysql" /><summary type="html">Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally.</summary></entry><entry><title type="html">Enable Tomcat Manager app on Linux WebApp on Azure</title><link href="/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html" rel="alternate" type="text/html" title="Enable Tomcat Manager app on Linux WebApp on Azure" /><published>2020-07-16T15:20:00+05:30</published><updated>2020-07-16T15:20:00+05:30</updated><id>/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure</id><content type="html" xml:base="/tomcat/azure_webapp/2020/07/16/enable-tomcat-manager-app-on-linux-webapp-on-azure.html">&lt;p&gt;Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use &lt;a href=&quot;https://github.com/projectkudu/kudu/wiki/Deploying-WAR-files-using-wardeploy#why-wardeploy&quot;&gt;wardeploy API&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;steps&quot;&gt;STEPS&lt;/h4&gt;
-
-&lt;h5 id=&quot;upload-manager-app&quot;&gt;Upload manager app&lt;/h5&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Copy the manager application from your local system to the WebApp’s /home/site/wwwroot/webapps directory&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Manager app has a configuration that restricts access only to &lt;strong&gt;&lt;em&gt;localhost&lt;/em&gt;&lt;/strong&gt;. We can remove that restriction by removing the following configuration from context.xml of the manager application:&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;allow-access-from-any-ip&quot;&gt;Allow access from any IP&lt;/h5&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;Valve&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;className=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.apache.catalina.valves.RemoteAddrValve&quot;&lt;/span&gt;
-         &lt;span class=&quot;na&quot;&gt;allow=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;copy-tomcat-to-home&quot;&gt;Copy Tomcat to /home&lt;/h5&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;We would also need to add a user under Tomcat’s conf/tomcat-users.xml file. Since the files under only /home persist on a Linux WebApp, we can create a copy of Tomcat’s configuration under /home. The container has the logic to use Tomcat under /home is present:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;mkdir -p /home/tomcat
-cp -a /usr/local/tomcat/conf /home/tomcat/conf
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h5 id=&quot;add-a-user-for-tomcat-manager&quot;&gt;Add a user for Tomcat Manager&lt;/h5&gt;
-
-&lt;p&gt;Edit the tomcat-users.xml file under /home/tomcat/conf and add the following:&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;lt;role&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rolename=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;manager-gui&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;role&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rolename=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;manager-script&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;user&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;username=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tomcatgui&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;password=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;s3cret&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;roles=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;manager-gui&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;user&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;username=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tomcattext&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;password=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mypassword&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;roles=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;manager-script&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;restart-the-webapp&quot;&gt;Restart the WebApp&lt;/h5&gt;
-
-&lt;p&gt;That’s all. :v:&lt;/p&gt;
-
-&lt;p&gt;You should be able to access Tomcat Manager app via webappname.azurewebsites.net/manager URL. Use the username/password configured in the previous steps to login.&lt;/p&gt;</content><author><name></name></author><category term="tomcat" /><category term="azure_webapp" /><summary type="html">Tomcat Manager application is a simple way to deploy WAR files on Tomcat Server. Although, the default Linux WebApp which uses the Tomcat image does not have the manager app pre-installed, we can do it using the steps metioned in this blog. It should be okay to use the Manager App when running on a single instance. However, it is recommended to use wardeploy API.</summary></entry></feed>
+&lt;p&gt;That’s all. :v:&lt;/p&gt;</content><author><name></name></author><category term="dbcp" /><category term="azure_webapp" /><category term="mysql" /><summary type="html">Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally.</summary></entry></feed>

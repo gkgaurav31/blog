@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Hide Tomcat Server Information on Azure App Service" />
 <script type="application/ld+json">
-{"dateModified":"2021-09-30T17:10:00+05:30","datePublished":"2021-09-30T17:10:00+05:30","url":"/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html"},"headline":"Hide Tomcat Server Information on Azure App Service","description":"Hide Tomcat Server Information on Azure App Service","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html","headline":"Hide Tomcat Server Information on Azure App Service","dateModified":"2021-09-30T17:10:00+05:30","datePublished":"2021-09-30T17:10:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html"},"description":"Hide Tomcat Server Information on Azure App Service","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -648,6 +648,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -743,15 +761,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" title="Log Originating Client IP on Linux App Service (Tomcat)">Log Originating Client IP on Linux...</a><span></span>
+<a class="previous" href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" title="Log Originating Client IP on Linux App Service (Tomcat)">Log Originating Client IP on Linux...</a><a class="next" href="/2022/06/25/download-torrents-in-raspberry-pi-transmission.html" title="Download Torrents in Raspberry Pi - Transmission">Download Torrents in Raspberry Pi -...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="">Troubleshoot High Memory Issues - Java Linux WebApp</a></li>
-<li><a class="post-link" href="/java/azure_webapp/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li>
-<li><a class="post-link" href="/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="">Deploy Azure Java Function App (Windows) via GitHub Actions</a></li>
-<li><a class="post-link" href="/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html" title="">Deploy NodeJS WebApp via GitHub Actions</a></li>
+        <li><a class="post-link" href="/java/azure_webapp/2020/05/21/troubleshoot-high-cpu-java-azure-webapp.html" title="Download Torrents in Raspberry Pi - Transmission">Troubleshoot High CPU - Java - Azure WebApp - Linux</a></li>
+<li><a class="post-link" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Download Torrents in Raspberry Pi - Transmission">Troubleshoot High Memory Issues - Java Linux WebApp</a></li>
+<li><a class="post-link" href="/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="Download Torrents in Raspberry Pi - Transmission">Custom JRE/JDK on Azure App Service - Windows</a></li>
+<li><a class="post-link" href="/2021/03/26/curl-3.html" title="Download Torrents in Raspberry Pi - Transmission">curl &lt;3</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

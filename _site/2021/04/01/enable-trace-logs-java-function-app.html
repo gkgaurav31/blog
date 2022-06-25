@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Enable trace logs - Java Function App" />
 <script type="application/ld+json">
-{"dateModified":"2021-04-01T22:28:00+05:30","datePublished":"2021-04-01T22:28:00+05:30","url":"/2021/04/01/enable-trace-logs-java-function-app.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/04/01/enable-trace-logs-java-function-app.html"},"headline":"Enable trace logs - Java Function App","description":"Enable trace logs - Java Function App","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/2021/04/01/enable-trace-logs-java-function-app.html","headline":"Enable trace logs - Java Function App","dateModified":"2021-04-01T22:28:00+05:30","datePublished":"2021-04-01T22:28:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/04/01/enable-trace-logs-java-function-app.html"},"description":"Enable trace logs - Java Function App","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -648,6 +648,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -712,10 +730,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/java/crash/azure_webapp/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)">Troubleshoot - JVM Crash - Azure WebApp - Linux</a></li>
-<li><a class="post-link" href="/2019/11/10/stop-and-remove-all-docker-container-at-once.html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)">Stop and remove all Docker containers at once</a></li>
-<li><a class="post-link" href="/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)">Deploy Azure Java Function App (Windows) via GitHub Actions</a></li>
-<li><a class="post-link" href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)">Log Originating Client IP on Linux App Service (Tomcat)</a></li>
+        <li><a class="post-link" href="/2021/03/26/curl-3.html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)">curl &lt;3</a></li>
+<li><a class="post-link" href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li>
+<li><a class="post-link" href="/java/crash/azure_webapp/2020/05/22/troubleshoot-jvm-crash-azure-webapp-linux.html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)">Troubleshoot - JVM Crash - Azure WebApp - Linux</a></li>
+<li><a class="post-link" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Remove Server Header from Nginx (Linux WebApp - Wordpress Image)">Troubleshoot High Memory Issues - Java Linux WebApp</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

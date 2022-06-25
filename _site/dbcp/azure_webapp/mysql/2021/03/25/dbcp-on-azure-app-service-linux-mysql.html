@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="DBCP on Azure App Service Linux (MySQL)" />
 <script type="application/ld+json">
-{"dateModified":"2021-03-25T18:15:00+05:30","datePublished":"2021-03-25T18:15:00+05:30","url":"/dbcp/azure_webapp/mysql/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html","mainEntityOfPage":{"@type":"WebPage","@id":"/dbcp/azure_webapp/mysql/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html"},"headline":"DBCP on Azure App Service Linux (MySQL)","description":"Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/dbcp/azure_webapp/mysql/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html","headline":"DBCP on Azure App Service Linux (MySQL)","dateModified":"2021-03-25T18:15:00+05:30","datePublished":"2021-03-25T18:15:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/dbcp/azure_webapp/mysql/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html"},"description":"Many Apache projects support interaction with a relational database. Creating a new connection for each user can be time consuming (often requiring multiple seconds of clock time), in order to perform a database transaction that might take milliseconds. Opening a connection per user can be unfeasible in a publicly-hosted Internet application where the number of simultaneous users can be very large. Accordingly, developers often wish to share a “pool” of open connections between all of the application’s current users. The number of users actually performing a request at any given time is usually a very small percentage of the total number of active users, and during request processing is the only time that a database connection is required. The application itself logs into the DBMS, and handles any user account issues internally.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -648,6 +648,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -754,10 +772,10 @@ mysql-connector-java-8.0.21.jar
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2019/11/10/create-a-post-in-jekyll-from-command-line.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Create a post in Jekyll via command line</a></li>
-<li><a class="post-link" href="/2021/06/29/using-minikube-on-linux-ubuntu.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Using Minikube on Linux (Ubuntu)</a></li>
-<li><a class="post-link" href="/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Deploy Azure Java Function App (Windows) via GitHub Actions</a></li>
-<li><a class="post-link" href="/dbcp/azure_webapp/mysql/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">DBCP on Azure App Service Linux (MySQL)</a></li>
+        <li><a class="post-link" href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Hide Tomcat Server Information on Azure App Service</a></li>
+<li><a class="post-link" href="/sql/azure_webapp/php/msi/2019/11/10/webapp-php-msi-sql.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Access Azure SQL Database using Managed Identity - PHP WebApp</a></li>
+<li><a class="post-link" href="/java/dump/azure_webapp/2019/11/10/collecting-thread-dump-on-azure-webapp.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Collecting Thread Dump on Azure WebApp</a></li>
+<li><a class="post-link" href="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html" title="Detect Tomcat Version change on Azure App Service when using Auto-Update... and more">Remove Server Header from Nginx (Linux WebApp - Wordpress Image)</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

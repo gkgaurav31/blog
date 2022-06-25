@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Using Java Flight Recorder" />
 <script type="application/ld+json">
-{"dateModified":"2020-05-23T02:46:00+05:30","datePublished":"2020-05-23T02:46:00+05:30","url":"/java/jfr/performance/2020/05/23/using-java-flight-recorder.html","mainEntityOfPage":{"@type":"WebPage","@id":"/java/jfr/performance/2020/05/23/using-java-flight-recorder.html"},"headline":"Using Java Flight Recorder","description":"You can now use Java Flight Recorder on Azure App Services - Linux!","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/java/jfr/performance/2020/05/23/using-java-flight-recorder.html","headline":"Using Java Flight Recorder","dateModified":"2020-05-23T02:46:00+05:30","datePublished":"2020-05-23T02:46:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/java/jfr/performance/2020/05/23/using-java-flight-recorder.html"},"description":"You can now use Java Flight Recorder on Azure App Services - Linux!","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -643,6 +643,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -752,7 +770,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-nav"><a class="previous" href="/java/azure_webapp/memory/2020/05/23/troubleshoot-high-memory-issues-java-linux-webapp.html" title="Troubleshoot High Memory Issues - Java Linux WebApp">Troubleshoot High Memory Issues - Java...</a><a class="next" href="/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="Custom JRE/JDK on Azure App Service - Windows">Custom JRE/JDK on Azure App Service...</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/azure_webapp/pscp/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" title="Custom JRE/JDK on Azure App Service - Windows">Download files from Azure Linux WebApp using pscp</a></li><li><a class="post-link" href="/webappspringboot" title="Custom JRE/JDK on Azure App Service - Windows">Deploy Spring Boot Application On Azure WebApp via ZipDeploy</a></li><li><a class="post-link" href="/java/dump/azure_webapp/2019/11/10/collecting-thread-dump-on-azure-webapp.html" title="Custom JRE/JDK on Azure App Service - Windows">Collecting Thread Dump on Azure WebApp</a></li><li><a class="post-link" href="/azure_webapp/java/2020/05/26/custom-jre-jdk-on-azure-app-service-windows.html" title="Custom JRE/JDK on Azure App Service - Windows">Custom JRE/JDK on Azure App Service - Windows</a></li></ul>
+        <li><a class="post-link" href="/ioncube/php/azure_webapp/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="Custom JRE/JDK on Azure App Service - Windows">Configure IonCube Loader - PHP Linux App Service</a></li><li><a class="post-link" href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="Custom JRE/JDK on Azure App Service - Windows">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li><li><a class="post-link" href="/2021/06/29/using-minikube-on-linux-ubuntu.html" title="Custom JRE/JDK on Azure App Service - Windows">Using Minikube on Linux (Ubuntu)</a></li><li><a class="post-link" href="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html" title="Custom JRE/JDK on Azure App Service - Windows">Remove Server Header from Nginx (Linux WebApp - Wordpress Image)</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 

@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Detect Tomcat Version change on Azure App Service when using Auto-Update… and more" />
 <script type="application/ld+json">
-{"dateModified":"2021-03-26T22:08:00+05:30","datePublished":"2021-03-26T22:08:00+05:30","url":"/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html","mainEntityOfPage":{"@type":"WebPage","@id":"/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html"},"headline":"Detect Tomcat Version change on Azure App Service when using Auto-Update… and more","description":"When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html","headline":"Detect Tomcat Version change on Azure App Service when using Auto-Update… and more","dateModified":"2021-03-26T22:08:00+05:30","datePublished":"2021-03-26T22:08:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html"},"description":"When using Auto-Update for various stacks on Azure App Service, one of the common problems is to get notified when the version changes. We could follow the official announcement page for any major changes. We can also create automation scripts to send notifications when such a change occurs. There are different ways in which this can be done. The idea is to check how the current stack version can be determined, and compare it with the previous versions. If it changes, trigger a notification, which itself can be done in numerous ways. In this blog, I will guide you to one of the several approaches you could take. This may not be the best option, but it will get your work done.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -648,6 +648,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -745,10 +763,10 @@ Refer to this documentation: <a href="https://docs.microsoft.com/en-us/azure/aut
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/azure_webapp/pscp/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" title="curl &lt;3">Download files from Azure Linux WebApp using pscp</a></li>
-<li><a class="post-link" href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" title="curl &lt;3">Hide Tomcat Server Information on Azure App Service</a></li>
-<li><a class="post-link" href="/ioncube/php/azure_webapp/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="curl &lt;3">Configure IonCube Loader - PHP Linux App Service</a></li>
-<li><a class="post-link" href="/2021/04/08/remove-server-header-from-nginx-linux-webapp-wordpress-image.html" title="curl &lt;3">Remove Server Header from Nginx (Linux WebApp - Wordpress Image)</a></li>
+        <li><a class="post-link" href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="curl &lt;3">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li>
+<li><a class="post-link" href="/2021/04/01/enable-trace-logs-java-function-app.html" title="curl &lt;3">Enable trace logs - Java Function App</a></li>
+<li><a class="post-link" href="/2021/06/29/using-minikube-on-linux-ubuntu.html" title="curl &lt;3">Using Minikube on Linux (Ubuntu)</a></li>
+<li><a class="post-link" href="/java/dump/azure_webapp/2019/11/10/collecting-thread-dump-on-azure-webapp.html" title="curl &lt;3">Collecting Thread Dump on Azure WebApp</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

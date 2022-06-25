@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Deploy NodeJS WebApp via GitHub Actions" />
 <script type="application/ld+json">
-{"dateModified":"2019-11-17T00:41:00+05:30","datePublished":"2019-11-17T00:41:00+05:30","url":"/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html","mainEntityOfPage":{"@type":"WebPage","@id":"/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html"},"headline":"Deploy NodeJS WebApp via GitHub Actions","description":"Steps to deploy a NodeJS application on Azure App Service","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html","headline":"Deploy NodeJS WebApp via GitHub Actions","dateModified":"2019-11-17T00:41:00+05:30","datePublished":"2019-11-17T00:41:00+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"/github_actions/nodejs/deployment/2019/11/17/deploy-nodejs-webapp-via-github-actions.html"},"description":"Steps to deploy a NodeJS application on Azure App Service","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -643,6 +643,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
   })();
 </script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <div class="framework">
@@ -763,7 +781,7 @@ This will require a publish profile which will be set as a secret. Follow the be
 <div class="post-nav"><a class="previous" href="/sql/python/azure_functions/2019/11/17/access-sql-database-via-azure-function-app-python.html" title="Access SQL Database via Azure Function App - Python">Access SQL Database via Azure Function...</a><a class="next" href="/java/azure_functions/github_actions/2019/11/17/deploy-azure-java-function-app-windows-via-github-actions.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Deploy Azure Java Function App (Windows)...</a></div><div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/2021/09/25/log-originating-client-ip-on-linux-app-service-tomcat.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Log Originating Client IP on Linux App Service (Tomcat)</a></li><li><a class="post-link" href="/2021/09/30/hide-tomcat-server-information-on-azure-app-service.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Hide Tomcat Server Information on Azure App Service</a></li><li><a class="post-link" href="/dbcp/azure_webapp/mysql/2021/03/25/dbcp-on-azure-app-service-linux-mysql.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">DBCP on Azure App Service Linux (MySQL)</a></li><li><a class="post-link" href="/ioncube/php/azure_webapp/2020/02/02/configure-ioncube-loader-php-linux-app-service.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Configure IonCube Loader - PHP Linux App Service</a></li></ul>
+        <li><a class="post-link" href="/azure_webapp/pscp/2020/06/01/download-files-from-azure-linux-webapp-using-pscp.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Download files from Azure Linux WebApp using pscp</a></li><li><a class="post-link" href="/opencv/python/azure_webapp/2021/03/31/using-opencv-python-on-linux-app-service.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Using opencv-python on Linux App Service</a></li><li><a class="post-link" href="/2022/06/25/download-torrents-in-raspberry-pi-transmission.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Download Torrents in Raspberry Pi - Transmission</a></li><li><a class="post-link" href="/tomcat/azure_webapp/2021/03/26/detect-tomcat-version-change-on-azure-app-service-when-using-auto-update-and-more.html" title="Deploy Azure Java Function App (Windows) via GitHub Actions">Detect Tomcat Version change on Azure App Service when using Auto-Update... and...</a></li></ul>
     </div><div class="post-comments"></div></section>
 </div>
 
